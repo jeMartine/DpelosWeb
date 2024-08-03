@@ -1,0 +1,357 @@
+body,html{
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+}
+
+*{
+    font-family: "Poppins", sans-serif;
+    box-sizing: border-box;
+}
+
+/* header */
+
+header{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    position: sticky;
+    top: 0px;
+    background-color: #ffffff;
+    z-index: 10;
+}
+
+#logo{
+    height: 70px;
+    width: auto;
+    margin: 5px;
+}
+
+.ul_header .li_header {
+  list-style-type: none;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+header > ul {
+  display: flex;
+  margin: 10px 10px;
+}
+
+header > ul > a {
+  padding: 15px;
+  color: black;
+  font-weight: 550;
+  font-size: 18px;
+
+}
+header li:hover {
+  color: #ff992b;
+}
+
+
+/* footer */
+
+footer{
+    display: flex;
+    flex-direction: column;
+    background-color: #121213;
+}
+
+#footerContent{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#logoFooter{
+    height: 45px;
+    width: auto;
+    align-self: first baseline;
+    margin-top: 10px;
+}
+
+.footerData{
+    padding: 15px;
+}
+
+.footerData img{
+    height: 35px;
+    width: auto;
+}
+
+footer p, footer h4, .h4Legal{
+    color: #e0dfdf;
+    margin: 0px;
+}
+
+footer h4, .h4Legal{
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.h4Legal{
+    margin-top: 10px;
+}
+
+.footer-credits{
+    align-self: center;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+footer a{
+    color: #e0dfdf;
+}
+
+footer a:visited, footer a:hover{
+    color: #ff992b;
+}
+
+/* contacto rápido */
+
+#contactoRapido{
+    position: fixed;
+    top: 50%; 
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: #94f3d4;
+    border-radius: 10px 0px 0px 10px;
+    z-index: 5;
+}
+
+
+#contactoRapido img{
+    height: 40px;
+    width: auto;
+    margin-top: 2px;
+    margin-left: 5px;
+}
+
+
+/* banner */
+
+#bannerPrincipal{
+    display: flex;
+    flex-direction: row;
+    background: linear-gradient(to bottom,#ffffff,#94edf3 );
+    position: relative;
+    overflow: hidden;
+}
+
+.bannerInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.txtBanner{
+    font-size: 40px;
+    font-weight: 500;
+    color: #0a152f;
+    text-align: center;
+    z-index: 5;
+}
+
+#bannerDog{
+    height: 350px;
+    width: auto;
+    margin-left: 20px;
+    margin-top: 40px;
+    z-index: 5;
+}
+
+#btnBanner{
+    background-color: #ff8f34;
+    border-radius: 20px;
+    border: 0;
+    width: 200px;
+    font-size: 25px;
+    color: #ffffff;
+    font-weight: 500;
+    align-self: center;
+    z-index: 5;
+}
+
+#btnBanner:hover{
+    background-color: #ffffff;
+    color: #ff8f34;
+}
+
+/* curas del banner */
+.cura1{
+    position: absolute;
+    top: 80%;
+    left: 25%;
+    height: 100px;
+    width: auto;
+    opacity: 0.7;
+}
+.cura2{
+    position: absolute;
+    top: 20%;
+    left: 40%;
+    height: 35px;
+    width: auto;
+    opacity: 0.6;
+}
+.cura3{
+    position: absolute;
+    top: 83%;
+    left: 60%;
+    height: 120px;
+    width: auto;
+    opacity: 0.6;
+}
+.cura4{
+    position: absolute;
+    top: 70%;
+    left: 80%;
+    height: 130px;
+    width: auto;
+    opacity: 0.4;
+    rotate: -20deg;
+}
+
+.cura5{
+    position: absolute;
+    top: 50%;
+    left: 70%;
+    height: 50px;
+    width: auto;
+    opacity: 0.3;
+}
+.cura6{
+    position: absolute;
+    top: 40%;
+    left: 0;
+    height: 50px;
+    width: auto;
+    opacity: 0.5;
+}
+.cura7{
+    position: absolute;
+    top: 55%;
+    left: 40%;
+    height: 100px;
+    width: auto;
+    opacity: 0.5;
+    rotate: 25deg;
+}
+
+
+/* servicios */
+
+
+#servicios{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+#servicios > h2{
+    color: #59c9d1;
+    font-size: 30px;
+    font-weight: 550;
+    margin: 30px;
+}
+
+.servLine{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 15px;
+    width: 100%;
+}
+
+.servicio{
+    background-color: #f2f4f4;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    width: 30%;
+    height: 120px;
+    align-items: center;
+}
+
+.servicio img{
+    width: auto;
+    height: 80px;
+}
+
+.servicio:hover{
+    background-color: #f5f795;
+}
+
+/* banner Molestias */
+
+#bannerMolestias{
+    display: flex;
+    flex-direction: row;
+    background-color: #ff8f34;
+    position: relative;
+    overflow: hidden;
+}
+
+#bannerMolestias img{
+    height: 350px;
+    width: auto;
+    margin-top: 40px;
+    z-index: 5;
+}
+
+.bannerInfo2{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    text-align: center;
+    width: 100%;
+}
+
+.bannerInfo2 h2{
+    color: #ffffff;
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.bannerInfo2 .txtBanner2{
+    color: #ffffff;
+    font-size: 20px;
+    margin-bottom: 50px;
+}
+
+
+#btnBanner2{
+    background-color: #61abc6;
+    color: #ffffff;
+    border-radius: 20px;
+    border: 0;
+    font-size: 20px;
+    font-weight: 500;
+    align-self: center;
+    z-index: 5;
+    width: 250px;
+
+    margin-bottom: 30px;
+}
+
+#btnBanner2:hover{
+    background-color: #ffffff;
+    color: #61abc6;
+}
+
+.circle {
+    position: absolute;
+    top: -5%;
+    left: 15%;
+    width: 400px;
+    height: 400px;
+    background-color: #efb358;
+    border-radius: 50%;
+    z-index: 1;
+}
