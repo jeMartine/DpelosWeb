@@ -3,6 +3,7 @@ html {
   margin: 0;
   padding: 0;
   background-color: #ffffff;
+  scroll-padding-top: 60px;
 }
 
 * {
@@ -99,9 +100,18 @@ footer {
   footer a {
     color: #e0dfdf;
     text-decoration: none;
+
   }
   
   footer a:visited,
   footer a:hover {
     color: #ff992b;
   }
+
+  .footerData a img {
+    transition: filter 0.3s ease;
+  }
+
+.footerData a:hover img {
+    filter: sepia(1) saturate(13) hue-rotate(-40deg);
+}

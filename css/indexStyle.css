@@ -1,22 +1,26 @@
+/* Logo */
+
+.navbar #logo {
+    width: 150px;
+    height: auto;
+}
+
 /* contacto rápido */
 
 #contactoRapido {
-	position: fixed;
-	top: 50%;
-	right: 0;
-	display: flex;
-	flex-direction: column;
-	background-color: #94f3d4;
-	border-radius: 10px 0px 0px 10px;
-	z-index: 5;
+    position: fixed;
+    bottom: 20px; 
+    right: 8px; 
+    display: flex;
+    flex-direction: column;
+    z-index: 5;
 }
 
 #contactoRapido img {
-	height: 40px;
-	width: auto;
-	margin-top: 2px;
-	margin-left: 5px;
+    height: 50px; 
+    width: auto; 
 }
+
 
 /* banner */
 
@@ -33,6 +37,8 @@
 	flex-direction: column;
 	justify-content: space-evenly;
 	z-index: 2;
+    align-items: center;
+    
 }
 
 .txtBanner {
@@ -42,9 +48,12 @@
 	text-align: center;
 	z-index: 2;
 	margin-top: 40px;
+    padding-right: 20px;
 }
 
 #bannerDog {
+    margin: 0;
+    padding: 0;
 	height: auto;
 	width: auto;
 	margin-top: 40px;
@@ -175,6 +184,7 @@
 .row.rowContainer {
 	margin: 10px;
 }
+
 .card.servicio {
 	background-color: #f2f4f4;
 	border-radius: 10px;
@@ -187,6 +197,9 @@
 	border: 0;
 }
 
+.card-title{
+    font-size: 25px;
+}
 .servicioImg {
 	width: 80px;
 	height: auto;
@@ -226,14 +239,16 @@
 	color: #ffffff;
 	font-size: 40px;
 	font-weight: 500;
-	margin: 30px;
+	margin: 20px;
+    margin-bottom: 0;
 	text-align: center;
+    white-space: nowrap;
 }
 
 .bannerInfo2 .txtBanner2 {
 	color: #ffffff;
 	font-size: 20px;
-	margin-bottom: 50px;
+	margin-bottom: 30px;
 }
 
 #btnBanner2 {
@@ -363,6 +378,7 @@
 
 #agendarCita {
     background-color: #61abc6;
+
 }
 
 
@@ -406,4 +422,3 @@
     background-color: #0056b3;
     font-weight: bold;
 }
-
