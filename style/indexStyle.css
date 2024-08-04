@@ -24,37 +24,40 @@
 
 /* banner */
 
-#bannerPrincipal{
+#bannerPrincipal {
     display: flex;
     flex-direction: row;
-    background: linear-gradient(to bottom,#ffffff,#94edf3 );
+    background: linear-gradient(to bottom, #ffffff, #94edf3);
     position: relative;
     overflow: hidden;
 }
 
-.bannerInfo{
+.bannerInfo {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    z-index: 2;
 }
 
-.txtBanner{
+.txtBanner {
     font-size: 40px;
     font-weight: 500;
     color: #0a152f;
     text-align: center;
-    z-index: 5;
+    z-index: 2;
+    margin-top: 40px;
 }
 
-#bannerDog{
-    height: 350px;
+#bannerDog {
+    height: auto;
     width: auto;
-    margin-left: 20px;
     margin-top: 40px;
     z-index: 5;
 }
 
-#btnBanner{
+
+
+#btnBanner {
     background-color: #ff8f34;
     border-radius: 20px;
     border: 0;
@@ -63,12 +66,41 @@
     color: #ffffff;
     font-weight: 500;
     align-self: center;
-    z-index: 5;
+    z-index: 2;
 }
 
-#btnBanner:hover{
+#btnBanner:hover {
     background-color: #ffffff;
     color: #ff8f34;
+}
+
+/* Media Query para pantallas pequeñas */
+@media (max-width: 576px) {
+    .txtBanner {
+        font-size: 25px;
+        margin-bottom: 20px;
+        margin: 40px 10px 10px 10px;
+    }
+    #bannerDog {
+        margin-right: 10px;
+    }
+
+    #btnBanner {
+        width: 150px;
+        font-size: 20px;
+    }
+}
+
+/* curas del banner */
+.cura1,
+.cura2,
+.cura3,
+.cura4,
+.cura5,
+.cura6,
+.cura7 {
+    position: absolute;
+    z-index: 1;
 }
 
 /* curas del banner */
@@ -137,10 +169,7 @@
 
 
 #servicios{
-    display: flex;
-    flex-direction: column;
     text-align: center;
-    align-items: center;
     margin-bottom: 50px;
 }
 
@@ -151,27 +180,24 @@
     margin: 30px;
 }
 
-.servLine{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    margin: 15px;
-    width: 100%;
+.row.rowContainer{
+    margin: 10px;
 }
-
-.servicio{
+.card.servicio{
     background-color: #f2f4f4;
     border-radius: 10px;
     display: flex;
     flex-direction: row;
-    width: 30%;
-    height: 120px;
     align-items: center;
+    margin-bottom: 10px;
+    text-align: left;
+    height: 120px;
+    border: 0;
 }
 
-.servicio img{
-    width: auto;
-    height: 80px;
+.servicioImg{
+    width: 80px;
+    height: auto;
 }
 
 .servicio:hover{
@@ -188,25 +214,32 @@
     overflow: hidden;
 }
 
-#bannerMolestias img{
-    height: 350px;
-    width: auto;
-    margin-top: 40px;
-    z-index: 5;
-}
 
 .bannerInfo2{
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     text-align: center;
-    width: 100%;
+    z-index: 5;
+    flex-grow: 1;
+    
 }
+
+#bannerMolestias img{
+    height: auto;
+    width: auto;
+    margin-top: 40px;
+    z-index: 5;
+}
+
+
 
 .bannerInfo2 h2{
     color: #ffffff;
     font-size: 40px;
     font-weight: 500;
+    margin: 30px;
+    text-align: center;
 }
 
 .bannerInfo2 .txtBanner2{
@@ -234,6 +267,7 @@
     background-color: #ffffff;
     color: #61abc6;
 }
+
 
 .circle {
     position: absolute;
