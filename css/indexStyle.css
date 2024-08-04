@@ -407,6 +407,3 @@
     font-weight: bold;
 }
 
-input::placeholder, select {
-    color: #6c757d; /* Color gris */
-}
