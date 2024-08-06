@@ -17,8 +17,9 @@ La clínica D' pelos se especializa en el cuidado de perros que requieren hospit
 - **Historial de Tratamientos**: Se guarda un historial de los tratamientos administrados a cada mascota.
 
 ## Requerimientos
-###Logo
+### Logo
 ![Logo D'pelos](https://github.com/jeMartine/DpelosWeb/blob/main/Resources/img/index/logo.png)
-###Diagrama UML
+### Diagrama UML
 
-###Paleta de colores
+### Paleta de colores
+![Paleta de colores](https://github.com/jeMartine/DpelosWeb/blob/main/Imgs/Paleta%20de%20colores.png)
