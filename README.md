@@ -18,7 +18,8 @@ La clínica D' pelos se especializa en el cuidado de perros que requieren hospit
 
 ## Requerimientos
 
-### Diagrama UML
+### Diagrama De clases
+![Diagrama de clases](https://github.com/jeMartine/DpelosWeb/blob/main/Imgs/DiagramaClases.jpeg)
 
 ### Paleta de colores
 ![Paleta de colores](https://github.com/jeMartine/DpelosWeb/blob/main/Imgs/Paleta%20de%20colores.png)
