@@ -22,3 +22,9 @@ La clínica D' pelos se especializa en el cuidado de perros que requieren hospit
 
 ### Paleta de colores
 ![Paleta de colores](https://github.com/jeMartine/DpelosWeb/blob/main/Imgs/Paleta%20de%20colores.png)
+
+##Integrantes
+ - Diego Alejando Albarracín Maldonado 
+ - Jorge Esteban Martinez Clavijo
+ - Maria José Cárdenas Machaca
+     
