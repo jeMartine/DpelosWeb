@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Obtener los datos del archivo JSON
-    fetch('../json/testimonios.json')
+    fetch('/data/testimonios.json')
         .then(response => response.json())
         .then(data => {
             // Crear elementos HTML para cada testimonio
