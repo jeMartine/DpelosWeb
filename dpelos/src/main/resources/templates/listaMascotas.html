@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="es">
+<!-- thymeleaf -->
+<html lang="es" xmlns="https://www.thymeleaf.org/">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -98,7 +99,41 @@
       </nav>
     </header>
     <main id="inicio">
-      <p>Hello from here :D</p>
+      <h1>Lista de Mascotas</h1>
+      <!-- <ul>
+        <li
+          th:each="mascota : ${mascotas}"
+          th:text="${mascota.nombreMascota}"
+        ></li>
+      </ul> -->
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th>ID Mascota</th>
+            <th>Nombre Mascota</th>
+            <th>Edad Mascota</th>
+            <th>Foto Mascota</th>
+            <th>Raza Mascota</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="mascota : ${mascotas}" th:object="${mascota}">
+            <td th:text="${mascota.idMascota}"></td>
+            <td th:text="${mascota.nombreMascota}"></td>
+            <td th:text="${mascota.edadMascota}"></td>
+            <td>
+              <img
+                th:src="${mascota.fotoMascota}"
+                alt="Foto de la mascota"
+                class="img-fluid"
+                height="150px"
+                width="150px"
+              />
+            </td>
+            <td th:text="${mascota.razaMascota}"></td>
+          </tr>
+        </tbody>
+      </table>
     </main>
 
     <footer>
