@@ -1,0 +1,31 @@
+#imgMascota{
+    border-radius: 10px;
+}
+
+#inicio{
+    margin: 10px;
+}
+
+td, tr{
+    text-align: center;
+    vertical-align: middle;
+}
+
+td{
+    font-weight: 400;
+}
+
+.table .tableHead th{
+    background-color: #61abc6;
+    color: #ffffff;
+}
+
+.table tbody tr:hover {
+    background-color: #28a745; /* Fondo verde al hacer hover */
+    color: white; /* Opcional: Cambia el texto a blanco en hover */
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}

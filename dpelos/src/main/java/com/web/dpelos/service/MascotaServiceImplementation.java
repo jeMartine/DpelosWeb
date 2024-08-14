@@ -1,4 +1,4 @@
-package com.web.dpelos;
+package com.web.dpelos.service;
 
 import java.util.Collection;
 
