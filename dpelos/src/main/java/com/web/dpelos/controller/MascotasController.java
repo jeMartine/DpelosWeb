@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.web.dpelos.MascotaService;
-import com.web.dpelos.MascotaServiceImplementation;
 import com.web.dpelos.entity.Mascota;
+import com.web.dpelos.service.MascotaService;
+import com.web.dpelos.service.MascotaServiceImplementation;
+
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -21,7 +22,7 @@ public class MascotasController {
     @Autowired
     MascotaServiceImplementation mascotaService;
     
-    @GetMapping("/listaMascotas")
+    @GetMapping()
     public String listaMascotas(Model model) {
         model.addAttribute("mascotas", mascotaService.obtenerMascotas());
         return "listaMascotas";

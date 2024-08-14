@@ -15,7 +15,7 @@
       rel="stylesheet"
     />
     <!-- css -->
-    <link rel="stylesheet" href="/css/indexStyle.css" />
+    <link rel="stylesheet" href="/css/mascotaDataStyle.css" />
     <link rel="stylesheet" href="/css/mainStyle.css" />
     <!-- scripts -->
     <script src="/js/indexScript.js" defer></script>
@@ -100,40 +100,34 @@
     </header>
     <main id="inicio">
       <h1>Información de la Mascota Solicitada</h1>
-      <!-- <ul>
-        <li
-          th:each="mascota : ${mascotas}"
-          th:text="${mascota.nombreMascota}"
-        ></li>
-      </ul> -->
-      <table class="table">
-        <thead class="thead-dark">
-          <tr>
-            <th>ID Mascota</th>
-            <th>Nombre Mascota</th>
-            <th>Edad Mascota</th>
-            <th>Foto Mascota</th>
-            <th>Raza Mascota</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="mascota : ${mascota}" th:object="${mascota}">
-            <td th:text="${mascota.idMascota}"></td>
-            <td th:text="${mascota.nombreMascota}"></td>
-            <td th:text="${mascota.edadMascota}"></td>
-            <td>
-              <img
-                th:src="${mascota.fotoMascota}"
-                alt="Foto de la mascota"
-                class="img-fluid"
-                height="250px"
-                width="450px"
-              />
-            </td>
-            <td th:text="${mascota.razaMascota}"></td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="carta">
+        <section class="mascota">
+          <img
+            th:src="${mascota.fotoMascota}"
+            alt="Foto de la mascota"
+            class="mascotaFoto"
+            height="250px"
+            width="450px"
+          />
+          <article class="mascotaData">
+            <span> <strong> Id Mascota</strong> 
+              <p th:text="${mascota.idMascota}"></p>
+            </span>
+            <span><strong>Nombre mascota</strong>
+              <p th:text="${mascota.nombreMascota}"></p
+            ></span>
+  
+            <span><strong>Edad mascota</strong>
+              <p th:text="${mascota.edadMascota}"></p
+            ></span>
+  
+            <span><strong>Raza mascota</strong>
+              <p th:text="${mascota.razaMascota}"></p>
+            </span>
+          </article>
+        </section>
+      </div>
+      
     </main>
 
     <footer>
