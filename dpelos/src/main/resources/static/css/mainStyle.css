@@ -19,11 +19,13 @@ header {
   z-index: 10;
 }
 
-#logo {
-  height: 70px;
-  width: auto;
-  margin: 5px;
+/* Logo */
+
+.navbar #logo {
+  width: 150px;
+  height: auto;
 }
+
 
 .ul_header .li_header {
   list-style-type: none;
