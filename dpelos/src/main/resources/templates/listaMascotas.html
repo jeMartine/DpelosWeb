@@ -63,14 +63,13 @@
     <header>
       <nav class="navbar navbar-expand-lg bg-white">
         <div class="container-fluid">
-          
           <img
             src="/images/index/logo.png"
             alt="logo D'pelos"
             id="logo"
             class="img-fluid"
           />
-      
+
           <button
             class="navbar-toggler"
             type="button"
@@ -129,11 +128,30 @@
             <td th:text="${mascota.idMascota}"></td>
             <td th:text="${mascota.nombreMascota}"></td>
             <td th:text="${mascota.edadMascota}"></td>
-            
+
             <td th:text="${mascota.razaMascota}"></td>
+            <td>
+              <a
+                type="button"
+                class="btn btn-primary"
+                th:href="@{mascota/update/{id}(id=${mascota.idMascota})}"
+                >Editar</a
+              >
+            </td>
+            <td>
+              <a
+                type="button"
+                class="btn btn-primary"
+                th:href="@{mascota/delete/{id}(id=${mascota.idMascota})}"
+                >Eliminar</a
+              >
+            </td>
           </tr>
         </tbody>
       </table>
+      <a type="button" class="btn btn-primary" th:href="@{mascota/add}"
+        >Añadir Mascota</a
+      >
     </main>
 
     <footer>

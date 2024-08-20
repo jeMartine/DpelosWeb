@@ -7,7 +7,7 @@ import java.util.Map;
 import org.springframework.stereotype.Repository;
 
 import com.web.dpelos.entity.Mascota;
-
+/* */
 @Repository
 public class MascotaRepository {
     private Map<Integer, Mascota> mascotas = new HashMap<>();
@@ -35,11 +35,36 @@ public class MascotaRepository {
         mascotas.put(20, new Mascota(20, "Lola", 5, "https://cdn.britannica.com/71/234471-050-093F4211/shiba-inu-dog-in-the-snow.jpg", "Shiba Inu"));
     }
 
+    /*Metodos CRUD Mascota */
+    
     public Mascota getMascotaById(Integer id){
+        /*Retorna toda la informacion de la mascota según el id indicado. */
         return mascotas.get(id);
     }
 
     public Collection<Mascota> getMascotas(){
+        /*Retorna toda la informacion de las mascota registradas.*/
         return mascotas.values();
+    }
+    
+    public void addMascota(Mascota mascota){
+        /*Obteniendo el tamaño del mapa mascotas */
+        int tam = mascotas.size();
+        /*Con el tamaño, obtener el id del útlimo elemento ingresado al mapa */
+        int lastId = mascotas.get(tam).getIdMascota();
+        /*Asignar el nuevo ID a la mascota a agregar asegurandose que sea +1 del ultimo ID asignado. */
+        mascota.setIdMascota(lastId+1);
+        /*Insertando la mascota al mapa */
+        mascotas.put(mascota.getIdMascota(), mascota);
+    }
+
+    public void updateMascota(Mascota mascota){
+        /*Actualiza la información de la mascota correspondiente */
+        mascotas.put(mascota.getIdMascota(), mascota);
+    }
+
+    public void deleteMascota(Integer id){
+        /*Elimina la informacion de una mascota según su ID */
+        mascotas.remove(id);
     }
 }

@@ -30,12 +30,11 @@ public class Mascota {
         this.edadMascota = edadMascota;
     }
 
-    public void setFotoMascota(String urlFotoMascota) {
-        this.urlFotoMascota = urlFotoMascota;
-    }
-
     public void setRazaMascota(String razaMascota) {
         this.razaMascota = razaMascota;
+    }
+    public void setUrlFotoMascota(String urlFotoMascota) {
+        this.urlFotoMascota = urlFotoMascota;
     }
 
     public Integer getIdMascota() {
@@ -54,6 +53,11 @@ public class Mascota {
         return razaMascota;
     }
 
+    public String getUrlFotoMascota() {
+        return urlFotoMascota;
+    }
 
+
+    
     
 }

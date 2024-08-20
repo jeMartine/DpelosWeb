@@ -15,9 +15,8 @@
       rel="stylesheet"
     />
     <!-- css -->
+    <link rel="stylesheet" href="/css/crearMascota.css" />
     <link rel="stylesheet" href="/css/mainStyle.css" />
-    <link rel="stylesheet" href="/css/mascotasStyle.css" />
-
     <!-- scripts -->
     <script src="/js/indexScript.js" defer></script>
     <!-- owl carousel -->
@@ -69,7 +68,6 @@
             id="logo"
             class="img-fluid"
           />
-
           <button
             class="navbar-toggler"
             type="button"
@@ -101,59 +99,72 @@
       </nav>
     </header>
     <main id="inicio">
-      <h1>Lista de Mascotas</h1>
-      <table class="table table-striped">
-        <thead class="tableHead">
-          <tr>
-            <th>Foto Mascota</th>
-            <th>ID Mascota</th>
-            <th>Nombre Mascota</th>
-            <th>Edad Mascota</th>
-            <th>Raza Mascota</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="mascota : ${mascotas}" th:object="${mascota}">
-            <td>
-              <img
-                th:src="${mascota.fotoMascota}"
-                alt="Foto de la mascota"
-                class="img-fluid"
-                height="150px"
-                width="150px"
-                id="imgMascota"
-              />
-            </td>
-
-            <td th:text="${mascota.idMascota}"></td>
-            <td th:text="${mascota.nombreMascota}"></td>
-            <td th:text="${mascota.edadMascota}"></td>
-
-            <td th:text="${mascota.razaMascota}"></td>
-            <td>
-              <a
-                type="button"
-                class="btn btn-primary"
-                th:href="@{mascota/update/{id}(id=${mascota.idMascota})}"
-                >Editar</a
-              >
-            </td>
-            <td>
-              <a
-                type="button"
-                class="btn btn-primary"
-                th:href="@{mascota/delete/{id}(id=${mascota.idMascota})}"
-                >Eliminar</a
-              >
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <a type="button" class="btn btn-primary" th:href="@{mascota/add}"
-        >Añadir Mascota</a
+      <a type="button" class="btn btn-primary" th:href="@{/mascota}"
+        >Regresar</a
       >
+      <h1>Formulario para la Actualización de una Mascota</h1>
+      <form
+        th:object="${mascota}"
+        th:action="@{/mascota/update/{id}(id=${mascota.idMascota})}"
+        method="post"
+      >
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputNombreMascota">ID de la Mascota</label>
+            <input
+              th:field="*{idMascota}"
+              type="text"
+              class="form-control"
+              id="idMascota"
+            />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputNombreMascota">Nombre de la Mascota</label>
+            <input
+              th:field="*{nombreMascota}"
+              type="text"
+              class="form-control"
+              id="nombreMascota"
+              placeholder="Ingrese el nombre de la mascota"
+            />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputEdadMascota">Edad Mascota</label>
+            <input
+              th:field="*{edadMascota}"
+              type="number"
+              class="form-control"
+              id="edadMascota"
+              placeholder="Ingrese la edad de la mascota"
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputUrlFotoMascota">Foto de la Mascota</label>
+            <input
+              th:field="*{urlFotoMascota}"
+              type="url"
+              class="form-control"
+              id="urlFotoMascota"
+              placeholder="Ingrese la URL de la foto de la mascota"
+            />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputRazaMascota">Raza de la Mascota</label>
+            <input
+              th:field="*{razaMascota}"
+              type="text"
+              class="form-control"
+              id="razaMascota"
+            />
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">
+          Actualizar Mascota
+        </button>
+      </form>
     </main>
-
     <footer>
       <div class="container">
         <div class="row">
