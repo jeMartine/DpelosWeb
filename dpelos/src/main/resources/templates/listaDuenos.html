@@ -15,8 +15,9 @@
       rel="stylesheet"
     />
     <!-- css -->
-    <link rel="stylesheet" href="/css/crearMascota.css" />
     <link rel="stylesheet" href="/css/mainStyle.css" />
+    <link rel="stylesheet" href="/css/mascotasStyle.css" />
+
     <!-- scripts -->
     <script src="/js/indexScript.js" defer></script>
     <!-- owl carousel -->
@@ -68,6 +69,7 @@
             id="logo"
             class="img-fluid"
           />
+
           <button
             class="navbar-toggler"
             type="button"
@@ -99,68 +101,51 @@
       </nav>
     </header>
     <main id="inicio">
-      <a type="button" class="btn btn-primary" th:href="@{/mascota}"
-        >Regresar</a
+      <h1>Lista de Dueños</h1>
+      <table class="table table-striped">
+        <thead class="tableHead">
+          <tr>
+            <th>Cedula Dueño</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Correo Electrónico</th>
+            <th>Celular</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="dueno : ${duenos}" th:object="${dueno}">
+            <td th:text="${dueno.cedulaDueno}"></td>
+            <td th:text="${dueno.nombreDueno}"></td>
+            <td th:text="${dueno.apellidoDueno}"></td>
+            <td th:text="${dueno.correoDueno}"></td>
+            <td th:text="${dueno.celularDueno}"></td>
+
+            <td>
+              <a
+                type="button"
+                class="btn btn-primary"
+                th:href="@{dueno/update/{id}(id=${dueno.cedulaDueno})}"
+                >Editar</a
+              >
+            </td>
+            <td>
+              <a
+                type="button"
+                class="btn btn-primary"
+                th:href="@{dueno/delete/{id}(id=${dueno.cedulaDueno})}"
+                >Eliminar</a
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <a type="button" class="btn btn-primary" th:href="@{dueno/add}"
+        >Añadir Dueño</a
       >
-      <h1>Formulario para la Creación de una Mascota</h1>
-      <form
-        th:object="${mascota}"
-        th:action="@{/mascota/agregar}"
-        method="post"
-      >
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="inputNombreMascota">Nombre de la Mascota</label>
-            <input
-              th:field="*{nombreMascota}"
-              type="text"
-              class="form-control"
-              id="nombreMascota"
-              placeholder="Ingrese el nombre de la mascota"
-            />
-          </div>
-          <div class="form-group col-md-6">
-            <label for="inputEdadMascota">Edad Mascota</label>
-            <input
-              th:field="*{edadMascota}"
-              type="number"
-              class="form-control"
-              id="edadMascota"
-              placeholder="Ingrese la edad de la mascota"
-            />
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="inputUrlFotoMascota">Foto de la Mascota</label>
-            <input
-              th:field="*{urlFotoMascota}"
-              type="url"
-              class="form-control"
-              id="urlFotoMascota"
-              placeholder="Ingrese la URL de la foto de la mascota"
-            />
-          </div>
-          <div class="form-group col-md-6">
-            <label for="inputRazaMascota">Raza de la Mascota</label>
-            <input
-              th:field="*{razaMascota}"
-              type="text"
-              class="form-control"
-              id="razaMascota"
-            />
-            <label for="inputIdDueno">ID del Dueño de la Mascota</label>
-            <input
-              th:field="*{idDueno}"
-              type="number"
-              class="form-control"
-              id="idDueno"
-            />
-          </div>
-        </div>
-        <button type="submit" class="btn btn-primary">Crear Mascota</button>
-      </form>
     </main>
+
     <footer>
       <div class="container">
         <div class="row">

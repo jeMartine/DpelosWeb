@@ -110,6 +110,9 @@
             <th>Nombre Mascota</th>
             <th>Edad Mascota</th>
             <th>Raza Mascota</th>
+            <th>ID Dueño</th>
+            <th>Editar Mascota</th>
+            <th>Eliminar Mascota</th>
           </tr>
         </thead>
         <tbody>
@@ -128,8 +131,8 @@
             <td th:text="${mascota.idMascota}"></td>
             <td th:text="${mascota.nombreMascota}"></td>
             <td th:text="${mascota.edadMascota}"></td>
-
             <td th:text="${mascota.razaMascota}"></td>
+            <td th:text="${mascota.idDueno}"></td>
             <td>
               <a
                 type="button"

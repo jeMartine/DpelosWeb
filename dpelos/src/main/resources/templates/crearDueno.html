@@ -99,66 +99,62 @@
       </nav>
     </header>
     <main id="inicio">
-      <a type="button" class="btn btn-primary" th:href="@{/mascota}"
-        >Regresar</a
-      >
-      <h1>Formulario para la Creación de una Mascota</h1>
-      <form
-        th:object="${mascota}"
-        th:action="@{/mascota/agregar}"
-        method="post"
-      >
+      <a type="button" class="btn btn-primary" th:href="@{/dueno}">Regresar</a>
+      <h1>Formulario para la Creación un Dueño</h1>
+      <form th:object="${dueno}" th:action="@{/dueno/agregar}" method="post">
         <div class="form-row">
           <div class="form-group col-md-6">
-            <label for="inputNombreMascota">Nombre de la Mascota</label>
+            <label for="inputCedulaDueno">Cedula</label>
             <input
-              th:field="*{nombreMascota}"
-              type="text"
+              th:field="*{cedulaDueno}"
+              type="number"
               class="form-control"
-              id="nombreMascota"
-              placeholder="Ingrese el nombre de la mascota"
+              id="cedulaDueno"
+              placeholder="Ingrese su número de cedula"
             />
           </div>
           <div class="form-group col-md-6">
-            <label for="inputEdadMascota">Edad Mascota</label>
+            <label for="inputNombreDueno">Nombre</label>
             <input
-              th:field="*{edadMascota}"
-              type="number"
+              th:field="*{nombreDueno}"
+              type="text"
               class="form-control"
-              id="edadMascota"
-              placeholder="Ingrese la edad de la mascota"
+              id="nombreDueno"
+              placeholder="Ingrese su nombre"
             />
           </div>
         </div>
         <div class="form-row">
           <div class="form-group col-md-6">
-            <label for="inputUrlFotoMascota">Foto de la Mascota</label>
+            <label for="inputApellidoDueno">Apellido</label>
             <input
-              th:field="*{urlFotoMascota}"
-              type="url"
+              th:field="*{apellidoDueno}"
+              type="text"
               class="form-control"
-              id="urlFotoMascota"
-              placeholder="Ingrese la URL de la foto de la mascota"
+              id="apellidoDueno"
+              placeholder="Ingrese su apellido"
             />
           </div>
           <div class="form-group col-md-6">
-            <label for="inputRazaMascota">Raza de la Mascota</label>
+            <label for="inputCorreoDueno">Correo Electrónico</label>
             <input
-              th:field="*{razaMascota}"
-              type="text"
+              th:field="*{correoDueno}"
+              type="email"
               class="form-control"
-              id="razaMascota"
+              id="correoDueno"
+              placeholder="Ingrese su correo electrónico"
             />
-            <label for="inputIdDueno">ID del Dueño de la Mascota</label>
+            <label for="inputIdTelefono">Teléfono</label>
             <input
-              th:field="*{idDueno}"
+              th:field="*{celularDueno}"
               type="number"
               class="form-control"
-              id="idDueno"
+              id="celularDueno"
+              placeholder="Escriba su número de teléfono"
             />
           </div>
         </div>
-        <button type="submit" class="btn btn-primary">Crear Mascota</button>
+        <button type="submit" class="btn btn-primary">Crear Dueno</button>
       </form>
     </main>
     <footer>
