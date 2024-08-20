@@ -25,4 +25,19 @@ public class MascotaServiceImplementation implements MascotaService {
     public Collection<Mascota> obtenerMascotas() {
         return mascotaRepository.getMascotas();
     }
+
+    @Override
+    public void addMascota(Mascota mascota) {
+        mascotaRepository.addMascota(mascota);
+    }
+
+    @Override
+    public void deleteMascota(Integer id) {
+        mascotaRepository.deleteMascota(id);
+    }
+
+    @Override
+    public void updateMascota(Mascota mascota) {
+        mascotaRepository.updateMascota(mascota);
+    }
 }

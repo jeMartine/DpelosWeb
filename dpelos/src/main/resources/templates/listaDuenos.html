@@ -101,43 +101,32 @@
       </nav>
     </header>
     <main id="inicio">
-      <h1>Lista de Mascotas</h1>
+      <h1>Lista de Dueños</h1>
       <table class="table table-striped">
         <thead class="tableHead">
           <tr>
-            <th>Foto Mascota</th>
-            <th>ID Mascota</th>
-            <th>Nombre Mascota</th>
-            <th>Edad Mascota</th>
-            <th>Raza Mascota</th>
-            <th>ID Dueño</th>
-            <th>Editar Mascota</th>
-            <th>Eliminar Mascota</th>
+            <th>Cedula Dueño</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Correo Electrónico</th>
+            <th>Celular</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
           </tr>
         </thead>
         <tbody>
-          <tr th:each="mascota : ${mascotas}" th:object="${mascota}">
-            <td>
-              <img
-                th:src="${mascota.fotoMascota}"
-                alt="Foto de la mascota"
-                class="img-fluid"
-                height="150px"
-                width="150px"
-                id="imgMascota"
-              />
-            </td>
+          <tr th:each="dueno : ${duenos}" th:object="${dueno}">
+            <td th:text="${dueno.cedulaDueno}"></td>
+            <td th:text="${dueno.nombreDueno}"></td>
+            <td th:text="${dueno.apellidoDueno}"></td>
+            <td th:text="${dueno.correoDueno}"></td>
+            <td th:text="${dueno.celularDueno}"></td>
 
-            <td th:text="${mascota.idMascota}"></td>
-            <td th:text="${mascota.nombreMascota}"></td>
-            <td th:text="${mascota.edadMascota}"></td>
-            <td th:text="${mascota.razaMascota}"></td>
-            <td th:text="${mascota.idDueno}"></td>
             <td>
               <a
                 type="button"
                 class="btn btn-primary"
-                th:href="@{mascota/update/{id}(id=${mascota.idMascota})}"
+                th:href="@{dueno/update/{id}(id=${dueno.cedulaDueno})}"
                 >Editar</a
               >
             </td>
@@ -145,15 +134,15 @@
               <a
                 type="button"
                 class="btn btn-primary"
-                th:href="@{mascota/delete/{id}(id=${mascota.idMascota})}"
+                th:href="@{dueno/delete/{id}(id=${dueno.cedulaDueno})}"
                 >Eliminar</a
               >
             </td>
           </tr>
         </tbody>
       </table>
-      <a type="button" class="btn btn-primary" th:href="@{mascota/add}"
-        >Añadir Mascota</a
+      <a type="button" class="btn btn-primary" th:href="@{dueno/add}"
+        >Añadir Dueño</a
       >
     </main>
 
