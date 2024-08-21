@@ -8,5 +8,5 @@ import com.web.dpelos.entity.Dueno;
 
 @Repository
 public interface DuenoRepository extends JpaRepository<Dueno, Long> {
-
+    Dueno findByCedulaDueno(String cedulaDueno);
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.web.dpelos.entity.Dueno;
 import com.web.dpelos.service.DuenoServiceImplementation;
@@ -53,5 +54,22 @@ public class DuenoControler {
     public String mostrarDuenoActualizado(@ModelAttribute("dueno") Dueno dueno) {
         duenoService.updateDueno(dueno);
         return "redirect:/dueno";
+    }
+
+    @GetMapping("/buscarDueno")
+    public String buscarDueno() {
+        return "buscarDueno";
+    }
+
+    @PostMapping("/buscarDueno")
+    public String buscarDueno(@RequestParam("cedula") String cedula, Model model) {
+        Dueno dueno = duenoService.buscarDuenoPorCedula(cedula);
+        if (dueno != null) {
+            model.addAttribute("dueno", dueno);
+            return "redirect:/mascota";
+        } else {
+            model.addAttribute("mensaje", "No se encontró un dueño con esa cédula");
+            return "redirect:/";
+        }
     }
 }

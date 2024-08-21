@@ -40,4 +40,8 @@ public class DuenoServiceImplementation implements DuenoService {
         duenoRepository.save(dueno);
     }
 
+    @Override
+    public Dueno buscarDuenoPorCedula(String cedulaDueno) {
+        return duenoRepository.findByCedulaDueno(cedulaDueno);
+    }
 }

@@ -15,4 +15,6 @@ public interface DuenoService {
 
     public void updateDueno(Dueno dueno);
 
+    public Dueno buscarDuenoPorCedula(String cedulaDueno);
+
 }
