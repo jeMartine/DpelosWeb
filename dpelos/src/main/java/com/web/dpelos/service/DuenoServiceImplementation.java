@@ -15,28 +15,29 @@ public class DuenoServiceImplementation implements DuenoService {
     @Autowired
     DuenoRepository duenoRepository;
 
-    public Dueno buscarDuenoPorId(Integer id) {
-        return duenoRepository.getDuenoById(id);
+    public Dueno buscarDuenoPorId(Long id) {
+        System.out.println("el id es: " + id);
+        return duenoRepository.findById(id).get();
     }
 
     @Override
     public Collection<Dueno> obtenerDuenos() {
-        return duenoRepository.getDuenos();
+        return duenoRepository.findAll();
     }
 
     @Override
     public void addDueno(Dueno dueno) {
-        duenoRepository.addDueno(dueno);
+        duenoRepository.save(dueno);
     }
 
     @Override
-    public void deleteDueno(Integer id) {
-        duenoRepository.deleteDueno(id);
+    public void deleteDueno(Long id) {
+        duenoRepository.deleteById(id);
     }
 
     @Override
     public void updateDueno(Dueno dueno) {
-        duenoRepository.updateDueno(dueno);
+        duenoRepository.save(dueno);
     }
 
 }

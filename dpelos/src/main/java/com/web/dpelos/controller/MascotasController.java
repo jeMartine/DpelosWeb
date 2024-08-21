@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.web.dpelos.entity.Mascota;
 import com.web.dpelos.service.MascotaServiceImplementation;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 @RequestMapping("/mascota")
@@ -27,14 +25,14 @@ public class MascotasController {
     }
 
     @GetMapping("/{id}")
-    public String mostrarMascotaPorID(Model model, @PathVariable Integer id) {
+    public String mostrarMascotaPorID(Model model, @PathVariable Long id) {
         model.addAttribute("mascota", mascotaService.buscarMascotaPorId(id));
         return "mascotaPorID";
     }
 
     @GetMapping("/add")
     public String mostrarFormularioCrearMascota(Model model) {
-        Mascota mascota = new Mascota(0, " ", 0, " ", " ", 0);
+        Mascota mascota = new Mascota();
         model.addAttribute("mascota", mascota);
         return "crearMascota";
     }
@@ -47,13 +45,13 @@ public class MascotasController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteMascota(@PathVariable Integer id) {
+    public String deleteMascota(@PathVariable Long id) {
         mascotaService.deleteMascota(id);
         return "redirect:/mascota";
     }
 
     @GetMapping("/update/{id}")
-    public String mostrarFormularioActualizarMascota(Model model, @PathVariable Integer id) {
+    public String mostrarFormularioActualizarMascota(Model model, @PathVariable Long id) {
         model.addAttribute("mascota", mascotaService.buscarMascotaPorId(id));
         return "actualizarMascota";
     }

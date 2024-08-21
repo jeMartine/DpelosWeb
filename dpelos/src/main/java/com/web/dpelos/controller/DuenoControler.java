@@ -27,7 +27,7 @@ public class DuenoControler {
 
     @GetMapping("/add")
     public String mostrarFormularioCrearDueno(Model model) {
-        Dueno dueno = new Dueno(null, null, null, null, null);
+        Dueno dueno = new Dueno();
         model.addAttribute("dueno", dueno);
         return "crearDueno";
     }
@@ -39,13 +39,13 @@ public class DuenoControler {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteDueno(@PathVariable Integer id) {
+    public String deleteDueno(@PathVariable Long id) {
         duenoService.deleteDueno(id);
         return "redirect:/dueno";
     }
 
     @GetMapping("/update/{id}")
-    public String mostrarFormularioActualizarDueno(Model model, @PathVariable Integer id) {
+    public String mostrarFormularioActualizarDueno(Model model, @PathVariable Long id) {
         model.addAttribute("dueno", duenoService.buscarDuenoPorId(id));
         return "actualizarDueno";
     }
