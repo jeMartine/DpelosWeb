@@ -62,12 +62,14 @@
     <header>
       <nav class="navbar navbar-expand-lg bg-white">
         <div class="container-fluid">
-          <img
-            src="/images/index/logo.png"
-            alt="logo D'pelos"
-            id="logo"
-            class="img-fluid"
-          />
+          <a th:href="@{/}">
+						<img
+						src="/images/index/logo.png"
+						alt="logo D'pelos"
+						id="logo"
+						class="img-fluid"
+						/>
+					</a>
           <button
             class="navbar-toggler"
             type="button"
@@ -116,6 +118,7 @@
               type="text"
               class="form-control"
               id="idMascota"
+              readonly
             />
           </div>
           <div class="form-group col-md-6">

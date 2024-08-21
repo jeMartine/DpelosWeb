@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.web.dpelos.entity.Dueno;
-import com.web.dpelos.entity.Mascota;
 import com.web.dpelos.service.DuenoServiceImplementation;
 
 @Controller
@@ -27,7 +27,7 @@ public class DuenoControler {
 
     @GetMapping("/add")
     public String mostrarFormularioCrearDueno(Model model) {
-        Dueno dueno = new Dueno(null, null, null, null, null);
+        Dueno dueno = new Dueno();
         model.addAttribute("dueno", dueno);
         return "crearDueno";
     }
@@ -39,13 +39,13 @@ public class DuenoControler {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteDueno(@PathVariable Integer id) {
+    public String deleteDueno(@PathVariable Long id) {
         duenoService.deleteDueno(id);
         return "redirect:/dueno";
     }
 
     @GetMapping("/update/{id}")
-    public String mostrarFormularioActualizarDueno(Model model, @PathVariable Integer id) {
+    public String mostrarFormularioActualizarDueno(Model model, @PathVariable Long id) {
         model.addAttribute("dueno", duenoService.buscarDuenoPorId(id));
         return "actualizarDueno";
     }
@@ -54,5 +54,22 @@ public class DuenoControler {
     public String mostrarDuenoActualizado(@ModelAttribute("dueno") Dueno dueno) {
         duenoService.updateDueno(dueno);
         return "redirect:/dueno";
+    }
+
+    @GetMapping("/buscarDueno")
+    public String buscarDueno() {
+        return "buscarDueno";
+    }
+
+    @PostMapping("/buscarDueno")
+    public String buscarDueno(@RequestParam("cedula") String cedula, Model model) {
+        Dueno dueno = duenoService.buscarDuenoPorCedula(cedula);
+        if (dueno != null) {
+            model.addAttribute("dueno", dueno);
+            return "redirect:/mascota";
+        } else {
+            model.addAttribute("mensaje", "No se encontró un dueño con esa cédula");
+            return "redirect:/";
+        }
     }
 }
