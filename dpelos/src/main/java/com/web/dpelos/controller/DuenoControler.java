@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.web.dpelos.entity.Dueno;
-import com.web.dpelos.entity.Mascota;
 import com.web.dpelos.service.DuenoServiceImplementation;
 
 @Controller

@@ -3,12 +3,10 @@ package com.web.dpelos.entity;
 import java.sql.Date;
 import java.time.LocalDate;
 
-import org.hibernate.annotations.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 
 import com.web.dpelos.repository.DuenoRepository;
 import com.web.dpelos.repository.MascotaRepository;
