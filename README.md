@@ -1,4 +1,4 @@
-![Logo D'pelos](https://github.com/jeMartine/DpelosWeb/blob/main/Resources/img/index/logo.png)
+![Logo D'pelos](https://github.com/jeMartine/DpelosWeb/blob/main/Imgs/logo.png)
 
 ## Descripción del Proyecto
 

@@ -15,9 +15,8 @@
       rel="stylesheet"
     />
     <!-- css -->
+    <link rel="stylesheet" href="/css/crearMascota.css" />
     <link rel="stylesheet" href="/css/mainStyle.css" />
-    <link rel="stylesheet" href="/css/mascotasStyle.css" />
-
     <!-- scripts -->
     <script src="/js/indexScript.js" defer></script>
     <!-- owl carousel -->
@@ -69,7 +68,6 @@
             id="logo"
             class="img-fluid"
           />
-
           <button
             class="navbar-toggler"
             type="button"
@@ -101,62 +99,68 @@
       </nav>
     </header>
     <main id="inicio">
-      <h1>Lista de Mascotas</h1>
-      <table class="table table-striped">
-        <thead class="tableHead">
-          <tr>
-            <th>Foto Mascota</th>
-            <th>ID Mascota</th>
-            <th>Nombre Mascota</th>
-            <th>Edad Mascota</th>
-            <th>Raza Mascota</th>
-            <th>ID Dueño</th>
-            <th>Editar Mascota</th>
-            <th>Eliminar Mascota</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="mascota : ${mascotas}" th:object="${mascota}">
-            <td>
-              <img
-                th:src="${mascota.fotoMascota}"
-                alt="Foto de la mascota"
-                class="img-fluid"
-                height="150px"
-                width="150px"
-                id="imgMascota"
-              />
-            </td>
-
-            <td th:text="${mascota.idMascota}"></td>
-            <td th:text="${mascota.nombreMascota}"></td>
-            <td th:text="${mascota.edadMascota}"></td>
-            <td th:text="${mascota.razaMascota}"></td>
-            <td th:text="${mascota.idDueno}"></td>
-            <td>
-              <a
-                type="button"
-                class="btn btn-primary"
-                th:href="@{mascota/update/{id}(id=${mascota.idMascota})}"
-                >Editar</a
-              >
-            </td>
-            <td>
-              <a
-                type="button"
-                class="btn btn-primary"
-                th:href="@{mascota/delete/{id}(id=${mascota.idMascota})}"
-                >Eliminar</a
-              >
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <a type="button" class="btn btn-primary" th:href="@{mascota/add}"
-        >Añadir Mascota</a
+      <a type="button" class="btn btn-primary" th:href="@{/dueno}">Regresar</a>
+      <h1>Formulario para la Actualización de un Dueno</h1>
+      <form
+        th:object="${dueno}"
+        th:action="@{/dueno/update/{id}(id=${dueno.cedulaDueno})}"
+        method="post"
       >
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputCedulaDueno">Cedula</label>
+            <input
+              th:field="*{cedulaDueno}"
+              type="number"
+              class="form-control"
+              id="cedulaDueno"
+              placeholder="Ingrese su número de cedula"
+            />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputNombreDueno">Nombre</label>
+            <input
+              th:field="*{nombreDueno}"
+              type="text"
+              class="form-control"
+              id="nombreDueno"
+              placeholder="Ingrese su nombre"
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputApellidoDueno">Apellido</label>
+            <input
+              th:field="*{apellidoDueno}"
+              type="text"
+              class="form-control"
+              id="apellidoDueno"
+              placeholder="Ingrese su apellido"
+            />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputCorreoDueno">Correo Electrónico</label>
+            <input
+              th:field="*{correoDueno}"
+              type="email"
+              class="form-control"
+              id="correoDueno"
+              placeholder="Ingrese su correo electrónico"
+            />
+            <label for="inputIdTelefono">Teléfono</label>
+            <input
+              th:field="*{celularDueno}"
+              type="number"
+              class="form-control"
+              id="celularDueno"
+              placeholder="Escriba su número de teléfono"
+            />
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Actualizar Dueno</button>
+      </form>
     </main>
-
     <footer>
       <div class="container">
         <div class="row">
