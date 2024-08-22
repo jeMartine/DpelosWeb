@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.web.dpelos.entity.Dueno;
 import com.web.dpelos.entity.Mascota;
-import com.web.dpelos.exception.NotFoundException;
-import com.web.dpelos.service.DuenoServiceImplementation;
 import com.web.dpelos.service.MascotaServiceImplementation;
 
 import jakarta.servlet.http.HttpSession;
@@ -30,10 +28,6 @@ public class MascotasController {
     @Autowired
     MascotaServiceImplementation mascotaService;
 
-    @Autowired
-    DuenoServiceImplementation duenoService;
-
-
     @GetMapping()
     public String listaMascotas(Model model) {
         model.addAttribute("mascotas", mascotaService.obtenerMascotas());
@@ -43,11 +37,14 @@ public class MascotasController {
     @GetMapping("/tus-mascotas")
     public String mostrarMascotaDueno(Model model, HttpSession session) {
         Long idDueno = (Long) session.getAttribute("idDueno");
-        if (idDueno != null) {
-            model.addAttribute("mascotas", mascotaService.obtenerMascotasDelDueno(idDueno));
-        } else {
-            model.addAttribute("mascotas", Collections.emptyList());
-        }
+    if (idDueno != null) {
+        model.addAttribute("mascotas", mascotaService.obtenerMascotasDelDueno(idDueno));
+        model.addAttribute("dueno", duenoService.buscarDuenoPorId(idDueno));
+        
+    } else {
+        model.addAttribute("mascotas", Collections.emptyList());
+        model.addAttribute("dueno", null);
+    }
         return "Dueno/inicioDueno";
     }
 
