@@ -63,12 +63,14 @@
     <header>
       <nav class="navbar navbar-expand-lg bg-white">
         <div class="container-fluid">
-          <img
-            src="/images/index/logo.png"
-            alt="logo D'pelos"
-            id="logo"
-            class="img-fluid"
-          />
+          <a th:href="@{/}">
+						<img
+						src="/images/index/logo.png"
+						alt="logo D'pelos"
+						id="logo"
+						class="img-fluid"
+						/>
+					</a>
 
           <button
             class="navbar-toggler"
@@ -93,8 +95,11 @@
                 <a href="#agendarCita" class="nav-link li_header">Contacto</a>
               </li>
               <li class="nav-item">
-                <a href="index.html" class="nav-link li_header">Ingresa</a>
-              </li>
+								<a 
+								th:href="@{/login}" 
+								class="nav-link li_header"
+								>Ingresa</a>
+							</li>
             </ul>
           </div>
         </div>
@@ -110,7 +115,7 @@
             <th>Nombre Mascota</th>
             <th>Edad Mascota</th>
             <th>Raza Mascota</th>
-            <th>ID Dueño</th>
+            <th>Nombre Dueño</th>
             <th>Editar Mascota</th>
             <th>Eliminar Mascota</th>
           </tr>
@@ -119,7 +124,7 @@
           <tr th:each="mascota : ${mascotas}" th:object="${mascota}">
             <td>
               <img
-                th:src="${mascota.fotoMascota}"
+                th:src="${mascota.urlFotoMascota}"
                 alt="Foto de la mascota"
                 class="img-fluid"
                 height="150px"
@@ -132,7 +137,7 @@
             <td th:text="${mascota.nombreMascota}"></td>
             <td th:text="${mascota.edadMascota}"></td>
             <td th:text="${mascota.razaMascota}"></td>
-            <td th:text="${mascota.idDueno}"></td>
+            <td th:text="${mascota.dueno.nombreDueno}"></td>
             <td>
               <a
                 type="button"

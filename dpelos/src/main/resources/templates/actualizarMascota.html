@@ -62,12 +62,14 @@
     <header>
       <nav class="navbar navbar-expand-lg bg-white">
         <div class="container-fluid">
-          <img
-            src="/images/index/logo.png"
-            alt="logo D'pelos"
-            id="logo"
-            class="img-fluid"
-          />
+          <a th:href="@{/}">
+						<img
+						src="/images/index/logo.png"
+						alt="logo D'pelos"
+						id="logo"
+						class="img-fluid"
+						/>
+					</a>
           <button
             class="navbar-toggler"
             type="button"
@@ -91,8 +93,11 @@
                 <a href="#agendarCita" class="nav-link li_header">Contacto</a>
               </li>
               <li class="nav-item">
-                <a href="index.html" class="nav-link li_header">Ingresa</a>
-              </li>
+								<a 
+								th:href="@{/login}" 
+								class="nav-link li_header"
+								>Ingresa</a>
+							</li>
             </ul>
           </div>
         </div>
@@ -108,68 +113,74 @@
         th:action="@{/mascota/update/{id}(id=${mascota.idMascota})}"
         method="post"
       >
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="inputNombreMascota">ID de la Mascota</label>
-            <input
-              th:field="*{idMascota}"
-              type="text"
-              class="form-control"
-              id="idMascota"
-            />
-          </div>
-          <div class="form-group col-md-6">
-            <label for="inputNombreMascota">Nombre de la Mascota</label>
-            <input
-              th:field="*{nombreMascota}"
-              type="text"
-              class="form-control"
-              id="nombreMascota"
-              placeholder="Ingrese el nombre de la mascota"
-            />
-          </div>
-          <div class="form-group col-md-6">
-            <label for="inputEdadMascota">Edad Mascota</label>
-            <input
-              th:field="*{edadMascota}"
-              type="number"
-              class="form-control"
-              id="edadMascota"
-              placeholder="Ingrese la edad de la mascota"
-            />
-          </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+
+          <label for="inputNombreMascota">Nombre de la Mascota</label>
+          <input
+            th:field="*{nombreMascota}"
+            type="text"
+            class="form-control"
+            id="nombreMascota"
+            placeholder="Ingrese el nombre de la mascota"
+          />
         </div>
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="inputUrlFotoMascota">Foto de la Mascota</label>
-            <input
-              th:field="*{urlFotoMascota}"
-              type="url"
-              class="form-control"
-              id="urlFotoMascota"
-              placeholder="Ingrese la URL de la foto de la mascota"
-            />
-          </div>
-          <div class="form-group col-md-6">
-            <label for="inputRazaMascota">Raza de la Mascota</label>
-            <input
-              th:field="*{razaMascota}"
-              type="text"
-              class="form-control"
-              id="razaMascota"
-            />
-            <label for="inputIdDueno">ID del Dueño de la Mascota</label>
-            <input
-              th:field="*{idDueno}"
-              type="number"
-              class="form-control"
-              id="idDueno"
-            />
-          </div>
+        <div class="form-group col-md-6">
+          <label for="inputEdadMascota">Edad Mascota</label>
+          <input
+            th:field="*{edadMascota}"
+            type="number"
+            class="form-control"
+            id="edadMascota"
+            placeholder="Ingrese la edad de la mascota"
+          />
         </div>
-        <button type="submit" class="btn btn-primary">
-          Actualizar Mascota
-        </button>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputUrlFotoMascota">Foto de la Mascota</label>
+          <input
+            th:field="*{urlFotoMascota}"
+            type="url"
+            class="form-control"
+            id="urlFotoMascota"
+            placeholder="Ingrese la URL de la foto de la mascota"
+          />
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputRazaMascota">Raza de la Mascota</label>
+          <input
+            th:field="*{razaMascota}"
+            type="text"
+            class="form-control"
+            id="razaMascota"
+          />
+          <label for="inputEnfermedadMascota">Enfermedad</label>
+          <input
+            th:field="*{enfermedad}"
+            type="text"
+            class="form-control"
+            id="enfermedad"
+          />
+          <label for="inputCedulaDueno">Dueño Id</label>
+          <input
+            th:field="*{dueno}"
+            type="text"
+            class="form-control"
+            id="dueno"
+          />
+          
+          <label for="inputCedulaDueno">Fecha de Creación</label>
+          <input
+            th:field="*{fechaCreacion}"
+            type="text"
+            class="form-control"
+            id="fechaCreacion"
+          />
+          
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Actualizar Mascota</button>
       </form>
     </main>
     <footer>

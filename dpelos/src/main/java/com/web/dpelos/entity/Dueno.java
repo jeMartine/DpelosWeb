@@ -1,58 +1,46 @@
 package com.web.dpelos.entity;
+
+import java.util.List;
+import java.util.Set;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /*Clase Dueno */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
 public class Dueno {
-    private Integer cedulaDueno;
+    @Id
+    @GeneratedValue()
+    private Long idDueno;
+    private String cedulaDueno;
     private String nombreDueno;
     private String apellidoDueno;
     private String correoDueno;
     private String celularDueno;
+    private String fotoUrl;
 
-    public Dueno(Integer cedulaDueno, String nombreDueno, String apellidoDueno, String correoDueno, String celularDueno) {
+    @OneToMany(mappedBy = "dueno")
+    private Set<Mascota> mascotas;
+
+
+    //constructor sin id
+    public Dueno(String cedulaDueno, String nombreDueno, String apellidoDueno, 
+                String correoDueno, String celularDueno, String fotoUrl) {
         this.cedulaDueno = cedulaDueno;
         this.nombreDueno = nombreDueno;
         this.apellidoDueno = apellidoDueno;
         this.correoDueno = correoDueno;
         this.celularDueno = celularDueno;
+        this.fotoUrl=fotoUrl;
     }
-
-    public Integer getCedulaDueno() {
-        return cedulaDueno;
-    }
-
-    public void setCedulaDueno(Integer cedulaDueno) {
-        this.cedulaDueno = cedulaDueno;
-    }
-
-    public String getNombreDueno() {
-        return nombreDueno;
-    }
-
-    public void setNombreDueno(String nombreDueno) {
-        this.nombreDueno = nombreDueno;
-    }
-
-    public String getApellidoDueno() {
-        return apellidoDueno;
-    }
-
-    public void setApellidoDueno(String apellidoDueno) {
-        this.apellidoDueno = apellidoDueno;
-    }
-
-    public String getCorreoDueno() {
-        return correoDueno;
-    }
-
-    public void setCorreoDueno(String correoDueno) {
-        this.correoDueno = correoDueno;
-    }
-
-    public String getCelularDueno() {
-        return celularDueno;
-    }
-
-    public void setCelularDueno(String celularDueno) {
-        this.celularDueno = celularDueno;
-    }
-    
 }

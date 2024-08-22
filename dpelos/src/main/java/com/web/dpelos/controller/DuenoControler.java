@@ -8,10 +8,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.web.dpelos.entity.Dueno;
-import com.web.dpelos.entity.Mascota;
+import com.web.dpelos.exception.NotFoundException;
 import com.web.dpelos.service.DuenoServiceImplementation;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/dueno")
@@ -27,7 +30,7 @@ public class DuenoControler {
 
     @GetMapping("/add")
     public String mostrarFormularioCrearDueno(Model model) {
-        Dueno dueno = new Dueno(null, null, null, null, null);
+        Dueno dueno = new Dueno();
         model.addAttribute("dueno", dueno);
         return "crearDueno";
     }
@@ -39,20 +42,38 @@ public class DuenoControler {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteDueno(@PathVariable Integer id) {
+    public String deleteDueno(@PathVariable Long id) {
         duenoService.deleteDueno(id);
         return "redirect:/dueno";
     }
 
     @GetMapping("/update/{id}")
-    public String mostrarFormularioActualizarDueno(Model model, @PathVariable Integer id) {
+    public String mostrarFormularioActualizarDueno(Model model, @PathVariable("id") Long id) {
         model.addAttribute("dueno", duenoService.buscarDuenoPorId(id));
         return "actualizarDueno";
     }
 
     @PostMapping("/update/{id}")
-    public String mostrarDuenoActualizado(@ModelAttribute("dueno") Dueno dueno) {
+    public String mostrarDuenoActualizado(@PathVariable("id") Long id, @ModelAttribute("dueno") Dueno dueno) {
+        dueno.setIdDueno(id);
         duenoService.updateDueno(dueno);
         return "redirect:/dueno";
     }
+
+    @GetMapping("/buscarDueno")
+    public String buscarDueno() {
+        return "buscarDueno";
+    }
+
+    @PostMapping("/buscarDueno")
+    public String buscarDueno(@RequestParam("cedula") String cedula, HttpSession session, Model model) {
+        Dueno dueno = duenoService.buscarDuenoPorCedula(cedula);
+        if (dueno != null) {
+            session.setAttribute("idDueno", dueno.getIdDueno());
+            return "redirect:/mascota/tus-mascotas";
+        } else {
+            throw new NotFoundException("No se encontró un dueño con cédula " + cedula);
+        }
+    }
+
 }
