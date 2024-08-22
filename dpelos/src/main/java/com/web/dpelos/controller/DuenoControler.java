@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.web.dpelos.entity.Dueno;
 import com.web.dpelos.service.DuenoServiceImplementation;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/dueno")
 public class DuenoControler {
@@ -62,14 +64,15 @@ public class DuenoControler {
     }
 
     @PostMapping("/buscarDueno")
-    public String buscarDueno(@RequestParam("cedula") String cedula, Model model) {
+    public String buscarDueno(@RequestParam("cedula") String cedula, HttpSession session, Model model) {
         Dueno dueno = duenoService.buscarDuenoPorCedula(cedula);
         if (dueno != null) {
-            model.addAttribute("dueno", dueno);
-            return "redirect:/mascota";
+            session.setAttribute("idDueno", dueno.getIdDueno());
+            return "redirect:/mascota/tus-mascotas";
         } else {
             model.addAttribute("mensaje", "No se encontró un dueño con esa cédula");
             return "redirect:/";
         }
     }
+
 }

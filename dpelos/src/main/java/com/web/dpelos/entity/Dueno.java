@@ -1,8 +1,14 @@
 package com.web.dpelos.entity;
 
+import java.util.List;
+import java.util.Set;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Dueno {
     @Id
-    @GeneratedValue
+    @GeneratedValue()
     private Long idDueno;
     private String cedulaDueno;
     private String nombreDueno;
@@ -22,6 +28,10 @@ public class Dueno {
     private String correoDueno;
     private String celularDueno;
     private String fotoUrl;
+
+    @OneToMany(mappedBy = "dueno")
+    private Set<Mascota> mascotas;
+
 
     //constructor sin id
     public Dueno(String cedulaDueno, String nombreDueno, String apellidoDueno, 

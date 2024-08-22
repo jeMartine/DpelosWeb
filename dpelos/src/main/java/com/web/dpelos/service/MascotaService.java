@@ -7,6 +7,7 @@ import com.web.dpelos.entity.Mascota;
 public interface MascotaService {
     public Mascota buscarMascotaPorId(Long id);
     public Collection<Mascota> obtenerMascotas();
+    public Collection<Mascota> obtenerMascotasDelDueno(Long idDueno);
     public void addMascota(Mascota mascota);
     public void deleteMascota(Long id);
     public void updateMascota(Mascota mascota);

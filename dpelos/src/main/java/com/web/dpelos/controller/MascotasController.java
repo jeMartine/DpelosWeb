@@ -1,5 +1,7 @@
 package com.web.dpelos.controller;
 
+import java.util.Collections;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.web.dpelos.entity.Mascota;
 import com.web.dpelos.service.MascotaServiceImplementation;
+
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -22,6 +27,17 @@ public class MascotasController {
     public String listaMascotas(Model model) {
         model.addAttribute("mascotas", mascotaService.obtenerMascotas());
         return "listaMascotas";
+    }
+
+    @GetMapping("/tus-mascotas")
+    public String mostrarMascotaDueno(Model model, HttpSession session) {
+        Long idDueno = (Long) session.getAttribute("idDueno");
+        if (idDueno != null) {
+            model.addAttribute("mascotas", mascotaService.obtenerMascotasDelDueno(idDueno));
+        } else {
+            model.addAttribute("mascotas", Collections.emptyList());
+        }
+        return "Dueno/inicioDueno";
     }
 
     @GetMapping("/{id}")
