@@ -7,7 +7,11 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Service;
 
 import com.web.dpelos.entity.Dueno;
+import com.web.dpelos.exception.NotFoundException;
 import com.web.dpelos.repository.DuenoRepository;
+import com.web.dpelos.repository.MascotaRepository;
+
+import jakarta.transaction.Transactional;
 
 @EnableAutoConfiguration
 @Service
@@ -15,8 +19,10 @@ public class DuenoServiceImplementation implements DuenoService {
     @Autowired
     DuenoRepository duenoRepository;
 
+    @Autowired
+    MascotaRepository mascotaRepository;
+
     public Dueno buscarDuenoPorId(Long id) {
-        System.out.println("el id es: " + id);
         return duenoRepository.findById(id).get();
     }
 
@@ -30,11 +36,22 @@ public class DuenoServiceImplementation implements DuenoService {
         duenoRepository.save(dueno);
     }
 
+    @Transactional
     @Override
     public void deleteDueno(Long id) {
-        duenoRepository.deleteById(id);
+        Dueno dueno = duenoRepository.findById(id).get();
+
+        if(dueno!=null){
+            mascotaRepository.deleteAllByDueno(dueno);
+            duenoRepository.deleteById(id);
+
+        }else{
+            throw new NotFoundException(id.toString());
+        }
+
     }
 
+    @Transactional
     @Override
     public void updateDueno(Dueno dueno) {
         duenoRepository.save(dueno);

@@ -16,4 +16,8 @@ import com.web.dpelos.entity.Mascota;
 public interface MascotaRepository extends JpaRepository<Mascota, Long> {
     @Query("SELECT m FROM Mascota m WHERE m.dueno = :dueno")
     Collection<Mascota> findByIdDueno(@Param("dueno") Dueno dueno);
+
+
+    //Eliminar las mascotas de un dueño
+    void deleteAllByDueno(Dueno dueno);
 }

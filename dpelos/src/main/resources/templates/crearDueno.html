@@ -93,8 +93,11 @@
                 <a href="#agendarCita" class="nav-link li_header">Contacto</a>
               </li>
               <li class="nav-item">
-                <a href="index.html" class="nav-link li_header">Ingresa</a>
-              </li>
+								<a 
+								th:href="@{/login}" 
+								class="nav-link li_header"
+								>Ingresa</a>
+							</li>
             </ul>
           </div>
         </div>
@@ -153,6 +156,16 @@
               class="form-control"
               id="celularDueno"
               placeholder="Escriba su número de teléfono"
+            />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputFotoUrl">Url Foto</label>
+            <input
+              th:field="*{fotoUrl}"
+              type="text"
+              class="form-control"
+              id="fotoUrl"
+              placeholder="Url foto del dueño"
             />
           </div>
         </div>

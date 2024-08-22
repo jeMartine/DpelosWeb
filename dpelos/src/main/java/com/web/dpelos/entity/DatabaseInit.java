@@ -30,9 +30,17 @@ public class DatabaseInit implements ApplicationRunner{
         LocalDate date = LocalDate.now();
         Date sqlDate = Date.valueOf(date);
 
-        //mascotaRepository.save(new Mascota("Perro", 21, "https://c.files.bbci.co.uk/48DD/production/_107435681_perro1.jpg", "chanda", 1, sqlDate, true, "ceguera"));
-        //duenoRepository.save(new Dueno("13231", "ola", "ola", "ola@gmail.com", "3122323212", "hrtps"));
-        //duenoRepository.save(new Dueno("210332323","jorge", "Esteban", "yo@gmail.com", "3122323212", "hrtps"));
+        Dueno[] duenos = new Dueno[2];
+        duenos[0] = new Dueno("13231", "ola", "ola", "ola@gmail.com", "3122323212", "hrtps");
+        duenos[1] = new Dueno("210332323","jorge", "Esteban", "yo@gmail.com", "3122323212", "hrtps");
+        
+
+        for (Dueno dueno : duenos) {
+            duenoRepository.save(dueno);
+        }
+
+        mascotaRepository.save(new Mascota("Perro", 21, "https://c.files.bbci.co.uk/48DD/production/_107435681_perro1.jpg", "chanda", sqlDate, true, "ceguera", duenos[0]));
+        
     }
     
 }

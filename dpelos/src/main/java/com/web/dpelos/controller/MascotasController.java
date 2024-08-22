@@ -1,16 +1,22 @@
 package com.web.dpelos.controller;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.web.dpelos.entity.Dueno;
 import com.web.dpelos.entity.Mascota;
+import com.web.dpelos.service.DuenoServiceImplementation;
 import com.web.dpelos.service.MascotaServiceImplementation;
 
 import jakarta.servlet.http.HttpSession;
@@ -22,6 +28,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class MascotasController {
     @Autowired
     MascotaServiceImplementation mascotaService;
+
+    @Autowired
+    DuenoServiceImplementation duenoService;
+
 
     @GetMapping()
     public String listaMascotas(Model model) {
@@ -53,8 +63,19 @@ public class MascotasController {
         return "crearMascota";
     }
 
-    @PostMapping("/agregar")
-    public String addMascota(@ModelAttribute("mascota") Mascota mascota) {
+    @PostMapping("/agregar/{cedulaDueno}")
+    public String addMascota(@ModelAttribute("mascota") Mascota mascota, @RequestParam("cedulaDueno") String cedulaDueno) {
+        Dueno dueno = duenoService.buscarDuenoPorCedula(cedulaDueno); // Obtener el objeto Dueno desde duenoService
+        //System.out.println("La cedula del dueño es: " + cedulaDueno);
+        LocalDate date = LocalDate.now();
+        Date sqlDate = Date.valueOf(date);
+
+        if (dueno != null) {
+            mascota.setDueno(dueno); // Asignar el dueño a la mascota
+        }
+
+        mascota.setFechaCreacion(sqlDate);
+
         mascotaService.addMascota(mascota);
 
         return "redirect:/mascota";
@@ -67,13 +88,26 @@ public class MascotasController {
     }
 
     @GetMapping("/update/{id}")
-    public String mostrarFormularioActualizarMascota(Model model, @PathVariable Long id) {
+    public String mostrarFormularioActualizarMascota(Model model, @PathVariable Long id ) {
         model.addAttribute("mascota", mascotaService.buscarMascotaPorId(id));
         return "actualizarMascota";
     }
 
     @PostMapping("/update/{id}")
-    public String mostrarMascotaActualizada(@ModelAttribute("mascota") Mascota mascota) {
+    public String mostrarMascotaActualizada(@ModelAttribute("mascota") Mascota mascota, @RequestParam("cedulaDueno") String cedulaDueno) {
+        
+        Dueno dueno = duenoService.buscarDuenoPorCedula(cedulaDueno); // Obtener el objeto Dueno desde duenoService
+        //System.out.println("La cedula del dueño es: " + cedulaDueno);
+        LocalDate date = LocalDate.now();
+        Date sqlDate = Date.valueOf(date);
+
+        if (dueno != null) {
+            mascota.setDueno(dueno); // Asignar el dueño a la mascota
+        }
+
+        mascota.setFechaCreacion(sqlDate);        
+        
+        
         mascotaService.updateMascota(mascota);
         return "redirect:/mascota";
     }

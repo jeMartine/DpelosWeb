@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.web.dpelos.entity.Dueno;
+import com.web.dpelos.exception.NotFoundException;
 import com.web.dpelos.service.DuenoServiceImplementation;
 
 import jakarta.servlet.http.HttpSession;
@@ -47,13 +48,14 @@ public class DuenoControler {
     }
 
     @GetMapping("/update/{id}")
-    public String mostrarFormularioActualizarDueno(Model model, @PathVariable Long id) {
+    public String mostrarFormularioActualizarDueno(Model model, @PathVariable("id") Long id) {
         model.addAttribute("dueno", duenoService.buscarDuenoPorId(id));
         return "actualizarDueno";
     }
 
     @PostMapping("/update/{id}")
-    public String mostrarDuenoActualizado(@ModelAttribute("dueno") Dueno dueno) {
+    public String mostrarDuenoActualizado(@PathVariable("id") Long id, @ModelAttribute("dueno") Dueno dueno) {
+        dueno.setIdDueno(id);
         duenoService.updateDueno(dueno);
         return "redirect:/dueno";
     }
@@ -70,8 +72,8 @@ public class DuenoControler {
             session.setAttribute("idDueno", dueno.getIdDueno());
             return "redirect:/mascota/tus-mascotas";
         } else {
-            model.addAttribute("mensaje", "No se encontró un dueño con esa cédula");
-            return "redirect:/";
+           // model.addAttribute("mensaje", "No se encontró un dueño con esa cédula");
+            throw new NotFoundException(cedula);
         }
     }
 
