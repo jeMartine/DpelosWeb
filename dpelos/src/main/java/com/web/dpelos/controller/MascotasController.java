@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.web.dpelos.entity.Dueno;
 import com.web.dpelos.entity.Mascota;
+import com.web.dpelos.exception.NotFoundException;
 import com.web.dpelos.service.DuenoServiceImplementation;
 import com.web.dpelos.service.MascotaServiceImplementation;
 
@@ -63,10 +64,9 @@ public class MascotasController {
         return "crearMascota";
     }
 
-    @PostMapping("/agregar/{cedulaDueno}")
+    @PostMapping("/agregar")
     public String addMascota(@ModelAttribute("mascota") Mascota mascota, @RequestParam("cedulaDueno") String cedulaDueno) {
         Dueno dueno = duenoService.buscarDuenoPorCedula(cedulaDueno); // Obtener el objeto Dueno desde duenoService
-        //System.out.println("La cedula del dueño es: " + cedulaDueno);
         LocalDate date = LocalDate.now();
         Date sqlDate = Date.valueOf(date);
 
@@ -89,25 +89,21 @@ public class MascotasController {
 
     @GetMapping("/update/{id}")
     public String mostrarFormularioActualizarMascota(Model model, @PathVariable Long id ) {
-        model.addAttribute("mascota", mascotaService.buscarMascotaPorId(id));
-        return "actualizarMascota";
+        Mascota mascota = mascotaService.buscarMascotaPorId(id);
+        if(mascota!=null){
+            model.addAttribute("mascota", mascota);
+            return "actualizarMascota";
+        }else{
+            throw new NotFoundException("No Se encuentra la mascota con id "+ id);
+        }
+        
     }
 
     @PostMapping("/update/{id}")
-    public String mostrarMascotaActualizada(@ModelAttribute("mascota") Mascota mascota, @RequestParam("cedulaDueno") String cedulaDueno) {
+    public String mostrarMascotaActualizada(@ModelAttribute("mascota") Mascota mascota, @PathVariable("id") Long idMascota) {
         
-        Dueno dueno = duenoService.buscarDuenoPorCedula(cedulaDueno); // Obtener el objeto Dueno desde duenoService
-        //System.out.println("La cedula del dueño es: " + cedulaDueno);
-        LocalDate date = LocalDate.now();
-        Date sqlDate = Date.valueOf(date);
-
-        if (dueno != null) {
-            mascota.setDueno(dueno); // Asignar el dueño a la mascota
-        }
-
-        mascota.setFechaCreacion(sqlDate);        
-        
-        
+        mascota.setIdMascota(idMascota);
+       
         mascotaService.updateMascota(mascota);
         return "redirect:/mascota";
     }

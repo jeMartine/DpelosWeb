@@ -115,6 +115,7 @@
       >
       <div class="form-row">
         <div class="form-group col-md-6">
+
           <label for="inputNombreMascota">Nombre de la Mascota</label>
           <input
             th:field="*{nombreMascota}"
@@ -161,15 +162,22 @@
             class="form-control"
             id="enfermedad"
           />
-          <label for="inputCedulaDueno">Cédula del Dueño de la Mascota</label>
+          <label for="inputCedulaDueno">Dueño Id</label>
           <input
-            name="cedulaDueno"
+            th:field="*{dueno}"
             type="text"
             class="form-control"
-            id="cedulaDueno"
-            placeholder="Ingrese la cédula del dueño"
-            required
+            id="dueno"
           />
+          
+          <label for="inputCedulaDueno">Fecha de Creación</label>
+          <input
+            th:field="*{fechaCreacion}"
+            type="text"
+            class="form-control"
+            id="fechaCreacion"
+          />
+          
         </div>
       </div>
       <button type="submit" class="btn btn-primary">Actualizar Mascota</button>
