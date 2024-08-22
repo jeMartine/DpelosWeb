@@ -21,11 +21,25 @@ header {
 
 /* Logo */
 
+.navbar {
+  display: flex;
+  align-items: center;
+  height: 65px; 
+  background-color: white;
+}
+
+
 .navbar #logo {
   width: 150px;
   height: auto;
+  margin-right: 20px;
 }
 
+.nav-item{
+  width: 100px;
+  text-align: center;
+  border: #C0CDE1 5px solid;
+}
 
 .ul_header .li_header {
   list-style-type: none;
@@ -34,9 +48,10 @@ header {
 
 .navbar-nav .nav-link {
   padding: 15px;
-  color: black;
+  color: white;
   font-weight: 550;
   font-size: 18px;
+  background-color: #C0CDE1;
 }
 
 .navbar-nav .nav-link:hover {
@@ -47,6 +62,11 @@ header {
     #logo {
         height: 50px;
     }
+}
+
+.img-perfil{
+  width: 50px;
+  height: auto;
 }
   
 /* footer */
