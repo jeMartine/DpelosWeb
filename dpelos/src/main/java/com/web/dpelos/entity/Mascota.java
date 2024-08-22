@@ -36,7 +36,7 @@ public class Mascota {
 
     //constructor sin id
     public Mascota(String nombreMascota, Integer edadMascota, String urlFotoMascota,
-            String razaMascota, Date fechaCreacion, boolean estado, String enfermedad, Dueno dueno) {
+            String razaMascota, Date fechaCreacion, boolean estado, String enfermedad) {
         this.nombreMascota = nombreMascota;
         this.edadMascota = edadMascota;
         this.urlFotoMascota = urlFotoMascota;
@@ -44,6 +44,6 @@ public class Mascota {
         this.fechaCreacion= fechaCreacion;
         this.estado = estado;
         this.enfermedad = enfermedad;
-        this.dueno=dueno;
+
     }
 }
