@@ -1,0 +1,119 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+  scroll-padding-top: 60px;
+}
+
+* {
+  font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
+}
+
+/* header */
+
+header {
+  position: sticky;
+  top: 0px;
+  z-index: 10;
+}
+
+/* Logo */
+
+.navbar #logo {
+  width: 150px;
+  height: auto;
+}
+
+
+.ul_header .li_header {
+  list-style-type: none;
+}
+
+
+.navbar-nav .nav-link {
+  padding: 15px;
+  color: black;
+  font-weight: 550;
+  font-size: 18px;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #ff992b;
+}
+
+@media (max-width: 576px) {
+    #logo {
+        height: 50px;
+    }
+}
+  
+/* footer */
+footer {
+    display: flex;
+    flex-direction: column;
+    background-color: #121213;
+    padding: 20px 0;
+  }
+  
+  #footerContent {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  #logoFooter {
+    height: 45px;
+    width: auto;
+  }
+  
+  .footerData {
+    padding: 15px;
+  }
+  
+  .footerData img {
+    height: 35px;
+    width: auto;
+  }
+  
+  footer p,
+  footer h4,
+  .h4Legal {
+    color: #e0dfdf;
+    margin: 0px;
+  }
+  
+  footer h4,
+  .h4Legal {
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+  
+  .h4Legal {
+    margin-top: 10px;
+  }
+  
+  .footer-credits {
+    font-size: 13px;
+  }
+  
+  footer a {
+    color: #e0dfdf;
+    text-decoration: none;
+
+  }
+  
+  footer a:visited,
+  footer a:hover {
+    color: #ff992b;
+  }
+
+  .footerData a img {
+    transition: filter 0.3s ease;
+  }
+
+.footerData a:hover img {
+    filter: sepia(1) saturate(13) hue-rotate(-40deg);
+}
