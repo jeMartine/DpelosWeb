@@ -33,7 +33,6 @@ public class MascotasController {
     @Autowired
     DuenoServiceImplementation duenoService;
 
-
     @GetMapping()
     public String listaMascotas(Model model) {
         model.addAttribute("mascotas", mascotaService.obtenerMascotas());
@@ -43,11 +42,14 @@ public class MascotasController {
     @GetMapping("/tus-mascotas")
     public String mostrarMascotaDueno(Model model, HttpSession session) {
         Long idDueno = (Long) session.getAttribute("idDueno");
-        if (idDueno != null) {
-            model.addAttribute("mascotas", mascotaService.obtenerMascotasDelDueno(idDueno));
-        } else {
-            model.addAttribute("mascotas", Collections.emptyList());
-        }
+    if (idDueno != null) {
+        model.addAttribute("mascotas", mascotaService.obtenerMascotasDelDueno(idDueno));
+        model.addAttribute("dueno", duenoService.buscarDuenoPorId(idDueno));
+        
+    } else {
+        model.addAttribute("mascotas", Collections.emptyList());
+        model.addAttribute("dueno", null);
+    }
         return "Dueno/inicioDueno";
     }
 
