@@ -1,5 +1,6 @@
 package com.web.dpelos.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -30,7 +31,8 @@ public class Dueno {
     private String fotoUrl;
 
     @OneToMany(mappedBy = "dueno")
-    private Set<Mascota> mascotas;
+    private List<Mascota> mascotas = new ArrayList();
+    
 
 
     //constructor sin id
