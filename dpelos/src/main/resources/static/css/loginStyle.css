@@ -6,7 +6,7 @@
 }
 
 body{
-    background-color: #9496F3;
+    background-color: #fbdb5d;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -23,6 +23,7 @@ body{
 .imgPerros{
     width: 100%;
     height: auto;
+
 }
 
 .container{
@@ -68,7 +69,14 @@ body{
 
 .container button.hidden{
     background-color: transparent;
-    border-color: #fff;
+    border: 2px solid #99532b;
+    margin-top: 0%;
+    color: #99532b;
+    font-style: 900;
+}
+
+#login:hover, #register:hover{
+    background-color: #ffdb4d;
 }
 
 .container form{
@@ -100,7 +108,6 @@ body{
     flex-direction: row;
     align-items: center;
     justify-content: center;
-
     position: absolute;
     top: 0;
     height: 100%;
@@ -152,7 +159,7 @@ body{
     overflow: hidden;
     transition: all 0.6s ease-in-out;
     z-index: 1000;
-    background-color: #9496F3;
+    background-color: #fbdb5d;
 }
 
 .container.active .toggle-container{
