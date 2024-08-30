@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import com.web.dpelos.repository.DuenoRepository;
 import com.web.dpelos.repository.MascotaRepository;
+import com.web.dpelos.repository.RazaMascotaRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -26,6 +27,9 @@ public class DatabaseInit implements ApplicationRunner {
 
         @Autowired
         MascotaRepository mascotaRepository;
+
+        @Autowired
+        RazaMascotaRepository razaMascotaRepository;
 
         @Override
         public void run(ApplicationArguments args) throws Exception {
@@ -139,20 +143,19 @@ public class DatabaseInit implements ApplicationRunner {
                 Mascota[] mascotas = new Mascota[] {
                 new Mascota("Firulais", 2,
                                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6vK9XGVpsZJyLqihEWrl8FZlRTEIvPpn90KC5OnJRh2qiNiEzy0JBlls0ZV3_rkQOmdo&usqp=CAU",
-                                "Pastor Aleman", sqlDate, true, "Displasia de cadera"),
+                                sqlDate, true),
                 new Mascota("Toby", 3,
                                 "https://images.saymedia-content.com/.image/t_share/MjAxMjg4MjkxNjI5MTQ3Njc1/labrador-retriever-guide.jpg",
-                                "Labrador", sqlDate, true, "Alergias cutáneas"),
+                                sqlDate, true),
                 new Mascota("Rex", 4,
                                 "https://i.pinimg.com/1200x/07/84/ab/0784ab30e8c3c18e909620e531572b53.jpg",
-                                "Pitbull", sqlDate,
-                                true, "Infección de oídos"),
+                                sqlDate,true),
                 new Mascota("Max", 5,
                                 "https://dogtime.com/wp-content/uploads/sites/12/2024/03/GettyImages-1285465107-e1710251441662.jpg?w=1024",
-                                "Golden Retriever", sqlDate, true, "Cáncer"),
+                                sqlDate, true),
                 new Mascota("Bella", 2,
                                 "https://www.borrowmydoggy.com/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2F4ij0poqn%2Fproduction%2F817123f48402f97455c0e9d3761f79613a151685-650x400.jpg&w=1200&q=100",
-                                "Bulldog Francés", sqlDate, true, "Problemas respiratorios"),
+                                sqlDate, true, "Problemas respiratorios"),
                 new Mascota("Charlie", 3,
                                 "https://www.metrovetchicago.com/cdn-cgi/image/q=75,f=auto,metadata=none/sites/default/files/styles/large/public/beagle-dog-breed-info.jpg?itok=xLkF7OZ_",
                                 "Beagle", sqlDate, true, "Sobrepeso"),
@@ -409,6 +412,31 @@ public class DatabaseInit implements ApplicationRunner {
 
                 };
 
+                RazaMascota[] razas = new RazaMascota[]{
+                        new RazaMascota("Husky"),
+                        new RazaMascota("Labrador"),
+                        new RazaMascota("Pastor Alemán"),
+                        new RazaMascota("Golden Retriever"),
+                        new RazaMascota("Bulldog"),
+                        new RazaMascota("Beagle"),
+                        new RazaMascota("Rottweiler"),
+                        new RazaMascota("Yorkshire Terrier"),
+                        new RazaMascota("Boxer"),
+                        new RazaMascota("Dálmata"),
+                        new RazaMascota("Chihuahua"),
+                        new RazaMascota("Poodle"),
+                        new RazaMascota("Shih Tzu"),
+                        new RazaMascota("Schnauzer"),
+                        new RazaMascota("Cocker Spaniel"),
+                        new RazaMascota("Pomerania"),
+                        new RazaMascota("Mastín"),
+                        new RazaMascota("Basset Hound"),
+                        new RazaMascota("Border Collie"),
+                        new RazaMascota("Akita"),
+                        new RazaMascota("Samoedo")
+                    };
+                    
+                
                 // Ejemplo de uso: guardar las mascotas en un repositorio (si fuera el caso)
                 for (Mascota mascota : mascotas) {
                         mascotaRepository.save(mascota);
@@ -417,7 +445,11 @@ public class DatabaseInit implements ApplicationRunner {
                 for (Dueno dueno : duenos) {
                         duenoRepository.save(dueno);
                 }
+                //Guardar las razas
 
+                for (RazaMascota raza : razas) {
+                        razaMascotaRepository.save(raza);
+                }
                 // socicar mascotas a dueños
                /* Dueno asociar = duenoRepository.findById((long) 1).get();
                 for (Mascota masc : mascotaRepository.findAll()) {

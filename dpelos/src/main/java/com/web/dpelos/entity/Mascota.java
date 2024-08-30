@@ -25,25 +25,28 @@ public class Mascota {
     private String nombreMascota;
     private Integer edadMascota;
     private String urlFotoMascota;
-    private String razaMascota;
     private Date fechaCreacion;
     private boolean estado;
-    private String enfermedad;
 
     @ManyToOne
     @JoinColumn(name = "dueno_id")
     private Dueno dueno;
 
+    @ManyToOne
+    @JoinColumn(name = "raza_id")
+    private RazaMascota raza;
+
+    @ManyToOne
+    @JoinColumn(name = "enfermedad_id")
+    private Enfermedad enfermedadMascota;
+
     //constructor sin id
     public Mascota(String nombreMascota, Integer edadMascota, String urlFotoMascota,
-            String razaMascota, Date fechaCreacion, boolean estado, String enfermedad) {
+             Date fechaCreacion, boolean estado) {
         this.nombreMascota = nombreMascota;
         this.edadMascota = edadMascota;
         this.urlFotoMascota = urlFotoMascota;
-        this.razaMascota = razaMascota;
         this.fechaCreacion= fechaCreacion;
         this.estado = estado;
-        this.enfermedad = enfermedad;
-
     }
 }
