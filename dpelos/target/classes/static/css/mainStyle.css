@@ -102,12 +102,12 @@ footer {
   footer a {
     color: #e0dfdf;
     text-decoration: none;
+    margin: 0 9px
 
   }
   
-  footer a:visited,
   footer a:hover {
-    color: #ff992b;
+    color: #fbdc77;
   }
 
   .footerData a img {

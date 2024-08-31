@@ -72,7 +72,7 @@ public class DuenoControler {
             session.setAttribute("idDueno", dueno.getIdDueno());
             return "redirect:/mascota/tus-mascotas";
         } else {
-            throw new NotFoundException("No se encontró un dueño con cédula " + cedula);
+            return "redirect:/login?error=true&cedula=" + cedula;
         }
     }
 
