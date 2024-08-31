@@ -26,9 +26,14 @@ body{
 
 }
 
+.imgVeterinaria{
+    height: 430px;
+    width: auto;
+}
+
 .container{
     display: flex;
-    flex-direction: row;
+    flex-direction: left;
     align-items: center;
     justify-content: center;
     background-color: #fff;
@@ -43,8 +48,9 @@ body{
 
 .container span{
     text-align: center;
-    margin-top: 20px;
+    margin-top: 15px;
     margin-bottom: 20px;
+    width: 320px;
 }
 
 .container a{
@@ -75,8 +81,16 @@ body{
     font-style: 900;
 }
 
-#login:hover, #register:hover{
-    background-color: #ffdb4d;
+#login{
+    margin-top: 15px;
+}
+
+#register:hover{
+    background-color: #fcd94d
+}
+
+#login:hover{
+    background-color: #82e1c2;
 }
 
 .container form{
@@ -89,6 +103,7 @@ body{
     width: 70%;
     padding: 10px;
     border-radius: 15px;
+    border: 2px solid #99532b;
 }
 
 .container input{
@@ -118,6 +133,7 @@ body{
     left: 0;
     width: 50%;
     z-index: 2;
+    background-color: #fbdb5d;
 }
 
 .container.active .sign-in{
@@ -129,6 +145,7 @@ body{
     width: 50%;
     opacity: 0;
     z-index: 1;
+    background-color: #94F3D4;
 }
 
 .container.active .sign-up{
@@ -199,6 +216,7 @@ body{
 
 .toggle-left{
     transform: translateX(-200%);
+    background-color: #94F3D4;
 }
 
 .container.active .toggle-left{
@@ -208,8 +226,56 @@ body{
 .toggle-right{
     right: 0;
     transform: translateX(0);
+    background-color: #fbdb5d;
 }
 
 .container.active .toggle-right{
     transform: translateX(200%);
 }
+
+#btnDueno{
+    margin-top: 30px;
+}
+
+/*Modal*/
+.modal {
+    z-index: 1050;
+}
+
+.modal .modal-header {
+    border-bottom: 1px solid #99532b;
+}
+
+.modal .modal-footer {
+    border-top: 1px solid #99532b;
+    justify-content: center;
+}
+
+.modal .modal-title {
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #333;
+}
+
+.modal .btn-secondary {
+    background-color: #fbdb5d;
+    border: 1px solid #99532b;
+    color: #99532b;
+    font-weight: 400;
+}
+
+.modal .btn-secondary:hover {
+    background-color: #333;
+    border: 1px solid #333;
+}
+
+.modal .close{
+    color: #99532b;
+}
+
+
+
+
+
+
+
