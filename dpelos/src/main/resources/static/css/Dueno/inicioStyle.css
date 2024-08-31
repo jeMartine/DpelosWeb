@@ -170,41 +170,7 @@
 	width: auto;
 }
 
-/*#listaMascotas {
-	margin-top: 40px;
-	overflow-x: hidden;
-}
-
-#listaMascotas .row {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-.card-mascota {
-	background: linear-gradient(to bottom, #d8f8fa, #c0cde1);
-	border-radius: 10px;
-	width: 800px;
-	margin: 0 auto;
-	padding: 20px;
-	margin-bottom: 30px;
-}
-
-
-.card-text-principal {
-	font-size: 20px;
-	font-weight: bold;
-	margin-bottom: 5px;
-}
-
-#listaMascotas .card-text {
-	margin-bottom: 0.5rem;
-}
-
-.info-mascota {
-	margin-left: 40px;
-}*/
-
+/* Carrusel de mascotas */
 #listaMascotas {
 	margin-top: 20px;
 }
@@ -220,18 +186,22 @@
     position: relative;
     width: 100%;
 	height: 100%;
+	top: 0;
+	left: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .img-mascota {
-    display: block;
     width: 100%;
     height: auto;
 	object-fit: cover;
+	transition: filter 0.3s;
 }
 
 .owl-carousel .item img {
     position: absolute;
-    transform: translate(-50%, -50%);
     min-width: 100%;
     min-height: 100%;
     object-fit: cover;
