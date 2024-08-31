@@ -12,7 +12,7 @@ registerBtn.addEventListener('click', () => {
 
 loginBtn.addEventListener('click', () => {
     container.classList.remove("active");
-    document.body.style.backgroundColor = '#fbdb5d'; // Color del cliente
+    document.body.style.backgroundColor = '#9496F3'; // Color del cliente
     document.body.style.transition="all 0.6s ease-in-out";
 });
 

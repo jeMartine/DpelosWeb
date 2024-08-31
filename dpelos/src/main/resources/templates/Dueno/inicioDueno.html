@@ -165,7 +165,7 @@
 					<div class="owl-carousel owl-theme">
 						<div class="item" th:each="mascota : ${mascotas}">
 							<div class="card-mascota">
-								<div class="card-body d-flex">
+								<div class="img-container">
 									<img th:src="@{${mascota.urlFotoMascota}}" alt="mascota" class="img-mascota"/>
 									<div class="img-caption">
 										<p th:text="${mascota.nombreMascota}"></p>
