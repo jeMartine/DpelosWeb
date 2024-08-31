@@ -11,13 +11,16 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Especialidad {
+public class Administrador {
     @Id
     @GeneratedValue
-    private Long idEspecialidad;
-    private String nombreEspecialidad;
+    private Long adminId;
+    private String adminCedula;
+    private String password;
 
-    public Especialidad(String nombreEspecialidad) {
-        this.nombreEspecialidad = nombreEspecialidad;
+    public Administrador(String adminCedula, String password) {
+        this.adminCedula = adminCedula;
+        this.password = password;
     }
+
 }
