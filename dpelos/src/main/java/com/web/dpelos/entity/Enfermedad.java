@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 
 public class Enfermedad {
     @Id

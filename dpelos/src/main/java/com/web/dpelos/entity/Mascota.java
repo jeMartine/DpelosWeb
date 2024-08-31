@@ -38,7 +38,7 @@ public class Mascota {
 
     @ManyToOne
     @JoinColumn(name = "enfermedad_id")
-    private Enfermedad enfermedadMascota;
+    private Enfermedad enfermedad;
 
     //constructor sin id
     public Mascota(String nombreMascota, Integer edadMascota, String urlFotoMascota,

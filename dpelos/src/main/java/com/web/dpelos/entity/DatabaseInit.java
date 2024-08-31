@@ -11,6 +11,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 import com.web.dpelos.repository.DuenoRepository;
+import com.web.dpelos.repository.EnfermedadMascotaRepository;
 import com.web.dpelos.repository.MascotaRepository;
 import com.web.dpelos.repository.RazaMascotaRepository;
 
@@ -30,6 +31,9 @@ public class DatabaseInit implements ApplicationRunner {
 
         @Autowired
         RazaMascotaRepository razaMascotaRepository;
+
+        @Autowired
+        EnfermedadMascotaRepository enfermedadRepository;
 
         @Override
         public void run(ApplicationArguments args) throws Exception {
@@ -266,6 +270,49 @@ public class DatabaseInit implements ApplicationRunner {
                         new RazaMascota("Akita"),
                         new RazaMascota("Samoedo")
                     };
+                
+                Enfermedad[] enfermedades = new Enfermedad[]{
+                        new Enfermedad("Displasia de cadera"),
+                        new Enfermedad("Dermatitis"),
+                        new Enfermedad("Otitis"),
+                        new Enfermedad("Parvovirus"),
+                        new Enfermedad("Moquillo"),
+                        new Enfermedad("Gastroenteritis"),
+                        new Enfermedad("Leishmaniasis"),
+                        new Enfermedad("Filariosis"),
+                        new Enfermedad("Sarna"),
+                        new Enfermedad("Enfermedad de Lyme"),
+                        new Enfermedad("Torsión gástrica"),
+                        new Enfermedad("Alergias"),
+                        new Enfermedad("Epilepsia"),
+                        new Enfermedad("Insuficiencia renal"),
+                        new Enfermedad("Hepatitis infecciosa"),
+                        new Enfermedad("Enfermedad del corazón"),
+                        new Enfermedad("Cataratas"),
+                        new Enfermedad("Artritis"),
+                        new Enfermedad("Problemas dentales"),
+                        new Enfermedad("Infecciones urinarias"),
+                        new Enfermedad("Anemia"),
+                        new Enfermedad("Problemas de tiroides"),
+                        new Enfermedad("Enfermedad de Cushing"),
+                        new Enfermedad("Hipoglucemia"),
+                        new Enfermedad("Pancreatitis"),
+                        new Enfermedad("Luxación de rótula"),
+                        new Enfermedad("Problemas respiratorios"),
+                        new Enfermedad("Gingivitis"),
+                        new Enfermedad("Diarrea crónica"),
+                        new Enfermedad("Cáncer de piel"),
+                        new Enfermedad("Problemas de columna"),
+                        new Enfermedad("Otitis externa"),
+                        new Enfermedad("Gripe canina"),
+                        new Enfermedad("Conjuntivitis"),
+                        new Enfermedad("Queratoconjuntivitis seca"),
+                        new Enfermedad("Prolapso de glándula nictitante"),
+                        new Enfermedad("Problemas hepáticos"),
+                        new Enfermedad("Insuficiencia cardíaca"),
+                        new Enfermedad("Problemas gastrointestinales"),
+                        new Enfermedad("Parásitos internos"),
+                    };
                     
                 
                 // Ejemplo de uso: guardar las mascotas en un repositorio (si fuera el caso)
@@ -276,34 +323,37 @@ public class DatabaseInit implements ApplicationRunner {
                 for (Dueno dueno : duenos) {
                         duenoRepository.save(dueno);
                 }
-                //Guardar las razas
 
+                //Guardar las razas
                 for (RazaMascota raza : razas) {
                         razaMascotaRepository.save(raza);
                 }
-                // socicar mascotas a dueños
-               /* Dueno asociar = duenoRepository.findById((long) 1).get();
-                for (Mascota masc : mascotaRepository.findAll()) {
-                        masc.setDueno(asociar);
-                        mascotaRepository.save(masc);
-                }*/
+                
+                //Guardar las enfermedades
+                for (Enfermedad enfermedad : enfermedades) {
+                        enfermedadRepository.save(enfermedad);
+                }
 
                 int CANT_DUENOS=50;
                 int CANT_ASIGNACIONES=2;
-                // for (Dueno dueno :duenoRepository.findAll()) {
-                //     for (int i = 0; i < CANT_ASIGNACIONES; i++) {
-                //         int random = ThreadLocalRandom.current().nextInt(1,CANT_MASCOTAS+1);
-                //         Long search = Long.valueOf(random);
-                //         Mascota masc = mascotaRepository.findById(search).get();
-                //         masc.setDueno(dueno);
-                //         mascotaRepository.save(masc);
-                //     }
-                // }
+                int CANT_RAZAS=21;
+                int CANT_ENFERMEDADES=40;
                 for (Mascota masc :mascotaRepository.findAll()) {
                         for (int i = 0; i < CANT_ASIGNACIONES; i++) {
-                            int random = ThreadLocalRandom.current().nextInt(1,CANT_DUENOS+1);
-                            Long search = Long.valueOf(random);
-                            Dueno dueno = duenoRepository.findById(search).get();
+                            int randomDueno = ThreadLocalRandom.current().nextInt(1,CANT_DUENOS+1);
+                            int randomRaza = ThreadLocalRandom.current().nextInt(1,CANT_RAZAS+1);
+                            int randomEnfermedad = ThreadLocalRandom.current().nextInt(1,CANT_ENFERMEDADES+1);
+
+
+                            Long lDueno = Long.valueOf(randomDueno);
+                            Long lRaza = Long.valueOf(randomRaza);
+                            Long lEnfermedad = Long.valueOf(randomEnfermedad);
+
+                            Dueno dueno = duenoRepository.findById(lDueno).get();
+                            RazaMascota raza = razaMascotaRepository.findById(lRaza).get();
+                            Enfermedad enfermedad = enfermedadRepository.findById(lEnfermedad).get();
+                            masc.setEnfermedad(enfermedad);
+                            masc.setRaza(raza);
                             masc.setDueno(dueno);
                             mascotaRepository.save(masc);
                         }
