@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.web.dpelos.repository.VeterinarioRepository;
 import com.web.dpelos.service.DuenoServiceImplementation;
 
 @Controller
@@ -13,6 +14,8 @@ public class LoginController {
     
     @Autowired
     DuenoServiceImplementation duenoService;
+
+    @Autowired
     
     @GetMapping()
     public String login() {
