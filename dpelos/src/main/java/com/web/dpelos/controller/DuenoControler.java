@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.web.dpelos.entity.Dueno;
 import com.web.dpelos.exception.NotFoundException;
+import com.web.dpelos.service.DuenoService;
 import com.web.dpelos.service.DuenoServiceImplementation;
 
 import jakarta.servlet.http.HttpSession;
@@ -20,7 +21,7 @@ import jakarta.servlet.http.HttpSession;
 @RequestMapping("/dueno")
 public class DuenoControler {
     @Autowired
-    DuenoServiceImplementation duenoService;
+    DuenoService duenoService;
 
     @GetMapping()
     public String listaDuenos(Model model) {

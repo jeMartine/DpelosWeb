@@ -90,7 +90,7 @@ public class MascotasController {
     }
 
     @GetMapping("/update/{id}")
-    public String mostrarFormularioActualizarMascota(Model model, @PathVariable Long id ) {
+    public String mostrarFormularioActualizarMascota(Model model, @PathVariable Long id) {
         Mascota mascota = mascotaService.buscarMascotaPorId(id);
         if(mascota!=null){
             model.addAttribute("mascota", mascota);
@@ -102,8 +102,9 @@ public class MascotasController {
     }
 
     @PostMapping("/update/{id}")
-    public String mostrarMascotaActualizada(@ModelAttribute("mascota") Mascota mascota, @PathVariable("id") Long idMascota) {
-        
+    public String mostrarMascotaActualizada(@ModelAttribute("mascota") Mascota mascota, @PathVariable("id") Long idMascota, @RequestParam("cedulaDueno") String cedulaDueno) {
+        Dueno dueno = duenoService.buscarDuenoPorCedula(cedulaDueno); // Obtener el objeto Dueno desde duenoService
+        mascota.setDueno(dueno);
         mascota.setIdMascota(idMascota);
        
         mascotaService.updateMascota(mascota);
