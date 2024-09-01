@@ -1,238 +1,276 @@
 <!DOCTYPE html>
 <!-- thymeleaf -->
 <html lang="es" xmlns="https://www.thymeleaf.org/">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>D' pelos</title>
-    <!-- favicon -->
-    <link rel="icon" href="/images/index/logoFavicon.png" type="image/x-icon" />
-    <!-- font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-      rel="stylesheet"
-    />
-    <!-- css -->
-    <link rel="stylesheet" href="/css/mainStyle.css" />
-    <link rel="stylesheet" href="/css/mascotasStyle.css" />
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>D' pelos</title>
+		<!-- favicon -->
+		<link
+			rel="icon"
+			href="/images/index/logoFavicon.png"
+			type="image/x-icon"
+		/>
+		<!-- font -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+			rel="stylesheet"
+		/>
+		<!-- bootstrap -->
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+			integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+			crossorigin="anonymous"
+		/>
+		<!-- css -->
+		<link rel="stylesheet" href="/css/mainStyle.css" />
+		<link rel="stylesheet" href="/css/listaMascotasStyle.css" />
 
-    <!-- scripts -->
-    <script src="/js/indexScript.js" defer></script>
-    <!-- owl carousel -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.theme.min.css"
-    />
-    <!-- font awesome -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
-    <!-- bootstrap -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous"
-    />
-  </head>
-  <body>
-    <!-- owl carousel -->
-    <script
-      type="text/javascript"
-      src="https://code.jquery.com/jquery-1.12.0.min.js"
-    ></script>
-    <script
-      type="text/javascript"
-      src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js"
-    ></script>
-
-    <!-- bootstrap  -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-      crossorigin="anonymous"
-    ></script>
-
-    <header>
-      <nav class="navbar navbar-expand-lg bg-white">
-        <div class="container-fluid">
-          <a th:href="@{/}">
+		<!-- scripts -->
+		<script src="/js/indexScript.js" defer></script>
+		<!-- owl carousel -->
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.theme.min.css"
+		/>
+		<!-- font awesome -->
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+		/>
+	</head>
+	<body>
+		<header>
+			<nav class="navbar navbar-expand-lg bg-white">
+				<div class="container-fluid">
+					<a th:href="@{/}">
 						<img
-						src="/images/index/logo.png"
-						alt="logo D'pelos"
-						id="logo"
-						class="img-fluid"
+							src="/images/index/logo.png"
+							alt="logo D'pelos"
+							id="logo"
+							class="img-fluid"
 						/>
 					</a>
 
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav ms-auto">
-              <li class="nav-item">
-                <a href="#inicio" class="nav-link li_header">Inicio</a>
-              </li>
-              <li class="nav-item">
-                <a href="#servicios" class="nav-link li_header">Servicios</a>
-              </li>
-              <li class="nav-item">
-                <a href="#agendarCita" class="nav-link li_header">Contacto</a>
-              </li>
-              <li class="nav-item">
-								<a 
-								th:href="@{/login}" 
-								class="nav-link li_header"
-								>Ingresa</a>
+					<button
+						class="navbar-toggler"
+						type="button"
+						data-bs-toggle="collapse"
+						data-bs-target="#navbarNavDropdown"
+						aria-controls="navbarNavDropdown"
+						aria-expanded="false"
+						aria-label="Toggle navigation"
+					>
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div
+						class="collapse navbar-collapse"
+						id="navbarNavDropdown"
+					>
+						<ul class="navbar-nav ms-auto">
+							<li class="nav-item">
+								<a href="#inicio" class="nav-link li_header"
+									>Inicio</a
+								>
 							</li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </header>
-    <main id="inicio">
-      <h1>Lista de Mascotas</h1>
-      <table class="table table-striped">
-        <thead class="tableHead">
-          <tr>
-            <th>Foto Mascota</th>
-            <th>ID Mascota</th>
-            <th>Nombre Mascota</th>
-            <th>Edad Mascota</th>
-            <th>Raza Mascota</th>
-            <th>Nombre Dueño</th>
-            <th>Editar Mascota</th>
-            <th>Eliminar Mascota</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="mascota : ${mascotas}" th:object="${mascota}">
-            <td>
-              <img
-                th:src="${mascota.urlFotoMascota}"
-                alt="Foto de la mascota"
-                class="img-fluid"
-                height="150px"
-                width="150px"
-                id="imgMascota"
-              />
-            </td>
+							<li class="nav-item">
+								<a href="#servicios" class="nav-link li_header"
+									>Servicios</a
+								>
+							</li>
+							<li class="nav-item">
+								<a
+									href="#agendarCita"
+									class="nav-link li_header"
+									>Contacto</a
+								>
+							</li>
+							<li class="nav-item">
+								<a
+									th:href="@{/login}"
+									class="nav-link li_header"
+									>Ingresa</a
+								>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</header>
 
-            <td th:text="${mascota.idMascota}"></td>
-            <td th:text="${mascota.nombreMascota}"></td>
-            <td th:text="${mascota.edadMascota}"></td>
-            <td th:text="${mascota.raza.razaMascota}"></td>
-            <td th:text="${mascota.dueno.nombreDueno}"></td>
-            <td>
-              <a
-                type="button"
-                class="btn btn-primary"
-                th:href="@{mascota/update/{id}(id=${mascota.idMascota})}"
-                >Editar</a
-              >
-            </td>
-            <td>
-              <a
-                type="button"
-                class="btn btn-primary"
-                th:href="@{mascota/delete/{id}(id=${mascota.idMascota})}"
-                >Eliminar</a
-              >
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <a type="button" class="btn btn-primary" th:href="@{mascota/add}"
-        >Añadir Mascota</a
-      >
-    </main>
+		<main id="inicio">
+			<h1>Lista de Mascotas</h1>
+			<div class="container">
+				<div class="d-flex justify-content-center flex-wrap">
+					<div class="col-md-4" th:each="mascota : ${mascotas}">
+						<div class="card mb-4">
+							<img
+								th:src="${mascota.urlFotoMascota}"
+								class="img-mascotas"
+								alt="Foto de la mascota"
+								height="200px"
+								width="200px"
+							/>
+							<div class="card-body">
+								<h5
+									class="card-title"
+									th:text="${mascota.nombreMascota}"
+								>
+									Nombre Mascota
+								</h5>
+								<p class="card-text">
+									<strong>ID Mascota: </strong
+									><span th:text="${mascota.idMascota}"></span
+									><br />
+									<strong>Edad: </strong
+									><span
+										th:text="${mascota.edadMascota}"
+									></span
+									><br />
+									<strong>Raza: </strong
+									><span
+										th:text="${mascota.raza.razaMascota}"
+									></span
+									><br />
+									<strong>Dueño: </strong
+									><span
+										th:text="${mascota.dueno.nombreDueno}"
+									></span>
+								</p>
+								<div
+									class="d-flex justify-content-between align-items-center"
+								>
+									<a
+										th:href="@{mascota/update/{id}(id=${mascota.idMascota})}"
+										class="btn btn-primary btn-sm"
+										>Editar</a
+									>
+									<a
+										th:href="@{mascota/delete/{id}(id=${mascota.idMascota})}"
+										class="btn btn-danger btn-sm"
+										>Eliminar</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<a
+				type="button"
+				class="btn btn-primary mt-3"
+				th:href="@{mascota/add}"
+				>Añadir Mascota</a
+			>
+		</main>
 
-    <footer>
-      <div class="container">
-        <div class="row">
-          <div class="col-12 text-center mb-3">
-            <img
-              src="/images/index/logo.png"
-              alt=""
-              id="logoFooter"
-              class="img-fluid"
-            />
-          </div>
+		<footer>
+			<div class="container">
+				<div class="row">
+					<div class="col-12 text-center mb-3">
+						<img
+							src="/images/index/logo.png"
+							alt=""
+							id="logoFooter"
+							class="img-fluid"
+						/>
+					</div>
 
-          <div class="col-12 col-md-6 col-lg-3">
-            <div class="footerData">
-              <h4>Contacto</h4>
-              <p>
-                <strong>Dirección</strong>: Calle 23 #5-70, Bogotá, Colombia
-              </p>
-              <p><strong>Teléfono</strong>: +57 317 243 3936</p>
-              <p><strong>Email</strong>: info@dpelos.com</p>
-            </div>
-          </div>
+					<div class="col-12 col-md-6 col-lg-3">
+						<div class="footerData">
+							<h4>Contacto</h4>
+							<p>
+								<strong>Dirección</strong>: Calle 23 #5-70,
+								Bogotá, Colombia
+							</p>
+							<p><strong>Teléfono</strong>: +57 317 243 3936</p>
+							<p><strong>Email</strong>: info@dpelos.com</p>
+						</div>
+					</div>
 
-          <div class="col-12 col-md-6 col-lg-3">
-            <div class="footerData">
-              <h4>Horarios de Atención</h4>
-              <p><strong>Lunes a Viernes</strong>: 8:00 AM - 6:00 PM</p>
-              <p><strong>Sábado</strong>: 9:00 AM - 4:00 PM</p>
-              <p><strong>Domingo</strong>: Cerrado</p>
-            </div>
-          </div>
+					<div class="col-12 col-md-6 col-lg-3">
+						<div class="footerData">
+							<h4>Horarios de Atención</h4>
+							<p>
+								<strong>Lunes a Viernes</strong>: 8:00 AM - 6:00
+								PM
+							</p>
+							<p><strong>Sábado</strong>: 9:00 AM - 4:00 PM</p>
+							<p><strong>Domingo</strong>: Cerrado</p>
+						</div>
+					</div>
 
-          <div class="col-12 col-md-6 col-lg-3">
-            <div class="footerData">
-              <h4>Enlaces Útiles</h4>
-              <a href="#inicio">Inicio</a><br />
-              <a href="#servicios">Servicios</a><br />
-              <a href="/sobre-nosotros">Sobre Nosotros</a><br />
-              <a href="/blog">Blog</a><br />
-              <a href="/contacto">Contacto</a>
+					<div class="col-12 col-md-6 col-lg-3">
+						<div class="footerData">
+							<h4>Enlaces Útiles</h4>
+							<a href="#inicio">Inicio</a><br />
+							<a href="#servicios">Servicios</a><br />
+							<a href="/sobre-nosotros">Sobre Nosotros</a><br />
+							<a href="/blog">Blog</a><br />
+							<a href="/contacto">Contacto</a>
 
-              <h4 class="h4Legal">Legal</h4>
-              <a href="/terminos-y-condiciones">Términos y Condiciones</a><br />
-              <a href="/politica-de-privacidad">Política de Privacidad</a>
-            </div>
-          </div>
+							<h4 class="h4Legal">Legal</h4>
+							<a href="/terminos-y-condiciones"
+								>Términos y Condiciones</a
+							><br />
+							<a href="/politica-de-privacidad"
+								>Política de Privacidad</a
+							>
+						</div>
+					</div>
 
-          <div class="col-12 col-md-6 col-lg-3 text-center">
-            <div class="footerData">
-              <h4>Síguenos</h4>
-              <a href="https://www.facebook.com/dpelos" target="_blank">
-                <img src="/images/redes/facebook.png" alt="Facebook" />
-              </a>
-              <a href="https://www.instagram.com/dpelos" target="_blank">
-                <img src="/images/redes/instagram.png" alt="Instagram" />
-              </a>
-              <a href="https://www.x.com/dpelos" target="_blank">
-                <img src="/images/redes/twitter.png" alt="Twitter" />
-              </a>
-              <a href="https://www.tiktok.com/dpelos" target="_blank">
-                <img src="/images/redes/tik-tok.png" alt="Tik Tok" />
-              </a>
-            </div>
-          </div>
-        </div>
+					<div class="col-12 col-md-6 col-lg-3 text-center">
+						<div class="footerData">
+							<h4>Síguenos</h4>
+							<a
+								href="https://www.facebook.com/dpelos"
+								target="_blank"
+							>
+								<img
+									src="/images/redes/facebook.png"
+									alt="Facebook"
+								/>
+							</a>
+							<a
+								href="https://www.instagram.com/dpelos"
+								target="_blank"
+							>
+								<img
+									src="/images/redes/instagram.png"
+									alt="Instagram"
+								/>
+							</a>
+							<a href="https://www.x.com/dpelos" target="_blank">
+								<img
+									src="/images/redes/twitter.png"
+									alt="Twitter"
+								/>
+							</a>
+							<a
+								href="https://www.tiktok.com/dpelos"
+								target="_blank"
+							>
+								<img
+									src="/images/redes/tik-tok.png"
+									alt="Tik Tok"
+								/>
+							</a>
+						</div>
+					</div>
+				</div>
 
-        <div class="footer-credits text-center mt-3">
-          <p>&copy; 2024 D'Pelos. Todos los derechos reservados.</p>
-          <p>Sitio web creado por el mejor grupo de la clase :).</p>
-        </div>
-      </div>
-    </footer>
-  </body>
+				<div class="footer-credits text-center mt-3">
+					<p>&copy; 2024 D'Pelos. Todos los derechos reservados.</p>
+					<p>Sitio web creado por el mejor grupo de la clase :).</p>
+				</div>
+			</div>
+		</footer>
+	</body>
 </html>
