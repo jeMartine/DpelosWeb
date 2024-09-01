@@ -16,7 +16,7 @@ public class EmpleadoController {
     @Autowired
     VeterinarioRepository veterinarioRepository;
     
-    @GetMapping
+    @GetMapping()
     public String indexEmpleado() {
         return "empleado/indexEmpleado";
     }
