@@ -39,7 +39,12 @@ public class VeterinarioController {
             model.addAttribute("veterinario", veterinario);
             return "redirect:/empleado";
         } else {
-            return "redirect:/login?error=true&cedula=" + cedulaVet;
+            Veterinario vetExiste = veterinarioService.buscarVetPorCedula(cedulaVet);
+            if(vetExiste != null){
+                return "redirect:/login?error=password&cedula=" + cedulaVet + "&userType=veterinario";
+            }else{
+                return "redirect:/login?error=user&cedula=" + cedulaVet + "&userType=veterinario";
+            }
         }  
     }
     

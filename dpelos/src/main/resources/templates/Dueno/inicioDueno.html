@@ -28,8 +28,14 @@
 		<link rel="stylesheet" href="/css/Dueno/mainStyleDueno.css" />
 		<link rel="stylesheet" href="/css/Dueno/inicioStyle.css" />
 
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+		/>
 
 		<!-- font awesome -->
 		<link
@@ -160,40 +166,67 @@
 						<i class="fas fa-search"></i>
 					</button>
 				</div>
+				<div
+					id="error-message"
+					class="text-danger mt-2"
+					style="display: none"
+				></div>
 			</section>
+
 			<section id="listaMascotas">
-					<div class="owl-carousel owl-theme">
-						<div class="item" th:each="mascota : ${mascotas}">
-							<div class="card-mascota">
-								<div class="img-container">
-									<img th:src="@{${mascota.urlFotoMascota}}" alt="mascota" class="img-mascota"/>
-									<div class="img-caption">
-										<p th:text="${mascota.nombreMascota}"></p>
-									</div>
+				<div class="owl-carousel owl-theme">
+					<div class="item" th:each="mascota : ${mascotas}">
+						<div class="card-mascota">
+							<div class="img-container">
+								<img
+									th:src="@{${mascota.urlFotoMascota}}"
+									alt="mascota"
+									class="img-mascota"
+									th:data-nombre="${mascota.nombreMascota}"
+									th:data-raza="${mascota.raza.razaMascota}"
+									th:data-fecha="${#dates.format(mascota.fechaCreacion, 'EEEE, dd MMMM yyyy')}"
+									th:data-estado="${mascota.estado ? 'En tratamiento' : 'Inactivo'}"
+									th:data-enfermedad="${mascota.enfermedad.nombreEnfermedad}"
+								/>
+								<div class="img-caption">
+									<p th:text="${mascota.nombreMascota}"></p>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div id="info-mascota" class="info-mascota" style="display:none;">
+				</div>
+
+				<div
+					id="info-mascota"
+					class="info-mascota"
+					style="display: none"
+				>
+					<div class="info-header">
 						<p class="card-text-principal">
 							<span id="info-nombre"></span>
 							<i class="fas fa-paw"></i>
 						</p>
-						<p class="card-text">
-							<strong>Fecha de creación: </strong>
-							<span id="info-fecha"></span>
-						</p>
-						<p class="card-text">
-							<strong>Estado: </strong>
-							<span id="info-estado"></span>
-						</p>
-						<p class="card-text">
-							<strong>Enfermedad: </strong>
-							<span id="info-enfermedad"></span>
-						</p>
+						<div id="info-estado" class="estado-mascota"></div>
 					</div>
-				
-			</section>		
+					<div class="info-details">
+						<div class="info-row">
+							<i class="fas fa-dog icon"></i>
+							<span class="subtitle">Raza:</span>
+							<span id="info-raza" class="value"></span>
+						</div>
+						<div class="info-row">
+							<i class="fas fa-calendar-alt icon"></i>
+							<span class="subtitle">Fecha de creación:</span>
+							<span id="info-fecha" class="value"></span>
+						</div>
+						<div class="info-row">
+							<i class="fas fa-medkit icon"></i>
+							<span class="subtitle">Enfermedad:</span>
+							<span id="info-enfermedad" class="value"></span>
+						</div>
+					</div>
+				</div>
+			</section>
 		</main>
 		<footer>
 			<div class="container">
