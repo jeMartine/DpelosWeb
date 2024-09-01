@@ -25,7 +25,7 @@ public class Veterinario {
     private String apellidoVeterinario;
     private String cedulaVeterinario;
     private String passwordVeterinario;
-    private String urlFotoVeterinario;
+    private String fotoUrl;
     private int numeroAtenciones;
 
     @ManyToOne
@@ -37,13 +37,13 @@ public class Veterinario {
 
 
     public Veterinario(String nombreVeterinario, String apellidoVeterinario, 
-            String cedulaVeterinario, String passwordVeterinario, String urlFotoVeterinario, 
+            String cedulaVeterinario, String passwordVeterinario, String fotoUrl, 
             int numeroAtenciones) {
         this.nombreVeterinario = nombreVeterinario;
         this.apellidoVeterinario = apellidoVeterinario;
         this.cedulaVeterinario = cedulaVeterinario;
         this.passwordVeterinario = passwordVeterinario;
-        this.urlFotoVeterinario = urlFotoVeterinario;
+        this.fotoUrl = fotoUrl;
         this.numeroAtenciones = numeroAtenciones;
     }
 }
