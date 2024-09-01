@@ -3,14 +3,17 @@ package com.web.dpelos.service;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.stereotype.Service;
 
 import com.web.dpelos.entity.Veterinario;
 import com.web.dpelos.exception.NotFoundException;
-import com.web.dpelos.repository.MascotaRepository;
 import com.web.dpelos.repository.VeterinarioRepository;
 
 import jakarta.transaction.Transactional;
 
+@EnableAutoConfiguration
+@Service
 public class VeterinarioServiceImplentation implements VeterinarioService{
   
 
@@ -55,4 +58,10 @@ public class VeterinarioServiceImplentation implements VeterinarioService{
     public Veterinario buscarVetPorCedula(String cedulaVet) {
         return veterinarioRepository.findByCedulaVeterinario(cedulaVet);
     }
+
+    @Override
+    public Veterinario buscarVetLogin(String cedulaVet, String passwordVet){
+        return veterinarioRepository.findByCedulaVeterinarioAndPasswordVeterinario(cedulaVet, passwordVet);
+    }
+
 }
