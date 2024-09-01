@@ -150,27 +150,27 @@
         <div class="form-group col-md-6">
           <label for="inputRazaMascota">Raza de la Mascota</label>
           <input
-            th:field="*{razaMascota}"
+            th:field="*{raza.razaMascota}"
             type="text"
             class="form-control"
             id="razaMascota"
           />
           <label for="inputEnfermedadMascota">Enfermedad</label>
           <input
-            th:field="*{enfermedad}"
+            th:field="*{enfermedad.nombreEnfermedad}"
             type="text"
             class="form-control"
             id="enfermedad"
           />
           <label for="inputCedulaDueno">Dueño Id</label>
           <input
-            th:field="*{dueno}"
+            th:field="*{dueno.idDueno}"
             type="text"
             class="form-control"
             id="dueno"
           />
           
-          <label for="inputCedulaDueno">Fecha de Creación</label>
+          <label for="inputFechaCreacion">Fecha de Creación</label>
           <input
             th:field="*{fechaCreacion}"
             type="text"

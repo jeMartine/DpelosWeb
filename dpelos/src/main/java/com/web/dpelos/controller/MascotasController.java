@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.web.dpelos.entity.Dueno;
 import com.web.dpelos.entity.Mascota;
 import com.web.dpelos.exception.NotFoundException;
-import com.web.dpelos.service.DuenoServiceImplementation;
-import com.web.dpelos.service.MascotaServiceImplementation;
+import com.web.dpelos.service.DuenoService;
+import com.web.dpelos.service.MascotaService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -28,10 +28,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequestMapping("/mascota")
 public class MascotasController {
     @Autowired
-    MascotaServiceImplementation mascotaService;
+    MascotaService mascotaService;
 
     @Autowired
-    DuenoServiceImplementation duenoService;
+    DuenoService duenoService;
 
     @GetMapping()
     public String listaMascotas(Model model) {

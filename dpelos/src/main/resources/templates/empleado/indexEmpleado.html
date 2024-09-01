@@ -15,9 +15,8 @@
       rel="stylesheet"
     />
     <!-- css -->
+    <link rel="stylesheet" href="/css/mascotaDataStyle.css" />
     <link rel="stylesheet" href="/css/mainStyle.css" />
-    <link rel="stylesheet" href="/css/mascotasStyle.css" />
-
     <!-- scripts -->
     <script src="/js/indexScript.js" defer></script>
     <!-- owl carousel -->
@@ -43,15 +42,6 @@
     />
   </head>
   <body>
-    <!-- owl carousel -->
-    <script
-      type="text/javascript"
-      src="https://code.jquery.com/jquery-1.12.0.min.js"
-    ></script>
-    <script
-      type="text/javascript"
-      src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js"
-    ></script>
 
     <!-- bootstrap  -->
     <script
@@ -71,7 +61,6 @@
 						class="img-fluid"
 						/>
 					</a>
-
           <button
             class="navbar-toggler"
             type="button"
@@ -106,60 +95,7 @@
       </nav>
     </header>
     <main id="inicio">
-      <h1>Lista de Mascotas</h1>
-      <table class="table table-striped">
-        <thead class="tableHead">
-          <tr>
-            <th>Foto Mascota</th>
-            <th>ID Mascota</th>
-            <th>Nombre Mascota</th>
-            <th>Edad Mascota</th>
-            <th>Raza Mascota</th>
-            <th>Nombre Dueño</th>
-            <th>Editar Mascota</th>
-            <th>Eliminar Mascota</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="mascota : ${mascotas}" th:object="${mascota}">
-            <td>
-              <img
-                th:src="${mascota.urlFotoMascota}"
-                alt="Foto de la mascota"
-                class="img-fluid"
-                height="150px"
-                width="150px"
-                id="imgMascota"
-              />
-            </td>
-
-            <td th:text="${mascota.idMascota}"></td>
-            <td th:text="${mascota.nombreMascota}"></td>
-            <td th:text="${mascota.edadMascota}"></td>
-            <td th:text="${mascota.raza.razaMascota}"></td>
-            <td th:text="${mascota.dueno.nombreDueno}"></td>
-            <td>
-              <a
-                type="button"
-                class="btn btn-primary"
-                th:href="@{mascota/update/{id}(id=${mascota.idMascota})}"
-                >Editar</a
-              >
-            </td>
-            <td>
-              <a
-                type="button"
-                class="btn btn-primary"
-                th:href="@{mascota/delete/{id}(id=${mascota.idMascota})}"
-                >Eliminar</a
-              >
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <a type="button" class="btn btn-primary" th:href="@{mascota/add}"
-        >Añadir Mascota</a
-      >
+      
     </main>
 
     <footer>
