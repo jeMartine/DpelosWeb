@@ -29,13 +29,6 @@
     />
   </head>
   <body>
-    <!-- bootstrap  -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-      crossorigin="anonymous"
-    ></script>
-
     <header>
       <nav class="navbar navbar-expand-lg bg-white">
         <div class="container-fluid">
@@ -75,12 +68,14 @@
                 <a href="#servicios" class="nav-link li_header">Historiales</a>
               </li>
               <li class="nav-item">
-                <img
-                  th:src="@{${veterinario.fotoUrl}}"
-                  alt="User Icon"
-                  id="userIcon"
-                  class="img-perfil rounded-circle me-3"
-                />
+                <a th:href="@{/login}">
+                  <img
+                    th:src="@{${veterinario.fotoUrl}}"
+                    alt="User Icon"
+                    id="userIcon"
+                    class="img-perfil rounded-circle me-3"
+                  />
+                </a>
               </li>
             </ul>
           </div>
@@ -95,7 +90,7 @@
           >
             <p
               class="bienvenida_titulo mb-10"
-              th:text="'Hola de nuevo ' + ${veterinario.nombreVeterinario} + ' ' + ${veterinario.apellidoVeterinario}"
+              th:text="'¡Hola de nuevo ' + ${veterinario.nombreVeterinario} + ' ' + ${veterinario.apellidoVeterinario} + '!'"
             ></p>
 
             <p
@@ -158,10 +153,23 @@
               <p>15:00 p.m</p>
           </div>
           </div>
+          <div >
+            <div class="card-media">
+              <p>¿Buscas algún peludito?</p>
+              <a 
+              href="#"
+              class="boton-mascota">Ver mascotas</a>
+            </div>
+            <div class="card-media">
+            <p>Contacta a un dueño D'Pelos</p>
+              <a 
+              href="#"
+              class="boton-dueno">Ver dueños</a>
+          </div>
+          </div>
+          
         </div>
       </section>
-
-      <section id="consultas"></section>
     </main>
     <footer>
       <div class="container">
