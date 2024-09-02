@@ -95,7 +95,7 @@ public class MascotasController {
         }
 
         mascota.setFechaCreacion(sqlDate);
-
+        mascota.setEstado(true);
         mascotaService.addMascota(mascota);
 
         return "redirect:/mascota";
@@ -110,8 +110,15 @@ public class MascotasController {
     @GetMapping("/update/{id}")
     public String mostrarFormularioActualizarMascota(Model model, @PathVariable Long id ) {
         Mascota mascota = mascotaService.buscarMascotaPorId(id);
+    
         if(mascota!=null){
+            List <Raza> listaRazas = razaService.obtenerRazas();
+            List <Enfermedad> listaEnfermedades = enfermedadService.obtenerEnfermedades();
+    
             model.addAttribute("mascota", mascota);
+            model.addAttribute("enfermedades", listaEnfermedades);
+            model.addAttribute("razas", listaRazas);
+
             return "actualizarMascota";
         }else{
             throw new NotFoundException("No Se encuentra la mascota con id "+ id);
@@ -120,8 +127,17 @@ public class MascotasController {
     }
 
     @PostMapping("/update/{id}")
-    public String mostrarMascotaActualizada(@ModelAttribute("mascota") Mascota mascota, @PathVariable("id") Long idMascota) {
+    public String mostrarMascotaActualizada(@ModelAttribute("mascota") Mascota mascota, @PathVariable("id") Long idMascota, @RequestParam("dueno.cedulaDueno") String cedulaDueno) {
         
+        Dueno dueno = duenoService.buscarDuenoPorCedula(cedulaDueno); // Obtener el objeto Dueno desde duenoService
+
+        if (dueno != null) {
+            mascota.setDueno(dueno); // Asignar el dueño a la mascota
+        }else{
+            //mostrar mensaje de error
+            mascota.setDueno(null);
+        }   
+
         mascota.setIdMascota(idMascota);
        
         mascotaService.updateMascota(mascota);

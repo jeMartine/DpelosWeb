@@ -11,6 +11,19 @@
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
 }
 
+.btn-secundary{
+    background-color: #333;
+    border: 1x solid #333;
+    color: white;
+	margin-left: 10px;
+}
+
+.btn-secundary:hover{
+	background-color: #ffffff;
+	color: #93d368;
+	border: 1px solid #93d368;
+}
+
 #card-container {
 	display: flex;
 	flex-wrap: wrap;

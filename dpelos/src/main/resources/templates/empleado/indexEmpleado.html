@@ -17,8 +17,7 @@
     <!-- css -->
     <link rel="stylesheet" href="/css/empleado/mainEmpleadoStyle.css" />
     <link rel="stylesheet" href="/css/mainStyle.css" />
-    <!-- scripts -->
-    <script src="/js/indexScript.js" defer></script>
+
 
     <!-- bootstrap -->
     <link
@@ -157,13 +156,13 @@
             <div class="card-media">
               <p>¿Buscas algún peludito?</p>
               <a 
-              href="#"
+              th:href="@{/mascota}"
               class="boton-mascota">Ver mascotas</a>
             </div>
             <div class="card-media">
             <p>Contacta a un dueño D'Pelos</p>
               <a 
-              href="#"
+              th:href="@{/dueno}"
               class="boton-dueno">Ver dueños</a>
           </div>
           </div>

@@ -64,3 +64,17 @@ main{
     border: none;
     color: white;
 }
+
+.duenoField{
+    background-color: #eaf4f7;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    padding: 15px 0 15px 0;
+}
+
+#agregarDuenoContainer{
+    display: flex;
+    justify-content: center;
+}

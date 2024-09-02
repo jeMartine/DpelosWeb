@@ -1,6 +1,10 @@
 package com.web.dpelos.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -77,13 +81,18 @@ public class DuenoControler {
     }
 
     @GetMapping("/verificar/{cedula}")
-    public boolean verificarDueno(@PathVariable("cedula") String cedula) {
-        Dueno dueno = duenoService.buscarDuenoPorCedula(cedula);
-        if (dueno != null) {
-            return true;
-        } else {
-            return false;
-        }
+    public ResponseEntity<Map<String, String>> verificarDueno(@PathVariable("cedula") String cedula) {
+    Dueno dueno = duenoService.buscarDuenoPorCedula(cedula);
+    Map<String, String> response = new HashMap<>();
+    
+    if (dueno != null) {
+        response.put("existe", "true");
+        response.put("nombre", dueno.getNombreDueno() + " " + dueno.getApellidoDueno());
+    } else {
+        response.put("existe", "false");
     }
+    
+    return ResponseEntity.ok(response);
+}
 
 }
