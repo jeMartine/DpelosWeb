@@ -117,3 +117,9 @@ footer {
 .footerData a:hover img {
     filter: sepia(1) saturate(13) hue-rotate(-40deg);
 }
+
+.img-perfil {
+    width: 50px;
+    height: auto;
+    margin: 0px 10px 0px 10px;
+}

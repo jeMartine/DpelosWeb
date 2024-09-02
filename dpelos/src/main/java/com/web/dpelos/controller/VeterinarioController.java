@@ -1,5 +1,7 @@
 package com.web.dpelos.controller;
 
+import java.util.Collections;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,12 +25,15 @@ public class VeterinarioController {
     @Autowired
     VeterinarioService veterinarioService;
 
+
+
     //buscar un veterinario
     @GetMapping("/buscarVet")
     public String buscarVeterinario() {
         return "buscarVet";
     }
     
+
     @PostMapping("/buscarVet")
     public String buscarVeterinario(@RequestParam("cedulaVet") String cedulaVet, 
                                     @RequestParam("passwordVet") String passwordVet,
@@ -36,8 +41,7 @@ public class VeterinarioController {
         Veterinario veterinario = veterinarioService.buscarVetLogin(cedulaVet, passwordVet);
         if (veterinario != null) {
             session.setAttribute("idVeterinario", veterinario.getIdVeterinario());
-            model.addAttribute("veterinario", veterinario);
-            return "redirect:/empleado";
+            return "redirect:/empleado/vet";
         } else {
             Veterinario vetExiste = veterinarioService.buscarVetPorCedula(cedulaVet);
             if(vetExiste != null){
