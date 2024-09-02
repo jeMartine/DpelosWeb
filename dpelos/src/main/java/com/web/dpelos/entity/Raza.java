@@ -11,12 +11,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RazaMascota {
+public class Raza {
     @Id
     @GeneratedValue
     private Long idRazaMascota;
     private String razaMascota;
-    public RazaMascota(String razaMascota) {
+    public Raza(String razaMascota) {
         this.razaMascota = razaMascota;
     }
 }

@@ -2,8 +2,10 @@ package com.web.dpelos.controller;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Collections;
+import java.util.List;
+import java.util.Collection;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,10 +17,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.web.dpelos.entity.Dueno;
+import com.web.dpelos.entity.Enfermedad;
 import com.web.dpelos.entity.Mascota;
+import com.web.dpelos.entity.Raza;
 import com.web.dpelos.exception.NotFoundException;
 import com.web.dpelos.service.DuenoService;
+import com.web.dpelos.service.EnfermedadService;
 import com.web.dpelos.service.MascotaService;
+import com.web.dpelos.service.RazaService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -32,6 +38,12 @@ public class MascotasController {
 
     @Autowired
     DuenoService duenoService;
+
+    @Autowired
+    RazaService razaService;
+
+    @Autowired
+    EnfermedadService enfermedadService;
 
     @GetMapping()
     public String listaMascotas(Model model) {
@@ -62,7 +74,13 @@ public class MascotasController {
     @GetMapping("/add")
     public String mostrarFormularioCrearMascota(Model model) {
         Mascota mascota = new Mascota();
+        List <Raza> listaRazas = razaService.obtenerRazas();
+        List <Enfermedad> listaEnfermedades = enfermedadService.obtenerEnfermedades();
+
         model.addAttribute("mascota", mascota);
+        model.addAttribute("enfermedades", listaEnfermedades);
+        model.addAttribute("razas", listaRazas);
+        
         return "crearMascota";
     }
 

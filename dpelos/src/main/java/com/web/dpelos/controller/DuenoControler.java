@@ -76,4 +76,14 @@ public class DuenoControler {
         }
     }
 
+    @GetMapping("/verificar/{cedula}")
+    public boolean verificarDueno(@PathVariable("cedula") String cedula) {
+        Dueno dueno = duenoService.buscarDuenoPorCedula(cedula);
+        if (dueno != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

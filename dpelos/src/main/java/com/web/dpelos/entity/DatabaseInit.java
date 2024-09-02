@@ -425,28 +425,28 @@ public class DatabaseInit implements ApplicationRunner {
         
                         };
 
-                RazaMascota[] razas = new RazaMascota[] {
-                                new RazaMascota("Husky"),
-                                new RazaMascota("Labrador"),
-                                new RazaMascota("Pastor Alemán"),
-                                new RazaMascota("Golden Retriever"),
-                                new RazaMascota("Bulldog"),
-                                new RazaMascota("Beagle"),
-                                new RazaMascota("Rottweiler"),
-                                new RazaMascota("Yorkshire Terrier"),
-                                new RazaMascota("Boxer"),
-                                new RazaMascota("Dálmata"),
-                                new RazaMascota("Chihuahua"),
-                                new RazaMascota("Poodle"),
-                                new RazaMascota("Shih Tzu"),
-                                new RazaMascota("Schnauzer"),
-                                new RazaMascota("Cocker Spaniel"),
-                                new RazaMascota("Pomerania"),
-                                new RazaMascota("Mastín"),
-                                new RazaMascota("Basset Hound"),
-                                new RazaMascota("Border Collie"),
-                                new RazaMascota("Akita"),
-                                new RazaMascota("Samoedo")
+                Raza[] razas = new Raza[] {
+                                new Raza("Husky"),
+                                new Raza("Labrador"),
+                                new Raza("Pastor Alemán"),
+                                new Raza("Golden Retriever"),
+                                new Raza("Bulldog"),
+                                new Raza("Beagle"),
+                                new Raza("Rottweiler"),
+                                new Raza("Yorkshire Terrier"),
+                                new Raza("Boxer"),
+                                new Raza("Dálmata"),
+                                new Raza("Chihuahua"),
+                                new Raza("Poodle"),
+                                new Raza("Shih Tzu"),
+                                new Raza("Schnauzer"),
+                                new Raza("Cocker Spaniel"),
+                                new Raza("Pomerania"),
+                                new Raza("Mastín"),
+                                new Raza("Basset Hound"),
+                                new Raza("Border Collie"),
+                                new Raza("Akita"),
+                                new Raza("Samoedo")
                 };
 
                 Enfermedad[] enfermedades = new Enfermedad[] {
@@ -640,7 +640,7 @@ public class DatabaseInit implements ApplicationRunner {
                 }
 
                 // Guardar las razas
-                for (RazaMascota raza : razas) {
+                for (Raza raza : razas) {
                         razaMascotaRepository.save(raza);
                 }
 
@@ -682,7 +682,7 @@ public class DatabaseInit implements ApplicationRunner {
                                 Long lEnfermedad = Long.valueOf(randomEnfermedad);
 
                                 Dueno dueno = duenoRepository.findById(lDueno).get();
-                                RazaMascota raza = razaMascotaRepository.findById(lRaza).get();
+                                Raza raza = razaMascotaRepository.findById(lRaza).get();
                                 Enfermedad enfermedad = enfermedadRepository.findById(lEnfermedad).get();
                                 masc.setEnfermedad(enfermedad);
                                 masc.setRaza(raza);

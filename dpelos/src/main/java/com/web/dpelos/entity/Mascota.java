@@ -36,7 +36,7 @@ public class Mascota {
 
     @ManyToOne
     @JoinColumn(name = "raza_id")
-    private RazaMascota raza;
+    private Raza raza;
 
     @ManyToOne
     @JoinColumn(name = "enfermedad_id")
