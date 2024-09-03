@@ -14,8 +14,7 @@ import jakarta.transaction.Transactional;
 
 @EnableAutoConfiguration
 @Service
-public class VeterinarioServiceImplentation implements VeterinarioService{
-  
+public class VeterinarioServiceImplentation implements VeterinarioService {
 
     @Autowired
     VeterinarioRepository veterinarioRepository;
@@ -37,14 +36,18 @@ public class VeterinarioServiceImplentation implements VeterinarioService{
     @Transactional
     @Override
     public void deleteVet(Long id) {
-        Veterinario Vet = veterinarioRepository.findById(id).get();
+        Veterinario Vet = veterinarioRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Veterinario no encontrado con el id: " + id));
+        ;
 
-        if(Vet!=null){
+        if (Vet != null) {
             veterinarioRepository.deleteById(id);
 
-        }else{
-            throw new NotFoundException(id.toString());
         }
+
+        // else {
+        // throw new NotFoundException();
+        // }
 
     }
 
@@ -60,7 +63,7 @@ public class VeterinarioServiceImplentation implements VeterinarioService{
     }
 
     @Override
-    public Veterinario buscarVetLogin(String cedulaVet, String passwordVet){
+    public Veterinario buscarVetLogin(String cedulaVet, String passwordVet) {
         return veterinarioRepository.findByCedulaVeterinarioAndPasswordVeterinario(cedulaVet, passwordVet);
     }
 

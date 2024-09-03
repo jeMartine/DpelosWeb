@@ -139,9 +139,8 @@ public class MascotasController {
             }
             return "actualizarMascota";
         } else {
-            throw new NotFoundException("No Se encuentra la mascota con id " + id);
+            throw new NotFoundException("Mascota " + id + "no encontrada");
         }
-
     }
 
     @PostMapping("/update/{id}")

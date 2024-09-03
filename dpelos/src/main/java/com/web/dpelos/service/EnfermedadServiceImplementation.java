@@ -15,40 +15,42 @@ import jakarta.transaction.Transactional;
 @EnableAutoConfiguration
 @Service
 public class EnfermedadServiceImplementation implements EnfermedadService {
-    
+
     @Autowired
     private EnfermedadMascotaRepository enfermedadRepository;
 
     @Override
-    public Enfermedad buscarEnfermedadPorId (Long id){
+    public Enfermedad buscarEnfermedadPorId(Long id) {
         return enfermedadRepository.findById(id).get();
     }
 
     @Override
-    public List<Enfermedad> obtenerEnfermedades(){
+    public List<Enfermedad> obtenerEnfermedades() {
         return enfermedadRepository.findAll();
     }
 
-
     @Override
-    public void addEnfermedad(Enfermedad enfermedad){
+    public void addEnfermedad(Enfermedad enfermedad) {
         enfermedadRepository.save(enfermedad);
     }
 
     @Override
-    public void deleteEnfermedad(Long id){
-        Enfermedad enfermedad = enfermedadRepository.findById(id).get();
+    public void deleteEnfermedad(Long id) {
+        Enfermedad enfermedad = enfermedadRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Mascota not found with id: " + id));
 
-        if(enfermedad!=null){
+        if (enfermedad != null) {
             enfermedadRepository.delete(enfermedad);
-        }else{
-            throw new NotFoundException(id.toString());
         }
+
+        // else {
+        // throw new NotFoundException();
+        // }
     }
 
     @Override
     @Transactional
-    public void updateEnfermedad(Enfermedad raza){
+    public void updateEnfermedad(Enfermedad raza) {
         enfermedadRepository.save(raza);
     }
 }

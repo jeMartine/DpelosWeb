@@ -39,15 +39,17 @@ public class DuenoServiceImplementation implements DuenoService {
     @Transactional
     @Override
     public void deleteDueno(Long id) {
-        Dueno dueno = duenoRepository.findById(id).get();
+        Dueno dueno = duenoRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Dueno no encontrado con el id: " + id));
 
-        if(dueno!=null){
+        if (dueno != null) {
             mascotaRepository.deleteAllByDueno(dueno);
             duenoRepository.deleteById(id);
 
-        }else{
-            throw new NotFoundException(id.toString());
         }
+        // else {
+        // throw new NotFoundException();
+        // }
 
     }
 
