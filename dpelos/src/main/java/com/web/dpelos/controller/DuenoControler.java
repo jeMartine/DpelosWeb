@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.web.dpelos.entity.Dueno;
 import com.web.dpelos.exception.NotFoundException;
 import com.web.dpelos.service.DuenoServiceImplementation;
+import com.web.dpelos.service.VeterinarioService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -26,16 +27,27 @@ public class DuenoControler {
     @Autowired
     DuenoServiceImplementation duenoService;
 
+    @Autowired
+    VeterinarioService veterinarioService;
+
     @GetMapping()
-    public String listaDuenos(Model model) {
+    public String listaDuenos(Model model, HttpSession session) {
         model.addAttribute("duenos", duenoService.obtenerDuenos());
+        Long idVet = (Long) session.getAttribute("idVeterinario");
+        if (idVet != null) {
+            model.addAttribute("veterinario", veterinarioService.buscarVetPorId(idVet));
+        }
         return "listaDuenos";
     }
 
     @GetMapping("/add")
-    public String mostrarFormularioCrearDueno(Model model) {
+    public String mostrarFormularioCrearDueno(Model model, HttpSession session) {
         Dueno dueno = new Dueno();
         model.addAttribute("dueno", dueno);
+        Long idVet = (Long) session.getAttribute("idVeterinario");
+        if (idVet != null) {
+            model.addAttribute("veterinario", veterinarioService.buscarVetPorId(idVet));
+        }
         return "crearDueno";
     }
 
@@ -52,8 +64,12 @@ public class DuenoControler {
     }
 
     @GetMapping("/update/{id}")
-    public String mostrarFormularioActualizarDueno(Model model, @PathVariable("id") Long id) {
+    public String mostrarFormularioActualizarDueno(Model model, @PathVariable("id") Long id, HttpSession session) {
         model.addAttribute("dueno", duenoService.buscarDuenoPorId(id));
+        Long idVet = (Long) session.getAttribute("idVeterinario");
+            if (idVet != null) {
+                model.addAttribute("veterinario", veterinarioService.buscarVetPorId(idVet));
+            }
         return "actualizarDueno";
     }
 
