@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.web.dpelos.repository.VeterinarioRepository;
 import com.web.dpelos.service.DuenoServiceImplementation;
+import com.web.dpelos.service.VeterinarioService;
 import com.web.dpelos.service.VeterinarioServiceImplentation;
 
 @Controller
@@ -19,7 +20,7 @@ public class LoginController {
     DuenoServiceImplementation duenoService;
 
     @Autowired
-    VeterinarioServiceImplentation veterinarioService;
+    VeterinarioService veterinarioService;
 
     @GetMapping
     public String login(@RequestParam(value = "error", required = false) String error,
