@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.web.dpelos.entity.Dueno;
 import com.web.dpelos.entity.Mascota;
+import com.web.dpelos.exception.NotFoundException;
 import com.web.dpelos.repository.DuenoRepository;
 import com.web.dpelos.repository.MascotaRepository;
 
@@ -25,7 +26,8 @@ public class MascotaServiceImplementation implements MascotaService {
 
     @Override
     public Mascota buscarMascotaPorId(Long id) {
-        return mascotaRepository.findById(id).get();
+        return mascotaRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Mascota no encontrada con el id: " + id));
     }
 
     @Override
@@ -41,6 +43,7 @@ public class MascotaServiceImplementation implements MascotaService {
         return Collections.emptyList();
 
     }
+
     @Override
     public void addMascota(Mascota mascota) {
         mascotaRepository.save(mascota);

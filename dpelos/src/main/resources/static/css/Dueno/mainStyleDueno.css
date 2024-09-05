@@ -41,11 +41,6 @@ header {
   border: #C0CDE1 5px solid;
 }
 
-.ul_header .li_header {
-  list-style-type: none;
-}
-
-
 .navbar-nav .nav-link {
   padding: 15px;
   color: white;
@@ -62,6 +57,12 @@ header {
     #logo {
         height: 50px;
     }
+}
+
+#logoutIcon{
+  font-size: 28px;
+  color: #121213;
+  margin-right: 10px;
 }
 
 .img-perfil{

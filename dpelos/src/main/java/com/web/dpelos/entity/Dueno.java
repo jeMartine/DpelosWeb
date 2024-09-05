@@ -1,12 +1,10 @@
 package com.web.dpelos.entity;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
@@ -30,8 +28,8 @@ public class Dueno {
     private String fotoUrl;
 
     @OneToMany(mappedBy = "dueno")
-    private Set<Mascota> mascotas;
-
+    private List<Mascota> mascotas = new ArrayList();
+    
 
     //constructor sin id
     public Dueno(String cedulaDueno, String nombreDueno, String apellidoDueno, 

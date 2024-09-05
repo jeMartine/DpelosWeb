@@ -34,31 +34,29 @@
     ></script>
 
     <main>
-      
-        <div class="carta">
-          <a th:href="@{/}">
-            <img src="/images/index/logo.png" alt="Logo D'pelos" id="logo" />
-          </a>
-          <span th:text="${id}"></span>
-          
-          <img
-            src="/images/login/perroTriste.png"
-            alt="Perro Triste :c"
-            id="perroTriste"
-          />
-        </div>
-      
-        <!-- imagenes de fondo -->
+      <div class="carta">
+        <a th:href="@{/}">
+          <img src="/images/index/logo.png" alt="Logo D'pelos" id="logo" />
+        </a>
+        <span th:text="${statusCode}"></span>
+        <span th:text="${errorMessage}"></span>
+        <img
+          src="/images/login/perroTriste.png"
+          alt="Perro Triste :c"
+          id="perroTriste"
+        />
+      </div>
 
-        <img src="/images/index/curaBannerT1.png" class="cura1" />
-        <img src="/images/index/curaBannerT2.png" class="cura2" />
-        <img src="/images/index/curaBannerT1.png" class="cura3" />
-        <img src="/images/index/curaBannerT3.png" class="cura4" />
-        <img src="/images/index/curaBannerT1.png" class="cura5" />
-        <img src="/images/index/curaBannerT2.png" class="cura6" />
-        <img src="/images/index/curaBannerT1.png" class="cura7" />
-        <img src="/images/index/curaBannerT1.png" class="cura8" />
+      <!-- imagenes de fondo -->
 
+      <img src="/images/index/curaBannerT1.png" class="cura1" />
+      <img src="/images/index/curaBannerT2.png" class="cura2" />
+      <img src="/images/index/curaBannerT1.png" class="cura3" />
+      <img src="/images/index/curaBannerT3.png" class="cura4" />
+      <img src="/images/index/curaBannerT1.png" class="cura5" />
+      <img src="/images/index/curaBannerT2.png" class="cura6" />
+      <img src="/images/index/curaBannerT1.png" class="cura7" />
+      <img src="/images/index/curaBannerT1.png" class="cura8" />
     </main>
 
     <footer>

@@ -102,12 +102,12 @@ footer {
   footer a {
     color: #e0dfdf;
     text-decoration: none;
+    margin: 0 9px
 
   }
   
-  footer a:visited,
   footer a:hover {
-    color: #ff992b;
+    color: #fbdc77;
   }
 
   .footerData a img {
@@ -116,4 +116,10 @@ footer {
 
 .footerData a:hover img {
     filter: sepia(1) saturate(13) hue-rotate(-40deg);
+}
+
+.img-perfil {
+    width: 50px;
+    height: auto;
+    margin: 0px 10px 0px 10px;
 }
