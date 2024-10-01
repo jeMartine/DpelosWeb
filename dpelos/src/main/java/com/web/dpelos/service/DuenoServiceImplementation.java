@@ -1,6 +1,7 @@
 package com.web.dpelos.service;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -27,7 +28,7 @@ public class DuenoServiceImplementation implements DuenoService {
     }
 
     @Override
-    public Collection<Dueno> obtenerDuenos() {
+    public List<Dueno> obtenerDuenos() {
         return duenoRepository.findAll();
     }
 

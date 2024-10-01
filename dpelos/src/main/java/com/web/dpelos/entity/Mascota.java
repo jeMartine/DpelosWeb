@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,7 +20,7 @@ import lombok.*;
 @NoArgsConstructor
 
 @Entity
-/*Plain Old Java Object */
+/* Plain Old Java Object */
 public class Mascota {
     /* Atributos de la Clase por el momento */
     @Id
@@ -42,17 +44,17 @@ public class Mascota {
     @JoinColumn(name = "enfermedad_id")
     private Enfermedad enfermedad;
 
-    @OneToMany
-    @JoinColumn(name = "tratamiento_id")
-    private List<Tratamiento> tratamientos = new ArrayList();
+    // @OneToMany
+    // @JoinColumn(name = "tratamiento_id")
+    // private List<Tratamiento> tratamientos = new ArrayList();
 
-    //constructor sin id
+    // constructor sin id
     public Mascota(String nombreMascota, Integer edadMascota, String urlFotoMascota,
-             Date fechaCreacion, boolean estado) {
+            Date fechaCreacion, boolean estado) {
         this.nombreMascota = nombreMascota;
         this.edadMascota = edadMascota;
         this.urlFotoMascota = urlFotoMascota;
-        this.fechaCreacion= fechaCreacion;
+        this.fechaCreacion = fechaCreacion;
         this.estado = estado;
     }
 }

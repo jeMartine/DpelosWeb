@@ -31,7 +31,7 @@ public class MascotaServiceImplementation implements MascotaService {
     }
 
     @Override
-    public Collection<Mascota> obtenerMascotas() {
+    public List<Mascota> obtenerMascotas() {
         return mascotaRepository.findAll();
     }
 

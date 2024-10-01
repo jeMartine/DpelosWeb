@@ -876,7 +876,7 @@ public class DatabaseInit implements ApplicationRunner {
                         Tratamiento tratamiento = new Tratamiento(
                                         Date.valueOf(LocalDate.now()
                                                         .minusDays(ThreadLocalRandom.current().nextInt(1, 30))),
-                                        "Descripción del tratamiento " + (i + 1));
+                                        "Una elegancia de tratamiento " + (i + 1));
                         int veterinarioRandom = ThreadLocalRandom.current().nextInt(1, 30 + 1);
                         int drogaRandom = ThreadLocalRandom.current().nextInt(1, 50 + 1);
                         int mascotaRandom = ThreadLocalRandom.current().nextInt(1, 100 + 1);
