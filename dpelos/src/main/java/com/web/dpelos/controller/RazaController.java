@@ -39,7 +39,11 @@ public class RazaController {
         Raza raza = new Raza();
         raza.setRazaMascota(nombreRaza);
         razaService.addRaza(raza);
-        // return "redirect:/registros";
+    }
+
+    @GetMapping()
+    public List<Raza> obtenerRazas() {
+        return razaService.obtenerRazas();
     }
 
 }

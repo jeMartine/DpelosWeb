@@ -131,7 +131,7 @@ public class MascotasController {
     // }
 
     /* Metodo para agregar mascotas a la base de datos */
-    @PostMapping("/agregar")
+    @PostMapping("/add")
     public void addMascota(@RequestBody Mascota mascota,
             @RequestParam("cedulaDueno") String cedulaDueno) {
         Dueno dueno = duenoService.buscarDuenoPorCedula(cedulaDueno); // Obtener el objeto Dueno desde duenoService

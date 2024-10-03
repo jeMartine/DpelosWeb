@@ -46,11 +46,6 @@ public class DuenoControler {
      */
     @GetMapping()
     public List<Dueno> listaDuenos(HttpSession session) {
-        // model.addAttribute("duenos", duenoService.obtenerDuenos());
-        // Long idVet = (Long) session.getAttribute("idVeterinario");
-        // if (idVet != null) {
-        // model.addAttribute("veterinario", veterinarioService.buscarVetPorId(idVet));
-        // }
         return duenoService.obtenerDuenos();
     }
 
@@ -70,11 +65,9 @@ public class DuenoControler {
     // }
 
     /* Metodo que agrega un dueno a la base de datos */
-    @PostMapping("/agregar")
+    @PostMapping()
     public void addDueno(@RequestBody Dueno dueno) {
         duenoService.addDueno(dueno);
-        // /* Cuando el dueno se agrega, se retorna a la lista de duenos por defecto */
-        // return "redirect:/dueno";
     }
 
     /* Metodo que elimina el dueno segun el id */
@@ -101,47 +94,11 @@ public class DuenoControler {
         // return "redirect:/dueno";
     }
 
-    // /* metodo que redirige al portal de buscar un dueno por su cedula */
-    // @GetMapping("/buscarDueno")
-    // public String buscarDueno() {
-    // return "buscarDueno";
-    // }
-
     /* Este metodo lo modifique para que retornara true si encuetra un dueno */
     /* Metodo que busca al dueno segun su cedula */
-    @PostMapping("/buscarDueno")
-    public boolean buscarDueno(@RequestParam("cedula") String cedula, HttpSession session) {
-        Dueno dueno = duenoService.buscarDuenoPorCedula(cedula);
-        /* Condicional para verificar si el dueno existe y manejar la excepcion */
-        if (dueno != null) {
-            session.setAttribute("idDueno", dueno.getIdDueno());
-            return true;
-        } else {
-            return false;
-        }
+    @GetMapping("/buscarCedula/{cedula}")
+    public Dueno buscarDueno(@PathVariable("cedula") String cedula, HttpSession session) {
+        return duenoService.buscarDuenoPorCedula(cedula);
     }
-
-    /* No entiendo como deberia modificar este metedo. */
-    // /*
-    // * Metodo que permite verificar si un dueno esta registrado consultando a
-    // traves
-    // * de su cedula
-    // */
-    // @GetMapping("/verificar/{cedula}")
-    // public ResponseEntity<Map<String, String>>
-    // verificarDueno(@PathVariable("cedula") String cedula) {
-    // Dueno dueno = duenoService.buscarDuenoPorCedula(cedula);
-    // Map<String, String> response = new HashMap<>();
-
-    // if (dueno != null) {
-    // response.put("existe", "true");
-    // response.put("nombre", dueno.getNombreDueno() + " " +
-    // dueno.getApellidoDueno());
-    // } else {
-    // response.put("existe", "false");
-    // }
-
-    // return ResponseEntity.ok(response);
-    // }
 
 }

@@ -44,9 +44,9 @@ public class Mascota {
     @JoinColumn(name = "enfermedad_id")
     private Enfermedad enfermedad;
 
-    // @OneToMany
-    // @JoinColumn(name = "tratamiento_id")
-    // private List<Tratamiento> tratamientos = new ArrayList();
+    @OneToMany
+    @JoinColumn(name = "tratamiento_id")
+    private List<Tratamiento> tratamientos = new ArrayList();
 
     // constructor sin id
     public Mascota(String nombreMascota, Integer edadMascota, String urlFotoMascota,
