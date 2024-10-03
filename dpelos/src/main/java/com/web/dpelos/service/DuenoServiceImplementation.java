@@ -1,13 +1,18 @@
 package com.web.dpelos.service;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Service;
 
 import com.web.dpelos.entity.Dueno;
+import com.web.dpelos.exception.NotFoundException;
 import com.web.dpelos.repository.DuenoRepository;
+import com.web.dpelos.repository.MascotaRepository;
+
+import jakarta.transaction.Transactional;
 
 @EnableAutoConfiguration
 @Service
@@ -15,28 +20,48 @@ public class DuenoServiceImplementation implements DuenoService {
     @Autowired
     DuenoRepository duenoRepository;
 
-    public Dueno buscarDuenoPorId(Integer id) {
-        return duenoRepository.getDuenoById(id);
+    @Autowired
+    MascotaRepository mascotaRepository;
+
+    public Dueno buscarDuenoPorId(Long id) {
+        return duenoRepository.findById(id).get();
     }
 
     @Override
-    public Collection<Dueno> obtenerDuenos() {
-        return duenoRepository.getDuenos();
+    public List<Dueno> obtenerDuenos() {
+        return duenoRepository.findAll();
     }
 
     @Override
     public void addDueno(Dueno dueno) {
-        duenoRepository.addDueno(dueno);
+        duenoRepository.save(dueno);
     }
 
+    @Transactional
     @Override
-    public void deleteDueno(Integer id) {
-        duenoRepository.deleteDueno(id);
+    public void deleteDueno(Long id) {
+        Dueno dueno = duenoRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Dueno no encontrado con el id: " + id));
+
+        if (dueno != null) {
+            mascotaRepository.deleteAllByDueno(dueno);
+            duenoRepository.deleteById(id);
+
+        }
+        // else {
+        // throw new NotFoundException();
+        // }
+
     }
 
+    @Transactional
     @Override
     public void updateDueno(Dueno dueno) {
-        duenoRepository.updateDueno(dueno);
+        duenoRepository.save(dueno);
     }
 
+    @Override
+    public Dueno buscarDuenoPorCedula(String cedulaDueno) {
+        return duenoRepository.findByCedulaDueno(cedulaDueno);
+    }
 }

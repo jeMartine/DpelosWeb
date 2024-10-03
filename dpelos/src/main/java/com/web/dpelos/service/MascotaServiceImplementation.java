@@ -1,13 +1,18 @@
 package com.web.dpelos.service;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
+import com.web.dpelos.entity.Dueno;
 import com.web.dpelos.entity.Mascota;
+import com.web.dpelos.exception.NotFoundException;
+import com.web.dpelos.repository.DuenoRepository;
 import com.web.dpelos.repository.MascotaRepository;
 
 @EnableAutoConfiguration
@@ -16,28 +21,41 @@ public class MascotaServiceImplementation implements MascotaService {
     @Autowired
     MascotaRepository mascotaRepository;
 
+    @Autowired
+    private DuenoRepository duenoRepository;
+
     @Override
-    public Mascota buscarMascotaPorId(Integer id) {
-        return mascotaRepository.getMascotaById(id);
+    public Mascota buscarMascotaPorId(Long id) {
+        return mascotaRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Mascota no encontrada con el id: " + id));
     }
 
     @Override
-    public Collection<Mascota> obtenerMascotas() {
-        return mascotaRepository.getMascotas();
+    public List<Mascota> obtenerMascotas() {
+        return mascotaRepository.findAll();
+    }
+
+    public List<Mascota> obtenerMascotasDelDueno(Long idDueno) {
+        Dueno dueno = duenoRepository.findById(idDueno).orElse(null);
+        if (dueno != null) {
+            return new ArrayList<>(mascotaRepository.findByIdDueno(dueno));
+        }
+        return Collections.emptyList();
+
     }
 
     @Override
     public void addMascota(Mascota mascota) {
-        mascotaRepository.addMascota(mascota);
+        mascotaRepository.save(mascota);
     }
 
     @Override
-    public void deleteMascota(Integer id) {
-        mascotaRepository.deleteMascota(id);
+    public void deleteMascota(Long id) {
+        mascotaRepository.deleteById(id);
     }
 
     @Override
     public void updateMascota(Mascota mascota) {
-        mascotaRepository.updateMascota(mascota);
+        mascotaRepository.save(mascota);
     }
 }

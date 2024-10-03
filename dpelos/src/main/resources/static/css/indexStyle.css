@@ -1,9 +1,3 @@
-/* Logo */
-
-.navbar #logo {
-    width: 150px;
-    height: auto;
-}
 
 /* contacto rápido */
 
@@ -256,13 +250,13 @@
 	color: #ffffff;
 	border-radius: 20px;
 	border: 0;
-	font-size: 20px;
+	font-size: 25px;
 	font-weight: 500;
 	align-self: center;
 	z-index: 5;
-	width: 250px;
-
+	width: 290px;
 	margin-bottom: 30px;
+	line-height: 1.8;
 }
 
 #btnBanner2:hover {
