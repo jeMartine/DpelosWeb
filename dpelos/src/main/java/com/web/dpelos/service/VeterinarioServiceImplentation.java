@@ -1,6 +1,7 @@
 package com.web.dpelos.service;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -24,7 +25,7 @@ public class VeterinarioServiceImplentation implements VeterinarioService {
     }
 
     @Override
-    public Collection<Veterinario> obtenerVets() {
+    public List<Veterinario> findAll() {
         return veterinarioRepository.findAll();
     }
 

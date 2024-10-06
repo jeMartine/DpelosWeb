@@ -145,51 +145,12 @@ public class MascotasController {
     public void deleteMascota(@PathVariable Long id) {
         mascotaService.deleteMascota(id);
     }
+    
 
-    /* No se si sea neceasrio usar este metodo, ustedes resuelvan ;D */
-    @GetMapping("/update/{id}")
-    public String mostrarFormularioActualizarMascota(Model model, @PathVariable Long id, HttpSession session) {
-        Mascota mascota = mascotaService.buscarMascotaPorId(id);
-        if (mascota != null) {
-            List<Raza> listaRazas = razaService.obtenerRazas();
-            List<Enfermedad> listaEnfermedades = enfermedadService.obtenerEnfermedades();
 
-            model.addAttribute("mascota", mascota);
-            model.addAttribute("enfermedades", listaEnfermedades);
-            model.addAttribute("razas", listaRazas);
-            Long idVet = (Long) session.getAttribute("idVeterinario");
-            if (idVet != null) {
-                model.addAttribute("veterinario", veterinarioService.buscarVetPorId(idVet));
-            }
-            return "actualizarMascota";
-        } else {
-            throw new NotFoundException("Mascota " + id + "no encontrada");
-        }
-    }
-
-    @PutMapping("/update/{id}")
-    public void mostrarMascotaActualizada(@RequestBody Mascota mascota,
-            @RequestParam("dueno.cedulaDueno") String cedulaDueno) {
-
-        Dueno dueno = duenoService.buscarDuenoPorCedula(cedulaDueno); // Obtener el objeto Dueno desde duenoService
-        /* Tampoco los veo necesarios porque ya se obtienen desde el parametro. */
-        // Mascota mascotaOriginal = mascotaService.buscarMascotaPorId(idMascota);
-        // mascota.setFechaCreacion(mascotaOriginal.getFechaCreacion());
-
-        if (dueno != null) {
-            mascota.setDueno(dueno); // Asignar el dueño a la mascota
-        } else {
-            // mostrar mensaje de error
-            mascota.setDueno(null);
-        }
-        /*
-         * No es necesario porque ya se obtiene toda la info de la mascota por el
-         * parametro.
-         */
-        // mascota.setIdMascota(idMascota);
-
+    @PutMapping("/update")
+    public void actualizarMascota(@RequestBody Mascota mascota) {
         mascotaService.updateMascota(mascota);
-        // return "redirect:/mascota";
     }
 
 }

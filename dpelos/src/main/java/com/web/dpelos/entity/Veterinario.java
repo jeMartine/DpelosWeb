@@ -3,6 +3,8 @@ package com.web.dpelos.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -24,14 +26,17 @@ public class Veterinario {
     private String nombreVeterinario;
     private String apellidoVeterinario;
     private String cedulaVeterinario;
+    @JsonIgnore
     private String passwordVeterinario;
     private String fotoUrl;
     private int numeroAtenciones;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "especialidad_id")
     private Especialidad especialidad;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "veterinario")
     private List<Tratamiento> tratamientos = new ArrayList();
 

@@ -1,29 +1,20 @@
 package com.web.dpelos.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.web.dpelos.entity.Dueno;
-import com.web.dpelos.exception.NotFoundException;
 import com.web.dpelos.service.DuenoService;
-import com.web.dpelos.service.DuenoServiceImplementation;
 import com.web.dpelos.service.VeterinarioService;
 
 
@@ -46,14 +37,19 @@ public class DuenoControler {
      * registrados.
      */
     @GetMapping()
-    public List<Dueno> listaDuenos(HttpSession session) {
+    public List<Dueno> listaDuenos() {
         return duenoService.obtenerDuenos();
+    }
+
+    /*Retorna un dueño por su id*/
+    @GetMapping("/{id}")
+    public Dueno getDuenoById(@PathVariable Long id) {
+        return duenoService.buscarDuenoPorId(id);
     }
 
     /* Metodo que agrega un dueno a la base de datos */
     @PostMapping()
     public void addDueno(@RequestBody Dueno dueno) {
-
         duenoService.addDueno(dueno);
     }
 
@@ -63,25 +59,12 @@ public class DuenoControler {
         duenoService.deleteDueno(id);
     }
 
-    /* Metodo que actualiza la informacion del dueno segun el id */
-    @GetMapping("/update/{id}")
-    public String mostrarFormularioActualizarDueno(Model model, @PathVariable("id") Long id, HttpSession session) {
-        model.addAttribute("dueno", duenoService.buscarDuenoPorId(id));
-        Long idVet = (Long) session.getAttribute("idVeterinario");
-        if (idVet != null) {
-            model.addAttribute("veterinario", veterinarioService.buscarVetPorId(idVet));
-        }
-        return "actualizarDueno";
-    }
-
     /* Metodo para mostrar el perfil de dueno actualizado */
-    @PutMapping("/update/{id}")
+    @PutMapping("/update")
     public void mostrarDuenoActualizado(@RequestBody Dueno dueno) {
         duenoService.updateDueno(dueno);
-        // return "redirect:/dueno";
     }
 
-    /* Este metodo lo modifique para que retornara true si encuetra un dueno */
     /* Metodo que busca al dueno segun su cedula */
     @GetMapping("/buscarCedula/{cedula}")
     public Dueno buscarDueno(@PathVariable("cedula") String cedula, HttpSession session) {

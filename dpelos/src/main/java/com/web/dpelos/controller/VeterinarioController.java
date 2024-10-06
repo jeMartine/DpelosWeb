@@ -1,6 +1,7 @@
 package com.web.dpelos.controller;
 
 import java.util.Collections;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,10 +14,13 @@ import com.web.dpelos.service.VeterinarioService;
 import jakarta.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController // Esta anotacion indica que esta clase es un controlador REST
@@ -27,11 +31,34 @@ public class VeterinarioController {
     @Autowired
     VeterinarioService veterinarioService;
 
-    /* Metodo que retorna el HTML con la pagina del vet. */
-    // @GetMapping("/buscarVet")
-    // public String buscarVeterinario() {
-    // return "buscarVet";
-    // }
+    //Retornar todos los veterinarios
+    @GetMapping
+    public List<Veterinario> findAll(){
+        return veterinarioService.findAll();
+    }
+
+    //Retornar un veterinario por su id
+    @GetMapping("/{id}")
+    public Veterinario findVetById(@PathVariable Long id){
+        return veterinarioService.buscarVetPorId(id);
+    }
+
+    //Crear un veterinario
+    @PostMapping
+    public void crearVet(@RequestBody Veterinario vet){
+        veterinarioService.addVet(vet);
+    }
+
+    //Eliminar un veterinario por su id
+    @DeleteMapping("/delete/{id}")
+    public void deleteVet(@PathVariable Long id){
+        veterinarioService.deleteVet(id);
+    }
+
+    @PutMapping("/update")
+    public void updateVet(@RequestBody Veterinario vet){
+        veterinarioService.updateVet(vet);
+    }
 
     /* Metodo que retorna un JSON con la informacion del vet. */
     @GetMapping("/buscarVet")
@@ -50,6 +77,6 @@ public class VeterinarioController {
                 return vetExiste;
             }
         }
-    }
+    } 
 
 }
