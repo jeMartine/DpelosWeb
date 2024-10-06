@@ -31,11 +31,11 @@ import com.web.dpelos.service.MascotaService;
 import com.web.dpelos.service.RazaService;
 import com.web.dpelos.service.VeterinarioService;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController // Esta anotacion indica que esta clase es un controlador REST
 @RequestMapping("/mascota") // Esta anotacion indica la URL base para todos los metodos de esta clase
@@ -132,18 +132,11 @@ public class MascotasController {
 
     /* Metodo para agregar mascotas a la base de datos */
     @PostMapping("/add")
-    public void addMascota(@RequestBody Mascota mascota,
-            @RequestParam("cedulaDueno") String cedulaDueno) {
-        Dueno dueno = duenoService.buscarDuenoPorCedula(cedulaDueno); // Obtener el objeto Dueno desde duenoService
+    public void addMascota(@RequestBody Mascota mascota) {
         LocalDate date = LocalDate.now();
         Date sqlDate = Date.valueOf(date);
 
-        if (dueno != null) {
-            mascota.setDueno(dueno); // Asignar el dueño a la mascota
-        }
-
         mascota.setFechaCreacion(sqlDate);
-        mascota.setEstado(true);
         mascotaService.addMascota(mascota);
     }
 

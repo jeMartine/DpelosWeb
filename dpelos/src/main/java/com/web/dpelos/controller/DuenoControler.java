@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,7 +26,7 @@ import com.web.dpelos.service.DuenoService;
 import com.web.dpelos.service.DuenoServiceImplementation;
 import com.web.dpelos.service.VeterinarioService;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+
 import jakarta.servlet.http.HttpSession;
 
 /*Controlador de las peticiones relacionadas con la entidad Dueno */
@@ -49,24 +50,10 @@ public class DuenoControler {
         return duenoService.obtenerDuenos();
     }
 
-    /*
-     * Metodo que muestra el formulario de creacion de duenos desde los permisos del
-     * veterinario
-     */
-    // @GetMapping("/add")
-    // public String mostrarFormularioCrearDueno(Model model, HttpSession session) {
-    // Dueno dueno = new Dueno();
-    // model.addAttribute("dueno", dueno);
-    // Long idVet = (Long) session.getAttribute("idVeterinario");
-    // if (idVet != null) {
-    // model.addAttribute("veterinario", veterinarioService.buscarVetPorId(idVet));
-    // }
-    // return "crearDueno";
-    // }
-
     /* Metodo que agrega un dueno a la base de datos */
     @PostMapping()
     public void addDueno(@RequestBody Dueno dueno) {
+
         duenoService.addDueno(dueno);
     }
 
