@@ -42,10 +42,6 @@ public class RazaServiceImplementation implements RazaService {
         if (raza != null) {
             razaRepository.deleteById(id);
         }
-
-        // else {
-        // throw new NotFoundException();
-        // }
     }
 
     @Override
