@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -66,70 +68,22 @@ public class MascotasController {
         return mascotaService.obtenerMascotas();
     }
 
-    /*
-     * No es necesario porque de llevar al usuario a la pagina se encarga el front
-     * :)
-     */
-    // @GetMapping("/tus-mascotas")
-    // public String mostrarMascotaDueno(Model model, HttpSession session) {
-    // Long idDueno = (Long) session.getAttribute("idDueno");
-    // if (idDueno != null) {
-    // model.addAttribute("mascotas",
-    // mascotaService.obtenerMascotasDelDueno(idDueno));
-    // model.addAttribute("dueno", duenoService.buscarDuenoPorId(idDueno));
-
-    // } else {
-    // model.addAttribute("mascotas", Collections.emptyList());
-    // model.addAttribute("dueno", null);
-    // }
-    // return "Dueno/inicioDueno";
-    // }
-
     /* Metodo que retorna la informacion de una mascota segun su respectivo ID */
     @GetMapping("/{id}")
     public Mascota mostrarMascotaPorID(@PathVariable Long id) {
         return mascotaService.buscarMascotaPorId(id);
     }
 
-    // @GetMapping("/add")
-    // public String mostrarFormularioCrearMascota(Model model, HttpSession session)
-    // {
-    // Mascota mascota = new Mascota();
-    // List<Raza> listaRazas = razaService.obtenerRazas();
-    // List<Enfermedad> listaEnfermedades = enfermedadService.obtenerEnfermedades();
-
-    // Long idVeterinario = (Long) session.getAttribute("idVeterinario");
-    // if (idVeterinario != null) {
-    // Veterinario veterinario = veterinarioService.buscarVetPorId(idVeterinario);
-    // model.addAttribute("veterinario", veterinario);
-    // }
-
-    // model.addAttribute("mascota", mascota);
-    // model.addAttribute("enfermedades", listaEnfermedades);
-    // model.addAttribute("razas", listaRazas);
-
-    // return "crearMascota";
-    // }
-
-    // @PostMapping("/agregar")
-    // public String addMascota(@ModelAttribute("mascota") Mascota mascota,
-    // @RequestParam("cedulaDueno") String cedulaDueno) {
-    // Dueno dueno = duenoService.buscarDuenoPorCedula(cedulaDueno); // Obtener el
-    // objeto Dueno desde duenoService
-    // LocalDate date = LocalDate.now();
-    // Date sqlDate = Date.valueOf(date);
-
-    // if (dueno != null) {
-    // mascota.setDueno(dueno); // Asignar el dueño a la mascota
-    // }
-
-    // mascota.setFechaCreacion(sqlDate);
-    // mascota.setEstado(true);
-    // mascotaService.addMascota(mascota);
-
-    // return "redirect:/mascota";
-    // }
-
+    @GetMapping("/dueno/{id}")
+    public ResponseEntity<?> mascotasDueno(@PathVariable Long id) {
+        List<Mascota> mascotas = mascotaService.obtenerMascotasDelDueno(id);
+        if (!mascotas.isEmpty()) {
+            return ResponseEntity.ok(mascotas);
+        } else {
+            String errorMessage = "No se encontraron mascotas";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
+        }
+    }
     /* Metodo para agregar mascotas a la base de datos */
     @PostMapping("/add")
     public void addMascota(@RequestBody Mascota mascota) {
@@ -146,8 +100,6 @@ public class MascotasController {
         mascotaService.deleteMascota(id);
     }
     
-
-
     @PutMapping("/update")
     public void actualizarMascota(@RequestBody Mascota mascota) {
         mascotaService.updateMascota(mascota);

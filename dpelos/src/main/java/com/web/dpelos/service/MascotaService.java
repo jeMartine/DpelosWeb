@@ -11,7 +11,7 @@ public interface MascotaService {
 
     public List<Mascota> obtenerMascotas();
 
-    public Collection<Mascota> obtenerMascotasDelDueno(Long idDueno);
+    public List<Mascota> obtenerMascotasDelDueno(Long idDueno);
 
     public void addMascota(Mascota mascota);
 
