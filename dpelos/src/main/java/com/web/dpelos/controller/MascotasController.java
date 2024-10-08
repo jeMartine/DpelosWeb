@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.web.dpelos.entity.Droga;
 import com.web.dpelos.entity.Dueno;
 import com.web.dpelos.entity.Enfermedad;
 import com.web.dpelos.entity.Mascota;
@@ -103,6 +104,11 @@ public class MascotasController {
     @PutMapping("/update")
     public void actualizarMascota(@RequestBody Mascota mascota) {
         mascotaService.updateMascota(mascota);
+    }
+
+    @GetMapping("/buscar")
+    public List<Mascota> buscarMascotas(@RequestParam String nombre) {
+        return mascotaService.buscarMascotasPorNombre(nombre);
     }
 
 }

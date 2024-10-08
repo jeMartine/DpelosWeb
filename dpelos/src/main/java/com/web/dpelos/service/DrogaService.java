@@ -17,4 +17,6 @@ public interface DrogaService {
     public void deleteDroga(Long id);
 
     public void updateDroga(Droga droga);
+
+    public List<Droga> buscarDrogasPorNombre(String nombreDroga);
 }
