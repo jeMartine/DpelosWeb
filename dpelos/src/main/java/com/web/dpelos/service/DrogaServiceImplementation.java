@@ -54,4 +54,12 @@ public class DrogaServiceImplementation implements DrogaService{
     public void updateDroga(Droga raza) {
         drogaRepository.save(raza);
     }
+
+    @Override
+    public List<Droga> buscarDrogasPorNombre(String nombreDroga) {
+        if (nombreDroga == null || nombreDroga.trim().isEmpty()) {
+            return drogaRepository.findAll();
+        }
+        return drogaRepository.findByNombreDrogaContainingIgnoreCase(nombreDroga);
+    }
 }

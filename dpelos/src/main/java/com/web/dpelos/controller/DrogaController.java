@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.web.dpelos.entity.Droga;
@@ -68,5 +69,10 @@ public class DrogaController {
     @PutMapping()
     public void updateDroga(@RequestBody Droga droga){
         drogaService.updateDroga(droga);
+    }
+
+    @GetMapping("/buscar")
+    public List<Droga> buscarDrogas(@RequestParam String nombre) {
+        return drogaService.buscarDrogasPorNombre(nombre);
     }
 }

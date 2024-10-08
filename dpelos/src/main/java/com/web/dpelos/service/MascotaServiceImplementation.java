@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Service;
 
+import com.web.dpelos.entity.Droga;
 import com.web.dpelos.entity.Dueno;
 import com.web.dpelos.entity.Mascota;
 import com.web.dpelos.exception.NotFoundException;
@@ -57,5 +58,10 @@ public class MascotaServiceImplementation implements MascotaService {
     @Override
     public void updateMascota(Mascota mascota) {
         mascotaRepository.save(mascota);
+    }
+
+    @Override
+    public List<Mascota> buscarMascotasPorNombre(String nombreMascota) {
+        return mascotaRepository.findByNombreMascotaContainingIgnoreCase(nombreMascota);
     }
 }
