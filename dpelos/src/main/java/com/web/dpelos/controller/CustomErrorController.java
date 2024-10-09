@@ -14,6 +14,9 @@ import com.web.dpelos.exception.NotFoundException;
 
 import jakarta.servlet.http.HttpServletRequest;
 
+/*Este es el controlador de los errores, la verdad solo retorna la pagina de erro. asumo que en el front-end se debera mostrar cuando se
+ * capturen errores.
+ */
 @RestController
 public class CustomErrorController implements ErrorController {
     @RequestMapping("/error")
