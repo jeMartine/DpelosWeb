@@ -28,9 +28,9 @@ public class Tratamiento {
     @JoinColumn(name = "droga_id")
     private Droga droga;
 
-    @ManyToOne
-    @JoinColumn(name = "mascota_id")
-    private Mascota mascota;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "mascota_id", nullable = true)
+    private Mascota mascota;    
 
     @ManyToOne
     @JoinColumn(name = "veterinario_id")

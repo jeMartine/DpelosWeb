@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -12,9 +13,11 @@ import org.springframework.stereotype.Service;
 import com.web.dpelos.entity.Droga;
 import com.web.dpelos.entity.Dueno;
 import com.web.dpelos.entity.Mascota;
+import com.web.dpelos.entity.Tratamiento;
 import com.web.dpelos.exception.NotFoundException;
 import com.web.dpelos.repository.DuenoRepository;
 import com.web.dpelos.repository.MascotaRepository;
+import com.web.dpelos.repository.TratamientoRepository;
 
 @EnableAutoConfiguration
 @Service
@@ -24,6 +27,9 @@ public class MascotaServiceImplementation implements MascotaService {
 
     @Autowired
     private DuenoRepository duenoRepository;
+
+    @Autowired
+    private TratamientoRepository tratamientoRepository;
 
     @Override
     public Mascota buscarMascotaPorId(Long id) {
@@ -52,7 +58,12 @@ public class MascotaServiceImplementation implements MascotaService {
 
     @Override
     public void deleteMascota(Long id) {
-        mascotaRepository.deleteById(id);
+            List<Tratamiento> tratamientos = tratamientoRepository.findByMascotaId(id);
+            for (Tratamiento tratamiento : tratamientos) {
+                tratamiento.setMascota(null); // Desvincular tratamiento
+                tratamientoRepository.save(tratamiento);
+            }
+            mascotaRepository.deleteById(id);
     }
 
     @Override
