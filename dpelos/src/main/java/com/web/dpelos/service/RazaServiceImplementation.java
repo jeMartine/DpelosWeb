@@ -15,39 +15,38 @@ import jakarta.transaction.Transactional;
 @EnableAutoConfiguration
 @Service
 public class RazaServiceImplementation implements RazaService {
-    
+
     @Autowired
     private RazaMascotaRepository razaRepository;
 
     @Override
-    public Raza buscarRazaPorId (Long id){
+    public Raza buscarRazaPorId(Long id) {
         return razaRepository.findById(id).get();
     }
 
     @Override
-    public List<Raza> obtenerRazas(){
+    public List<Raza> obtenerRazas() {
         return razaRepository.findAll();
     }
 
     @Override
-    public void addRaza(Raza raza){
+    public void addRaza(Raza raza) {
         razaRepository.save(raza);
     }
 
     @Override
-    public void deleteRaza(Long id){
-        Raza raza = razaRepository.findById(id).get();
+    public void deleteRaza(Long id) {
+        Raza raza = razaRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Mascota not found with id: " + id));
 
-        if(raza!=null){
+        if (raza != null) {
             razaRepository.deleteById(id);
-        }else{
-            throw new NotFoundException(id.toString());
         }
     }
 
     @Override
     @Transactional
-    public void updateRaza(Raza raza){
+    public void updateRaza(Raza raza) {
         razaRepository.save(raza);
     }
 }

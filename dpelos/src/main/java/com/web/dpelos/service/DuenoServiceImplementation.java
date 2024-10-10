@@ -1,6 +1,7 @@
 package com.web.dpelos.service;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -27,7 +28,7 @@ public class DuenoServiceImplementation implements DuenoService {
     }
 
     @Override
-    public Collection<Dueno> obtenerDuenos() {
+    public List<Dueno> obtenerDuenos() {
         return duenoRepository.findAll();
     }
 
@@ -39,15 +40,17 @@ public class DuenoServiceImplementation implements DuenoService {
     @Transactional
     @Override
     public void deleteDueno(Long id) {
-        Dueno dueno = duenoRepository.findById(id).get();
+        Dueno dueno = duenoRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Dueno no encontrado con el id: " + id));
 
-        if(dueno!=null){
+        if (dueno != null) {
             mascotaRepository.deleteAllByDueno(dueno);
             duenoRepository.deleteById(id);
 
-        }else{
-            throw new NotFoundException(id.toString());
         }
+        // else {
+        // throw new NotFoundException();
+        // }
 
     }
 

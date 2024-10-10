@@ -3,6 +3,8 @@ package com.web.dpelos.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -27,18 +29,18 @@ public class Dueno {
     private String celularDueno;
     private String fotoUrl;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "dueno")
     private List<Mascota> mascotas = new ArrayList();
-    
 
-    //constructor sin id
-    public Dueno(String cedulaDueno, String nombreDueno, String apellidoDueno, 
-                String correoDueno, String celularDueno, String fotoUrl) {
+    // constructor sin id
+    public Dueno(String cedulaDueno, String nombreDueno, String apellidoDueno,
+            String correoDueno, String celularDueno, String fotoUrl) {
         this.cedulaDueno = cedulaDueno;
         this.nombreDueno = nombreDueno;
         this.apellidoDueno = apellidoDueno;
         this.correoDueno = correoDueno;
         this.celularDueno = celularDueno;
-        this.fotoUrl=fotoUrl;
+        this.fotoUrl = fotoUrl;
     }
 }

@@ -7,17 +7,16 @@
 	margin-bottom: 0;
 }
 
-.btn-secundary{
+#btn-secundary{
     background-color: #333;
     border: 1x solid #333;
     color: white;
-	margin-left: 10px;
 }
 
-.btn-secundary:hover{
+#btn-secundary:hover{
 	background-color: #ffffff;
-	color: #2c2f33;
-	border: 1px solid #C6DDF6;
+	color: #1C82A7;
+	border: 1px solid #1C82A7;
 }
 
 
