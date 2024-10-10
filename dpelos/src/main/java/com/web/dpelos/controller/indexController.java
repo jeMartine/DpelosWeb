@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping()
-public class IndexController {
+public class indexController {
     public String vistaPrincipal() {
         return "index";
     }
