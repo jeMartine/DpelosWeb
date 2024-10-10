@@ -12,6 +12,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import com.web.dpelos.repository.AdminRepository;
 import com.web.dpelos.repository.DrogaRepository;
 import com.web.dpelos.repository.DuenoRepository;
 import com.web.dpelos.repository.EnfermedadMascotaRepository;
@@ -51,11 +52,16 @@ public class DatabaseInit implements ApplicationRunner {
         @Autowired
         TratamientoRepository tratamientoRepository;
 
+        @Autowired
+        AdminRepository adminRepository;
+
         @Override
         public void run(ApplicationArguments args) throws Exception {
 
                 LocalDate date = LocalDate.now();
                 Date sqlDate = Date.valueOf(date);
+                //crear un administrador
+                Administrador admin = new Administrador("998877", "pass123");
 
                 Dueno[] duenos = new Dueno[] {
                                 new Dueno("13231", "Ana", "Martínez", "ana.martinez@gmail.com", "3001234567",
@@ -161,7 +167,7 @@ public class DatabaseInit implements ApplicationRunner {
 
                 };
 
-                // Inicializa el arreglo de mascotas
+                // Inicializar el arreglo de mascotas
                 Mascota[] mascotas = new Mascota[] {
                                 new Mascota("Firulais", 2,
                                                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6vK9XGVpsZJyLqihEWrl8FZlRTEIvPpn90KC5OnJRh2qiNiEzy0JBlls0ZV3_rkQOmdo&usqp=CAU",
@@ -466,7 +472,8 @@ public class DatabaseInit implements ApplicationRunner {
                                                 sqlDate, true)
 
                 };
-
+                
+                // Inicializar el arreglo de razas
                 Raza[] razas = new Raza[] {
                                 new Raza("Husky"),
                                 new Raza("Labrador"),
@@ -490,7 +497,8 @@ public class DatabaseInit implements ApplicationRunner {
                                 new Raza("Akita"),
                                 new Raza("Samoedo")
                 };
-
+                
+                // Inicializar el arreglo de enfermedades
                 Enfermedad[] enfermedades = new Enfermedad[] {
                                 new Enfermedad("Displasia de cadera"),
                                 new Enfermedad("Dermatitis"),
@@ -533,7 +541,8 @@ public class DatabaseInit implements ApplicationRunner {
                                 new Enfermedad("Problemas gastrointestinales"),
                                 new Enfermedad("Parásitos internos"),
                 };
-
+                
+                // Inicializar el arreglo de especialidades 
                 Especialidad[] especialidades = new Especialidad[] {
                                 new Especialidad("Ortopedia"),
                                 new Especialidad("Dermatología"),
@@ -798,6 +807,9 @@ public class DatabaseInit implements ApplicationRunner {
                 };
                 // Initialize Tratamiento objects
 
+
+                //Guardar el administrador
+                adminRepository.save(admin);
                 // Ejemplo de uso: guardar las mascotas en un repositorio (si fuera el caso)
                 for (Mascota mascota : mascotas) {
                         mascotaRepository.save(mascota);
@@ -832,6 +844,7 @@ public class DatabaseInit implements ApplicationRunner {
                         drogaRepository.save(droga);
                 }
 
+        
                 int CANT_DUENOS = 50;
                 int CANT_ASIGNACIONES = 2;
                 int CANT_RAZAS = 21;

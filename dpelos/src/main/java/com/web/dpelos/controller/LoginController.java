@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.web.dpelos.dto.LoginRequest;
-import com.web.dpelos.service.DuenoServiceImplementation;
+import com.web.dpelos.service.AdminService;
+import com.web.dpelos.service.DuenoService;
 import com.web.dpelos.service.VeterinarioService;
 
 
@@ -20,18 +21,22 @@ import com.web.dpelos.service.VeterinarioService;
 public class LoginController {
 
     @Autowired
-    DuenoServiceImplementation duenoService;
+    DuenoService duenoService;
 
     @Autowired
     VeterinarioService veterinarioService;
 
+    @Autowired
+    AdminService adminService;
 
     @PostMapping()
     public ResponseEntity<?> login(@RequestBody LoginRequest peticion) {
         Object user = null;
+        Object admin= null;
 
         if (peticion.getType() == 1) {
             user = veterinarioService.buscarVetLogin(peticion.getDocument(), peticion.getPassword());
+            admin = adminService.buscarAdminLogin(peticion.getDocument(), peticion.getPassword());
         } else if (peticion.getType() == 2) {
             user = duenoService.buscarDuenoPorCedula(peticion.getDocument());
         }

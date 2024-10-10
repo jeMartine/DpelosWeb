@@ -59,24 +59,4 @@ public class VeterinarioController {
     public void updateVet(@RequestBody Veterinario vet){
         veterinarioService.updateVet(vet);
     }
-
-    /* Metodo que retorna un JSON con la informacion del vet. */
-    @GetMapping("/buscarVet")
-    public Veterinario buscarVeterinario(@RequestParam("cedulaVet") String cedulaVet,
-            @RequestParam("passwordVet") String passwordVet,
-            HttpSession session) {
-        Veterinario veterinario = veterinarioService.buscarVetLogin(cedulaVet, passwordVet);
-        if (veterinario != null) {
-            session.setAttribute("idVeterinario", veterinario.getIdVeterinario());
-            return veterinario;
-        } else {
-            Veterinario vetExiste = veterinarioService.buscarVetPorCedula(cedulaVet);
-            if (vetExiste != null) {
-                return vetExiste;
-            } else {
-                return vetExiste;
-            }
-        }
-    } 
-
 }
