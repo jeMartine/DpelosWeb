@@ -26,7 +26,7 @@ public class Veterinario {
     private String nombreVeterinario;
     private String apellidoVeterinario;
     private String cedulaVeterinario;
-    @JsonIgnore
+    //@JsonIgnore
     private String passwordVeterinario;
     private String fotoUrl;
     private int numeroAtenciones;
