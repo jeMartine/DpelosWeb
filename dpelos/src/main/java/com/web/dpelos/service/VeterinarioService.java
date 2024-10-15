@@ -29,7 +29,7 @@ public interface VeterinarioService {
 
     public Page<Veterinario> getVeterinarioPaginadas(int page, int size);
 
-    // public long obtenerTotalVeterinariosActivos();
+    public long obtenerTotalVeterinariosActivos();
 
-    // public long obtenerTotalVeterinariosInactivos();
+    public long obtenerTotalVeterinariosInactivos();
 }

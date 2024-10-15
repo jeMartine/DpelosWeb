@@ -26,7 +26,8 @@ public class Veterinario {
     private String nombreVeterinario;
     private String apellidoVeterinario;
     private String cedulaVeterinario;
-    //@JsonIgnore
+    private boolean estadoVeterinario;
+    // @JsonIgnore
     private String passwordVeterinario;
     private String fotoUrl;
     private int numeroAtenciones;
@@ -39,15 +40,15 @@ public class Veterinario {
     @OneToMany(mappedBy = "veterinario")
     private List<Tratamiento> tratamientos = new ArrayList();
 
-
-    public Veterinario(String nombreVeterinario, String apellidoVeterinario, 
-            String cedulaVeterinario, String passwordVeterinario, String fotoUrl, 
-            int numeroAtenciones) {
+    public Veterinario(String nombreVeterinario, String apellidoVeterinario,
+            String cedulaVeterinario, String passwordVeterinario, String fotoUrl,
+            int numeroAtenciones, boolean estadoVeterinario) {
         this.nombreVeterinario = nombreVeterinario;
         this.apellidoVeterinario = apellidoVeterinario;
         this.cedulaVeterinario = cedulaVeterinario;
         this.passwordVeterinario = passwordVeterinario;
         this.fotoUrl = fotoUrl;
         this.numeroAtenciones = numeroAtenciones;
+        this.estadoVeterinario = estadoVeterinario;
     }
 }
