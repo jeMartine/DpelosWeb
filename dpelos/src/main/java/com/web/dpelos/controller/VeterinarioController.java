@@ -46,6 +46,7 @@ public class VeterinarioController {
     //Crear un veterinario
     @PostMapping
     public void crearVet(@RequestBody Veterinario vet){
+        System.out.println("Password: " + vet.getPasswordVeterinario());  // Verificar si llega la contraseña
         veterinarioService.addVet(vet);
     }
 

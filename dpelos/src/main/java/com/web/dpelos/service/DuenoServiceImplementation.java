@@ -46,12 +46,7 @@ public class DuenoServiceImplementation implements DuenoService {
         if (dueno != null) {
             mascotaRepository.deleteAllByDueno(dueno);
             duenoRepository.deleteById(id);
-
         }
-        // else {
-        // throw new NotFoundException();
-        // }
-
     }
 
     @Transactional
