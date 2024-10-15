@@ -5,9 +5,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -75,7 +72,9 @@ public class TratamientosController {
         }
         return new ResponseEntity<>(tratamientos, HttpStatus.OK);
     }
-    /*@GetMapping("/{idTratamiento}/medicamentos")
+
+
+    @GetMapping("/{idTratamiento}/medicamentos")
     public ResponseEntity<List<Droga>> getMedicamentosPorTratamiento(@PathVariable Long idTratamiento) {
         List<Droga> medicamentos = tratamientoService.getMedicamentosPorTratamiento(idTratamiento);
         return new ResponseEntity<>(medicamentos, HttpStatus.OK);
@@ -88,6 +87,6 @@ public class TratamientosController {
             @RequestBody List<Droga> medicamentos) {
         tratamientoService.updateMedicamentosDelTratamiento(idTratamiento, medicamentos);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }*/
+    }
     
 }

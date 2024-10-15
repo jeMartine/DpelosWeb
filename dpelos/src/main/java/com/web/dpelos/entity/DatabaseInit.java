@@ -5,8 +5,8 @@ import java.time.LocalDate;
 import java.util.concurrent.ThreadLocalRandom;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import org.hibernate.mapping.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -887,19 +887,35 @@ public class DatabaseInit implements ApplicationRunner {
                                         Date.valueOf(LocalDate.now()
                                                         .minusDays(ThreadLocalRandom.current().nextInt(1, 30))),
                                         "Una elegancia de tratamiento " + (i + 1),
-                                        activoRandom, "Indicaciones mencionadas al dueño" + (i + 1));
+                                        activoRandom,
+                                        "Indicaciones mencionadas al dueño" + (i + 1));
 
                         int veterinarioRandom = ThreadLocalRandom.current().nextInt(1, 30 + 1);
-                        int drogaRandom = ThreadLocalRandom.current().nextInt(1, 50 + 1);
                         int mascotaRandom = ThreadLocalRandom.current().nextInt(1, 100 + 1);
 
+                        // Asigna el veterinario y la mascota
                         tratamiento.setVeterinario(veterinarioRepository.findById((long) veterinarioRandom).get());
-                        tratamiento.setDroga(drogaRepository.findById((long) drogaRandom).get());
                         tratamiento.setMascota(mascotaRepository.findById((long) mascotaRandom).get());
 
+                        // Comprobar si la lista de drogas ya fue declarada
+                        List<Droga> drogasList = new ArrayList<>(); // Si no fue declarada antes
+                        int numDrogas = ThreadLocalRandom.current().nextInt(1, 5); // Elige entre 1 y 5 drogas
+                                                                                   // aleatorias
+                        for (int j = 0; j < numDrogas; j++) {
+                                int drogaRandom = ThreadLocalRandom.current().nextInt(1, 50 + 1);
+                                Droga droga = drogaRepository.findById((long) drogaRandom).get(); // Asegúrate de que el
+                                                                                                  // ID sea válido
+                                drogasList.add(droga); // Añadir cada droga a la lista
+                        }
+
+                        // Asignar la lista de drogas al tratamiento
+                        tratamiento.setDrogas(drogasList);
+
+                        // Añadir el tratamiento a la lista
                         tratamientos.add(tratamiento);
                 }
 
+                // Guardar cada tratamiento en la base de datos
                 for (Tratamiento tratamiento : tratamientos) {
                         tratamientoRepository.save(tratamiento);
                 }
