@@ -28,8 +28,8 @@ public interface TratamientoService {
 
     public List<Tratamiento> buscarTratamientosActivosPorNombreMascota(String nombreMascota);
 
-    //public List<Droga> getMedicamentosPorTratamiento(Long idTratamiento);
+    public List<Droga> getMedicamentosPorTratamiento(Long idTratamiento);
 
-    //public void updateMedicamentosDelTratamiento(Long idTratamiento, List<Droga> medicamentos);
+    public void updateMedicamentosDelTratamiento(Long idTratamiento, List<Droga> medicamentos);
 
 }
