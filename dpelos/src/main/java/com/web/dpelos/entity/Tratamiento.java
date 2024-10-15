@@ -1,12 +1,16 @@
 package com.web.dpelos.entity;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,9 +29,13 @@ public class Tratamiento {
     private String descripcionTratamiento;
     private String recomendacionesGenerales;
 
-    @ManyToOne
-    @JoinColumn(name = "droga_id")
-    private Droga droga;
+    @ManyToMany
+    @JoinTable(
+        name = "tratamiento_droga",
+        joinColumns = @JoinColumn(name = "tratamiento_id"), 
+        inverseJoinColumns = @JoinColumn(name = "droga_id")
+    )
+    private List<Droga> drogas = new ArrayList<>();
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "mascota_id", nullable = true)
