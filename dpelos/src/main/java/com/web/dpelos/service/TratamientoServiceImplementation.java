@@ -1,6 +1,7 @@
 package com.web.dpelos.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -53,6 +54,13 @@ public class TratamientoServiceImplementation implements TratamientoService {
     
     public List<Tratamiento> buscarTratamientosActivosPorNombreMascota(String nombreMascota) {
         return tratamientoRepository.findTratamientosActivosByNombreMascota(nombreMascota);
+    }
+
+    public List<Droga> obtenerMedicamentosActivosPorTratamiento(Long idTratamiento) {
+        Tratamiento tratamiento = tratamientoRepository.findById(idTratamiento)
+                .orElseThrow(() -> new RuntimeException("Tratamiento no encontrado"));
+        return tratamiento.getDrogas().stream()
+                .collect(Collectors.toList());
     }
 
 

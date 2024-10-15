@@ -75,6 +75,13 @@ public class TratamientosController {
         }
         return new ResponseEntity<>(tratamientos, HttpStatus.OK);
     }
+
+    @GetMapping("/{idTratamiento}/medicamentos")
+    public ResponseEntity<List<Droga>> getMedicamentosPorTratamiento(@PathVariable Long idTratamiento) {
+        List<Droga> medicamentos = tratamientoService.obtenerMedicamentosActivosPorTratamiento(idTratamiento);
+        return ResponseEntity.ok(medicamentos);
+    }
+
     /*@GetMapping("/{idTratamiento}/medicamentos")
     public ResponseEntity<List<Droga>> getMedicamentosPorTratamiento(@PathVariable Long idTratamiento) {
         List<Droga> medicamentos = tratamientoService.getMedicamentosPorTratamiento(idTratamiento);
