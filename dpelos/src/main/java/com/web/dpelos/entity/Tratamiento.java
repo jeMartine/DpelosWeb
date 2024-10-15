@@ -32,7 +32,7 @@ public class Tratamiento {
     @ManyToMany
     @JoinTable(
         name = "tratamiento_droga",
-        joinColumns = @JoinColumn(name = "tratamiento_id"), 
+        joinColumns = @JoinColumn(name = "tratamiento_droga"), 
         inverseJoinColumns = @JoinColumn(name = "droga_id")
     )
     private List<Droga> drogas = new ArrayList<>();
@@ -55,5 +55,9 @@ public class Tratamiento {
         this.estado = estado;
         this.fechaAdministracion = fechaAdministracion;
         this.descripcionTratamiento = descripcionTratamiento;
+    }
+
+    public void setDroga(List<Droga> drogas) {
+        this.drogas = drogas;
     }
 }

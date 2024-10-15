@@ -64,7 +64,7 @@ public class TratamientoServiceImplementation implements TratamientoService {
     }
 
 
-    /*public List<Droga> getMedicamentosPorTratamiento(Long idTratamiento) {
+    public List<Droga> getMedicamentosPorTratamiento(Long idTratamiento) {
         return tratamientoRepository.findMedicamentosByIdTratamiento(idTratamiento);
     }
 
@@ -73,6 +73,6 @@ public class TratamientoServiceImplementation implements TratamientoService {
                 .orElseThrow(() -> new RuntimeException("Tratamiento no encontrado"));
         tratamiento.setDroga(medicamentos);
         tratamientoRepository.save(tratamiento);
-    }*/
+    }
 
 }

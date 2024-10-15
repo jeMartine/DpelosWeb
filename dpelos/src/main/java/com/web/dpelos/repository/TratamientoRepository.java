@@ -21,7 +21,11 @@ public interface TratamientoRepository extends JpaRepository<Tratamiento, Long> 
     @Query("SELECT t FROM Tratamiento t WHERE t.mascota.nombreMascota LIKE %:nombreMascota% AND t.estado = true")
     List<Tratamiento> findTratamientosActivosByNombreMascota(@Param("nombreMascota") String nombreMascota);
 
-    List<Droga> findMedicamentosByIdTratamiento(Long idTratamiento);
+    //List<Droga> findMedicamentosByIdTratamiento(Long idTratamiento);
+
+    @Query("SELECT t.drogas FROM Tratamiento t WHERE t.idTratamiento = :idTratamiento")
+    List<Droga> findMedicamentosByIdTratamiento(@Param("idTratamiento") Long idTratamiento);
+
 
 
 }
