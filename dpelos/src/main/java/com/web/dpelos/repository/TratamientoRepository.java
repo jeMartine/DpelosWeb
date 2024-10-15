@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.web.dpelos.entity.Droga;
 import com.web.dpelos.entity.Tratamiento;
+// import com.web.dpelos.entity.TratamientoDrogasCountDTO;
 
 @Repository
 public interface TratamientoRepository extends JpaRepository<Tratamiento, Long> {
@@ -21,11 +22,16 @@ public interface TratamientoRepository extends JpaRepository<Tratamiento, Long> 
     @Query("SELECT t FROM Tratamiento t WHERE t.mascota.nombreMascota LIKE %:nombreMascota% AND t.estado = true")
     List<Tratamiento> findTratamientosActivosByNombreMascota(@Param("nombreMascota") String nombreMascota);
 
-    //List<Droga> findMedicamentosByIdTratamiento(Long idTratamiento);
+    // List<Droga> findMedicamentosByIdTratamiento(Long idTratamiento);
 
     @Query("SELECT t.drogas FROM Tratamiento t WHERE t.idTratamiento = :idTratamiento")
     List<Droga> findMedicamentosByIdTratamiento(@Param("idTratamiento") Long idTratamiento);
 
-
+    // @Query("SELECT new com.web.dpelos.dto.TratamientoDrogasCountDTO(t.id,
+    // COUNT(d)) " +
+    // "FROM Tratamiento t LEFT JOIN t.drogas d GROUP BY t.id ORDER BY COUNT(d)
+    // DESC")
+    // List<TratamientoDrogasCountDTO>
+    // findTop3TratamientosOrderByDrogasCountDesc(Pageable pageable);
 
 }

@@ -26,7 +26,7 @@ public class TratamientoServiceImplementation implements TratamientoService {
     public List<Tratamiento> obtenerTratamientos() {
         return tratamientoRepository.findAll();
     }
-    
+
     @Override
     public Tratamiento buscarTratamientoPorId(Long id) {
         return tratamientoRepository.findById(id)
@@ -37,7 +37,7 @@ public class TratamientoServiceImplementation implements TratamientoService {
     public void addTratamiento(Tratamiento tratamiento) {
         tratamientoRepository.save(tratamiento);
     }
-    
+
     @Override
     public void deleteTratamiento(Long id) {
         tratamientoRepository.deleteById(id);
@@ -51,7 +51,7 @@ public class TratamientoServiceImplementation implements TratamientoService {
     public List<Tratamiento> getActiveTratamientos() {
         return tratamientoRepository.findActiveTratamientos();
     }
-    
+
     public List<Tratamiento> buscarTratamientosActivosPorNombreMascota(String nombreMascota) {
         return tratamientoRepository.findTratamientosActivosByNombreMascota(nombreMascota);
     }
@@ -62,7 +62,6 @@ public class TratamientoServiceImplementation implements TratamientoService {
         return tratamiento.getDrogas().stream()
                 .collect(Collectors.toList());
     }
-
 
     public List<Droga> getMedicamentosPorTratamiento(Long idTratamiento) {
         return tratamientoRepository.findMedicamentosByIdTratamiento(idTratamiento);
@@ -75,4 +74,9 @@ public class TratamientoServiceImplementation implements TratamientoService {
         tratamientoRepository.save(tratamiento);
     }
 
+    // public List<TratamientoDrogasCountDTO> tratamientosMasUnidadesVendidas() {
+    // return
+    // tratamientoRepository.findTop3TratamientosOrderByDrogasCountDesc(PageRequest.of(0,
+    // 3));
+    // }
 }

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.web.dpelos.entity.Droga;
 import com.web.dpelos.entity.Mascota;
 import com.web.dpelos.entity.Tratamiento;
+// import com.web.dpelos.entity.TratamientoDrogasCountDTO;
 import com.web.dpelos.service.TratamientoService;
 
 @RestController // Esta anotacion indica que esta clase es un controlador REST
@@ -37,7 +38,9 @@ public class TratamientosController {
         return tratamientoService.obtenerTratamientos();
     }
 
-    /* Metodo que retorna la informacion de un trataamiento segun su respectivo ID */
+    /*
+     * Metodo que retorna la informacion de un trataamiento segun su respectivo ID
+     */
     @GetMapping("/{id}")
     public Tratamiento mostrarTratamientoPorID(@PathVariable Long id) {
         return tratamientoService.buscarTratamientoPorId(id);
@@ -73,7 +76,6 @@ public class TratamientosController {
         return new ResponseEntity<>(tratamientos, HttpStatus.OK);
     }
 
-
     @GetMapping("/{idTratamiento}/medicamentos")
     public ResponseEntity<List<Droga>> getMedicamentosPorTratamiento(@PathVariable Long idTratamiento) {
         List<Droga> medicamentos = tratamientoService.getMedicamentosPorTratamiento(idTratamiento);
@@ -88,5 +90,12 @@ public class TratamientosController {
         tratamientoService.updateMedicamentosDelTratamiento(idTratamiento, medicamentos);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-    
+
+    // @GetMapping("/masUnidadesVendidas")
+    // public ResponseEntity<List<TratamientoDrogasCountDTO>>
+    // tratamientosMasUnidadesVendidas() {
+    // List<TratamientoDrogasCountDTO> tratamientos =
+    // tratamientoService.tratamientosMasUnidadesVendidas();
+    // return new ResponseEntity<>(tratamientos, HttpStatus.OK);
+    // }
 }
