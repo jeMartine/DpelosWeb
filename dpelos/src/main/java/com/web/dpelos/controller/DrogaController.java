@@ -23,7 +23,6 @@ import com.web.dpelos.entity.Droga;
 import com.web.dpelos.entity.Mascota;
 import com.web.dpelos.service.DrogaService;
 
-
 @RestController // Esta anotacion indica que esta clase es un controlador REST
 @RequestMapping("/droga")
 @CrossOrigin(origins = "http://localhost:4200") // Esta anotacion indica que se permite el acceso a esta URL desde un
@@ -34,14 +33,13 @@ public class DrogaController {
 
     /* Metodo para agregar drogas a la base de datos. */
 
-    
     @GetMapping()
     public List<Droga> obtenerDrogas() {
         return drogaService.obtenerDrogas();
     }
 
     @GetMapping("/{id}")
-    public Droga getDrogaById(@PathVariable Long id){
+    public Droga getDrogaById(@PathVariable Long id) {
         return drogaService.buscarDrogaPorId(id);
     }
 
@@ -52,24 +50,24 @@ public class DrogaController {
 
     @PostMapping("/excel")
     public ResponseEntity<Map<String, String>> addDrogasExcel(@RequestBody List<Droga> drogas) {
-    Map<String, String> response = new HashMap<>();
-    if (!drogas.isEmpty()) {
-        drogaService.saveAllExcel(drogas);
-        response.put("message", "Medicamentos agregados exitosamente");
-        return ResponseEntity.ok(response);
-    } else {
-        response.put("message", "El archivo enviado está vacío");
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(response);
+        Map<String, String> response = new HashMap<>();
+        if (!drogas.isEmpty()) {
+            drogaService.saveAllExcel(drogas);
+            response.put("message", "Medicamentos agregados exitosamente");
+            return ResponseEntity.ok(response);
+        } else {
+            response.put("message", "El archivo enviado está vacío");
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(response);
+        }
     }
-}
 
     @DeleteMapping("/{id}")
-    public void deleteDroga(@PathVariable Long id){
+    public void deleteDroga(@PathVariable Long id) {
         drogaService.deleteDroga(id);
     }
 
     @PutMapping()
-    public void updateDroga(@RequestBody Droga droga){
+    public void updateDroga(@RequestBody Droga droga) {
         drogaService.updateDroga(droga);
     }
 
@@ -96,5 +94,17 @@ public class DrogaController {
     public ResponseEntity<Long> obtenerTotalDrogas() {
         long totalDrogas = drogaService.obtenerTotalDrogas();
         return new ResponseEntity<>(totalDrogas, HttpStatus.OK);
+    }
+
+    @GetMapping("/totalVentas")
+    public ResponseEntity<Double> obtenerTotalVentas() {
+        double totalVentas = drogaService.obtenerTotalVentas();
+        return new ResponseEntity<>(totalVentas, HttpStatus.OK);
+    }
+
+    @GetMapping("/totalGanancias")
+    public ResponseEntity<Double> obtenerTotalGanancias() {
+        double totalGanancias = drogaService.obtenerTotalGanancias();
+        return new ResponseEntity<>(totalGanancias, HttpStatus.OK);
     }
 }

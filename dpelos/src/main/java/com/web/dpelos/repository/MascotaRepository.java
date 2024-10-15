@@ -28,4 +28,7 @@ public interface MascotaRepository extends JpaRepository<Mascota, Long> {
     // Obtener todas las mascotas con paginación
     @Query("SELECT m FROM Mascota m")
     Page<Mascota> findAllMascotas(Pageable pageable);
+
+    @Query("SELECT COUNT(m) FROM Mascota m WHERE m.estado = true")
+    long countByEstadoTrue();
 }

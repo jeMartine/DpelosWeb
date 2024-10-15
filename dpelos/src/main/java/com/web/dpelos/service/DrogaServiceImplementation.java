@@ -18,10 +18,10 @@ import jakarta.transaction.Transactional;
 
 @EnableAutoConfiguration
 @Service
-public class DrogaServiceImplementation implements DrogaService{
-    
+public class DrogaServiceImplementation implements DrogaService {
+
     @Autowired
-    private DrogaRepository drogaRepository; 
+    private DrogaRepository drogaRepository;
 
     @Override
     public Droga buscarDrogaPorId(Long id) {
@@ -39,7 +39,7 @@ public class DrogaServiceImplementation implements DrogaService{
     }
 
     @Override
-    public void saveAllExcel(List<Droga> drogas){
+    public void saveAllExcel(List<Droga> drogas) {
         drogaRepository.saveAll(drogas);
     }
 
@@ -59,7 +59,7 @@ public class DrogaServiceImplementation implements DrogaService{
         drogaRepository.save(raza);
     }
 
-     public Page<Droga> buscarMedicamentosPorNombre(String nombreMedicamento, int page, int size) {
+    public Page<Droga> buscarMedicamentosPorNombre(String nombreMedicamento, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return drogaRepository.findByNombreDrogaContainingIgnoreCase(nombreMedicamento, pageable);
     }
@@ -71,5 +71,25 @@ public class DrogaServiceImplementation implements DrogaService{
 
     public long obtenerTotalDrogas() {
         return drogaRepository.count();
+    }
+
+    public double obtenerTotalVentas() {
+        Double totalVentas = drogaRepository.findTotalVentas();
+        return totalVentas != null ? totalVentas : 0.0;
+    }
+
+    public double obtenerTotalGanancias() {
+        Double totalVentas = drogaRepository.findTotalVentas();
+        Double totalCost = drogaRepository.findTotalCost();
+
+        if (totalVentas == null) {
+            totalVentas = 0.0;
+        }
+
+        if (totalCost == null) {
+            totalCost = 0.0;
+        }
+
+        return totalVentas - totalCost;
     }
 }

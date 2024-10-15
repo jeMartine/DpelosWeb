@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.web.dpelos.entity.Veterinario;
 
-
 public interface VeterinarioService {
     public Veterinario buscarVetPorId(Long id);
 
@@ -29,4 +28,8 @@ public interface VeterinarioService {
     public Page<Veterinario> buscarVeterinarioPorNombre(String nombreVeterinario, int page, int size);
 
     public Page<Veterinario> getVeterinarioPaginadas(int page, int size);
+
+    // public long obtenerTotalVeterinariosActivos();
+
+    // public long obtenerTotalVeterinariosInactivos();
 }

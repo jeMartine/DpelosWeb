@@ -134,5 +134,9 @@ public class MascotasController {
         return new ResponseEntity<>(totalMascotas, HttpStatus.OK);
     }
 
-
+    @GetMapping("/totalActivas")
+    public ResponseEntity<Long> obtenerTotalMascotasActivas() {
+        long totalMascotasActivas = mascotaService.obtenerTotalMascotasActivas();
+        return new ResponseEntity<>(totalMascotasActivas, HttpStatus.OK);
+    }
 }

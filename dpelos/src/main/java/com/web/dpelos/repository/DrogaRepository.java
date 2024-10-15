@@ -17,4 +17,10 @@ public interface DrogaRepository extends JpaRepository<Droga, Long> {
     // Obtener todas las mascotas con paginación
     @Query("SELECT m FROM Droga m")
     Page<Droga> findAllDroga(Pageable pageable);
+
+    @Query("SELECT SUM(d.unitVendidas * d.precioVenta) FROM Droga d")
+    Double findTotalVentas();
+
+    @Query("SELECT SUM(d.unitVendidas * d.precioCompra) FROM Droga d")
+    Double findTotalCost();
 }

@@ -7,7 +7,7 @@ import org.springframework.data.domain.Page;
 import com.web.dpelos.entity.Droga;
 
 public interface DrogaService {
-    
+
     public Droga buscarDrogaPorId(Long id);
 
     public List<Droga> obtenerDrogas();
@@ -25,4 +25,8 @@ public interface DrogaService {
     public Page<Droga> getMedicamentosPaginadas(int page, int size);
 
     public long obtenerTotalDrogas();
+
+    public double obtenerTotalVentas();
+
+    public double obtenerTotalGanancias();
 }

@@ -82,4 +82,8 @@ public class MascotaServiceImplementation implements MascotaService {
     public long obtenerTotalMascotas() {
         return mascotaRepository.count();
     }
+
+    public long obtenerTotalMascotasActivas() {
+        return mascotaRepository.countByEstadoTrue();
+    }
 }

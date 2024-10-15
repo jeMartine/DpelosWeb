@@ -28,5 +28,6 @@ public interface MascotaService {
 
     public long obtenerTotalMascotas();
 
+    public long obtenerTotalMascotasActivas();
 
 }
