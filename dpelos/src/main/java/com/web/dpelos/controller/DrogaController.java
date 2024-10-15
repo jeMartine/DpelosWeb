@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.web.dpelos.entity.Droga;
+import com.web.dpelos.entity.Mascota;
 import com.web.dpelos.service.DrogaService;
 
 
@@ -71,8 +73,28 @@ public class DrogaController {
         drogaService.updateDroga(droga);
     }
 
+    /* Metodo para buscar medicamentos por su nombre */
     @GetMapping("/buscar")
-    public List<Droga> buscarDrogas(@RequestParam String nombre) {
-        return drogaService.buscarDrogasPorNombre(nombre);
+    public Page<Droga> buscarMedicamentos(
+            @RequestParam String nombre,
+            @RequestParam int page,
+            @RequestParam int size) {
+        return drogaService.buscarMedicamentosPorNombre(nombre, page, size);
+    }
+
+    /* Metodo para obtener todas los medicamentos por paginación */
+    @GetMapping("/paginacion")
+    public ResponseEntity<Page<Droga>> getMedicamentosPaginados(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "30") int size) {
+
+        Page<Droga> medicamentosPaginados = drogaService.getMedicamentosPaginadas(page, size);
+        return new ResponseEntity<>(medicamentosPaginados, HttpStatus.OK);
+    }
+
+    @GetMapping("/total")
+    public ResponseEntity<Long> obtenerTotalDrogas() {
+        long totalDrogas = drogaService.obtenerTotalDrogas();
+        return new ResponseEntity<>(totalDrogas, HttpStatus.OK);
     }
 }

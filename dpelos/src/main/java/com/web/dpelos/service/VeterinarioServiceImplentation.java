@@ -5,8 +5,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.web.dpelos.entity.Mascota;
 import com.web.dpelos.entity.Veterinario;
 import com.web.dpelos.exception.NotFoundException;
 import com.web.dpelos.repository.VeterinarioRepository;
@@ -66,6 +70,20 @@ public class VeterinarioServiceImplentation implements VeterinarioService {
     @Override
     public Veterinario buscarVetLogin(String cedulaVet, String passwordVet) {
         return veterinarioRepository.findByCedulaVeterinarioAndPasswordVeterinario(cedulaVet, passwordVet);
+    }
+
+    public Page<Veterinario> buscarVeterinarioPorNombre(String nombreVeterinario, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return veterinarioRepository.findByNombreVeterinarioContainingIgnoreCase(nombreVeterinario, pageable);
+    }
+
+    public Page<Veterinario> getVeterinarioPaginadas(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return veterinarioRepository.findAllVeterinario(pageable);
+    }
+
+    public long obtenerTotalVeterinarios() {
+        return veterinarioRepository.count();
     }
 
 }

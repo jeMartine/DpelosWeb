@@ -8,6 +8,9 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.web.dpelos.entity.Droga;
@@ -66,8 +69,17 @@ public class MascotaServiceImplementation implements MascotaService {
         mascotaRepository.save(mascota);
     }
 
-    @Override
-    public List<Mascota> buscarMascotasPorNombre(String nombreMascota) {
-        return mascotaRepository.findByNombreMascotaContainingIgnoreCase(nombreMascota);
+    public Page<Mascota> buscarMascotasPorNombre(String nombreMascota, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return mascotaRepository.findByNombreMascotaContainingIgnoreCase(nombreMascota, pageable);
+    }
+
+    public Page<Mascota> getMascotasPaginadas(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return mascotaRepository.findAllMascotas(pageable);
+    }
+
+    public long obtenerTotalMascotas() {
+        return mascotaRepository.count();
     }
 }

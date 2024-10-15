@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -85,6 +86,7 @@ public class MascotasController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
         }
     }
+
     /* Metodo para agregar mascotas a la base de datos */
     @PostMapping("/add")
     public void addMascota(@RequestBody Mascota mascota) {
@@ -100,15 +102,37 @@ public class MascotasController {
     public void deleteMascota(@PathVariable Long id) {
         mascotaService.deleteMascota(id);
     }
-    
+
+    /* Metodo para actualizar la informacion de una mascota */
     @PutMapping("/update")
     public void actualizarMascota(@RequestBody Mascota mascota) {
         mascotaService.updateMascota(mascota);
     }
 
+    /* Metodo para buscar mascotas por su nombre */
     @GetMapping("/buscar")
-    public List<Mascota> buscarMascotas(@RequestParam String nombre) {
-        return mascotaService.buscarMascotasPorNombre(nombre);
+    public Page<Mascota> buscarMascotas(
+            @RequestParam String nombre,
+            @RequestParam int page,
+            @RequestParam int size) {
+        return mascotaService.buscarMascotasPorNombre(nombre, page, size);
     }
+
+    /* Metodo para obtener todas las mascotas por paginación */
+    @GetMapping("/paginacion")
+    public ResponseEntity<Page<Mascota>> getMascotasPaginadas(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "30") int size) {
+
+        Page<Mascota> mascotasPaginadas = mascotaService.getMascotasPaginadas(page, size);
+        return new ResponseEntity<>(mascotasPaginadas, HttpStatus.OK);
+    }
+
+    @GetMapping("/total")
+    public ResponseEntity<Long> obtenerTotalMascotas() {
+        long totalMascotas = mascotaService.obtenerTotalMascotas();
+        return new ResponseEntity<>(totalMascotas, HttpStatus.OK);
+    }
+
 
 }

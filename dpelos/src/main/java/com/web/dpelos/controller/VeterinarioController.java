@@ -3,8 +3,13 @@ package com.web.dpelos.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.web.dpelos.entity.Mascota;
 import com.web.dpelos.entity.Veterinario;
 import com.web.dpelos.service.VeterinarioService;
 
@@ -53,5 +58,30 @@ public class VeterinarioController {
     @PutMapping("/update")
     public void updateVet(@RequestBody Veterinario vet){
         veterinarioService.updateVet(vet);
+    }
+
+    /* Metodo para buscar veterianrio por su nombre */
+    @GetMapping("/buscar")
+    public Page<Veterinario> buscarVeterinario(
+            @RequestParam String nombre,
+            @RequestParam int page,
+            @RequestParam int size) {
+        return veterinarioService.buscarVeterinarioPorNombre(nombre, page, size);
+    }
+
+    /* Metodo para obtener todos los veterinarios por paginación */
+    @GetMapping("/paginacion")
+    public ResponseEntity<Page<Veterinario>> getVeterinarioPaginadas(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "30") int size) {
+
+        Page<Veterinario> veterinarioPaginadas = veterinarioService.getVeterinarioPaginadas(page, size);
+        return new ResponseEntity<>(veterinarioPaginadas, HttpStatus.OK);
+    }
+
+    @GetMapping("/total")
+    public ResponseEntity<Long> obtenerTotalVeterinarios() {
+        long totalVeterinarios = veterinarioService.obtenerTotalVeterinarios();
+        return new ResponseEntity<>(totalVeterinarios, HttpStatus.OK);
     }
 }

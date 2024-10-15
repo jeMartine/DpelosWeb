@@ -3,6 +3,8 @@ package com.web.dpelos.service;
 import java.util.Collection;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+
 import com.web.dpelos.entity.Droga;
 import com.web.dpelos.entity.Mascota;
 
@@ -20,5 +22,11 @@ public interface MascotaService {
 
     public void updateMascota(Mascota mascota);
 
-    public List<Mascota> buscarMascotasPorNombre(String nombreMascota);
+    public Page<Mascota> buscarMascotasPorNombre(String nombreMascota, int page, int size);
+
+    public Page<Mascota> getMascotasPaginadas(int page, int size);
+
+    public long obtenerTotalMascotas();
+
+
 }

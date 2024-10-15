@@ -60,7 +60,7 @@ public class DatabaseInit implements ApplicationRunner {
 
                 LocalDate date = LocalDate.now();
                 Date sqlDate = Date.valueOf(date);
-                //crear un administrador
+                // crear un administrador
                 Administrador admin = new Administrador("998877", "pass123");
 
                 Dueno[] duenos = new Dueno[] {
@@ -472,7 +472,7 @@ public class DatabaseInit implements ApplicationRunner {
                                                 sqlDate, true)
 
                 };
-                
+
                 // Inicializar el arreglo de razas
                 Raza[] razas = new Raza[] {
                                 new Raza("Husky"),
@@ -497,7 +497,7 @@ public class DatabaseInit implements ApplicationRunner {
                                 new Raza("Akita"),
                                 new Raza("Samoedo")
                 };
-                
+
                 // Inicializar el arreglo de enfermedades
                 Enfermedad[] enfermedades = new Enfermedad[] {
                                 new Enfermedad("Displasia de cadera"),
@@ -541,8 +541,8 @@ public class DatabaseInit implements ApplicationRunner {
                                 new Enfermedad("Problemas gastrointestinales"),
                                 new Enfermedad("Parásitos internos"),
                 };
-                
-                // Inicializar el arreglo de especialidades 
+
+                // Inicializar el arreglo de especialidades
                 Especialidad[] especialidades = new Especialidad[] {
                                 new Especialidad("Ortopedia"),
                                 new Especialidad("Dermatología"),
@@ -807,8 +807,7 @@ public class DatabaseInit implements ApplicationRunner {
                 };
                 // Initialize Tratamiento objects
 
-
-                //Guardar el administrador
+                // Guardar el administrador
                 adminRepository.save(admin);
                 // Ejemplo de uso: guardar las mascotas en un repositorio (si fuera el caso)
                 for (Mascota mascota : mascotas) {
@@ -844,7 +843,6 @@ public class DatabaseInit implements ApplicationRunner {
                         drogaRepository.save(droga);
                 }
 
-        
                 int CANT_DUENOS = 50;
                 int CANT_ASIGNACIONES = 2;
                 int CANT_RAZAS = 21;
@@ -886,22 +884,29 @@ public class DatabaseInit implements ApplicationRunner {
 
                 ArrayList<Tratamiento> tratamientos = new ArrayList<>();
                 for (int i = 0; i < 10; i++) {
+                        boolean activoRandom = ThreadLocalRandom.current().nextBoolean();
+
                         Tratamiento tratamiento = new Tratamiento(
                                         Date.valueOf(LocalDate.now()
                                                         .minusDays(ThreadLocalRandom.current().nextInt(1, 30))),
-                                        "Una elegancia de tratamiento " + (i + 1));
+                                        "Una elegancia de tratamiento " + (i + 1),
+                                        activoRandom, "Indicaciones mencionadas al dueño" + (i + 1));
+
                         int veterinarioRandom = ThreadLocalRandom.current().nextInt(1, 30 + 1);
                         int drogaRandom = ThreadLocalRandom.current().nextInt(1, 50 + 1);
                         int mascotaRandom = ThreadLocalRandom.current().nextInt(1, 100 + 1);
+
                         tratamiento.setVeterinario(veterinarioRepository.findById((long) veterinarioRandom).get());
                         tratamiento.setDroga(drogaRepository.findById((long) drogaRandom).get());
                         tratamiento.setMascota(mascotaRepository.findById((long) mascotaRandom).get());
+
                         tratamientos.add(tratamiento);
                 }
-                // Save the tratamientos to the database
+
                 for (Tratamiento tratamiento : tratamientos) {
                         tratamientoRepository.save(tratamiento);
                 }
+
         }
 
 }

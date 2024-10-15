@@ -21,6 +21,7 @@ public class Droga {
     private int unitDisponibles;
     private int unitVendidas;
     private String urlFotoDroga;
+    
 
     public Droga(String nombreDroga, float precioCompra, float precioVenta, int unitDisponibles, int unitVendidas, String urlFotoDroga) {
         this.nombreDroga = nombreDroga;

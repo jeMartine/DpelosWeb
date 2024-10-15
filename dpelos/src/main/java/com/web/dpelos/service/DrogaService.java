@@ -2,6 +2,8 @@ package com.web.dpelos.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+
 import com.web.dpelos.entity.Droga;
 
 public interface DrogaService {
@@ -18,5 +20,9 @@ public interface DrogaService {
 
     public void updateDroga(Droga droga);
 
-    public List<Droga> buscarDrogasPorNombre(String nombreDroga);
+    public Page<Droga> buscarMedicamentosPorNombre(String nombreMedicamento, int page, int size);
+
+    public Page<Droga> getMedicamentosPaginadas(int page, int size);
+
+    public long obtenerTotalDrogas();
 }

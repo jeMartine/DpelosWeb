@@ -4,9 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.web.dpelos.entity.Droga;
+import com.web.dpelos.entity.Mascota;
 import com.web.dpelos.exception.NotFoundException;
 import com.web.dpelos.repository.DrogaRepository;
 
@@ -55,11 +59,17 @@ public class DrogaServiceImplementation implements DrogaService{
         drogaRepository.save(raza);
     }
 
-    @Override
-    public List<Droga> buscarDrogasPorNombre(String nombreDroga) {
-        if (nombreDroga == null || nombreDroga.trim().isEmpty()) {
-            return drogaRepository.findAll();
-        }
-        return drogaRepository.findByNombreDrogaContainingIgnoreCase(nombreDroga);
+     public Page<Droga> buscarMedicamentosPorNombre(String nombreMedicamento, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return drogaRepository.findByNombreDrogaContainingIgnoreCase(nombreMedicamento, pageable);
+    }
+
+    public Page<Droga> getMedicamentosPaginadas(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return drogaRepository.findAllDroga(pageable);
+    }
+
+    public long obtenerTotalDrogas() {
+        return drogaRepository.count();
     }
 }

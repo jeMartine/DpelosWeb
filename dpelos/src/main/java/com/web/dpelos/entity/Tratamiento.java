@@ -20,9 +20,10 @@ public class Tratamiento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idTratamiento;
-
+    private boolean estado;
     private Date fechaAdministracion;
     private String descripcionTratamiento;
+    private String recomendacionesGenerales;
 
     @ManyToOne
     @JoinColumn(name = "droga_id")
@@ -41,7 +42,9 @@ public class Tratamiento {
     // this.fechaAdministracion = fechaAdministracion;
     // this.descripcionTratamiento = descripcionTratamiento;
     // }
-    public Tratamiento(Date fechaAdministracion, String descripcionTratamiento) {
+    public Tratamiento(Date fechaAdministracion, String descripcionTratamiento, boolean estado, String recomendacionesGenerales) {
+        this.recomendacionesGenerales = recomendacionesGenerales;
+        this.estado = estado;
         this.fechaAdministracion = fechaAdministracion;
         this.descripcionTratamiento = descripcionTratamiento;
     }

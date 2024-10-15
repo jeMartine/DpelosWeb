@@ -18,4 +18,6 @@ public interface DuenoService {
 
     public Dueno buscarDuenoPorCedula(String cedulaDueno);
 
+    
+
 }

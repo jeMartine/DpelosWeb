@@ -31,7 +31,6 @@ public class Veterinario {
     private String fotoUrl;
     private int numeroAtenciones;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "especialidad_id")
     private Especialidad especialidad;
