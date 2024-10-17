@@ -1,5 +1,6 @@
 package com.web.dpelos.entity;
 
+import java.util.Optional;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.concurrent.ThreadLocalRandom;
@@ -7,6 +8,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.ArrayList;
 import java.util.List;
 
+// import org.apache.el.stream.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -890,12 +892,28 @@ public class DatabaseInit implements ApplicationRunner {
                                         activoRandom,
                                         "Indicaciones mencionadas al dueño" + (i + 1));
 
-                        int veterinarioRandom = ThreadLocalRandom.current().nextInt(1, 30 + 1);
+                        int veterinarioRandom = ThreadLocalRandom.current().nextInt(1, 28 + 1);
                         int mascotaRandom = ThreadLocalRandom.current().nextInt(1, 100 + 1);
 
                         // Asigna el veterinario y la mascota
-                        tratamiento.setVeterinario(veterinarioRepository.findById((long) veterinarioRandom).get());
-                        tratamiento.setMascota(mascotaRepository.findById((long) mascotaRandom).get());
+                        Optional<Veterinario> optionalVeterinario = veterinarioRepository
+                                        .findById((long) veterinarioRandom);
+                        if (optionalVeterinario.isPresent()) {
+                                tratamiento.setVeterinario(optionalVeterinario.get());
+                        } else {
+                                // Handle the case where the veterinarian is not found
+                                // For example, you can log an error or throw an exception
+                                throw new RuntimeException("Veterinario not found for id: " + veterinarioRandom);
+                        }
+
+                        Optional<Mascota> optionalMascota = mascotaRepository.findById((long) mascotaRandom);
+                        if (optionalMascota.isPresent()) {
+                                tratamiento.setMascota(optionalMascota.get());
+                        } else {
+                                // Handle the case where the pet is not found
+                                // For example, you can log an error or throw an exception
+                                throw new RuntimeException("Mascota not found for id: " + mascotaRandom);
+                        }
 
                         // Comprobar si la lista de drogas ya fue declarada
                         List<Droga> drogasList = new ArrayList<>(); // Si no fue declarada antes
@@ -903,15 +921,18 @@ public class DatabaseInit implements ApplicationRunner {
                                                                                    // aleatorias
                         for (int j = 0; j < numDrogas; j++) {
                                 int drogaRandom = ThreadLocalRandom.current().nextInt(1, 50 + 1);
-                                Droga droga = drogaRepository.findById((long) drogaRandom).get(); // Asegúrate de que el
-                                                                                                  // ID sea válido
-                                drogasList.add(droga); // Añadir cada droga a la lista
+                                Optional<Droga> optionalDroga = drogaRepository.findById((long) drogaRandom);
+                                if (optionalDroga.isPresent()) {
+                                        drogasList.add(optionalDroga.get());
+                                } else {
+                                        // Handle the case where the drug is not found
+                                        // For example, you can log an error or throw an exception
+                                        throw new RuntimeException("Droga not found for id: " + drogaRandom);
+                                }
                         }
 
                         // Asignar la lista de drogas al tratamiento
                         tratamiento.setDrogas(drogasList);
-
-                        // Añadir el tratamiento a la lista
                         tratamientos.add(tratamiento);
                 }
 

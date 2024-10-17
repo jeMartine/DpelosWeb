@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.web.dpelos.dto.DrogaTratamientoCountDTO;
 import com.web.dpelos.entity.Droga;
 import com.web.dpelos.entity.Mascota;
 import com.web.dpelos.entity.Tratamiento;
@@ -91,11 +92,13 @@ public class TratamientosController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    // @GetMapping("/masUnidadesVendidas")
-    // public ResponseEntity<List<TratamientoDrogasCountDTO>>
-    // tratamientosMasUnidadesVendidas() {
-    // List<TratamientoDrogasCountDTO> tratamientos =
-    // tratamientoService.tratamientosMasUnidadesVendidas();
-    // return new ResponseEntity<>(tratamientos, HttpStatus.OK);
-    // }
+    @GetMapping("/top3")
+    public List<String> getTop3TratamientosMasUnidadesVendidas() {
+        return tratamientoService.tratamientosMasUnidadesVendidas();
+    }
+
+    @GetMapping("/tratamientos-por-tipo-drogas")
+    public List<DrogaTratamientoCountDTO> getTratamientosPorTipoDrogas() {
+        return tratamientoService.tratamientosPorTipoDrogas();
+    }
 }
