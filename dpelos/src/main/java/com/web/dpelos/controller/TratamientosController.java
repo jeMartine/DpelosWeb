@@ -59,6 +59,18 @@ public class TratamientosController {
         tratamientoService.deleteTratamiento(id);
     }
 
+    /*Metodo que permite actualizar un tratramiento */
+    @PutMapping("/update")
+    public ResponseEntity<?> updateTratamiento(@RequestBody Tratamiento tratamiento) {
+        try {
+            tratamientoService.updateTratamiento(tratamiento);
+            return ResponseEntity.ok("Tratamiento actualizado correctamente.");
+        } catch (Exception e) {
+            String errorMessage = "Error al actualizar el tratamiento";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
+        }
+    }
+
     @GetMapping("/activos")
     public List<Tratamiento> getActiveTratamientos() {
         return tratamientoService.getActiveTratamientos();
