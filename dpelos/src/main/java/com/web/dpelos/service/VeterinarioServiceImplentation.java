@@ -86,11 +86,11 @@ public class VeterinarioServiceImplentation implements VeterinarioService {
         return veterinarioRepository.count();
     }
 
-    // public long obtenerTotalVeterinariosActivos() {
-    // return veterinarioRepository.countByEstadoTrue();
-    // }
+    public long obtenerTotalVeterinariosActivos() {
+        return veterinarioRepository.countByEstadoVeterinarioTrue();
+    }
 
-    // public long obtenerTotalVeterinariosInactivos() {
-    // return veterinarioRepository.countByEstadoFalse();
-    // }
+    public long obtenerTotalVeterinariosInactivos() {
+        return veterinarioRepository.countByEstadoVeterinarioFalse();
+    }
 }

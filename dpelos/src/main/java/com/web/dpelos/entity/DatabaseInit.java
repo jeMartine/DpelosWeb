@@ -1,5 +1,6 @@
 package com.web.dpelos.entity;
 
+import java.util.Optional;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.concurrent.ThreadLocalRandom;
@@ -7,6 +8,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.ArrayList;
 import java.util.List;
 
+// import org.apache.el.stream.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -578,96 +580,93 @@ public class DatabaseInit implements ApplicationRunner {
 
                 // Entidades de veterinario
                 Veterinario[] veterinarios = new Veterinario[] {
-                                new Veterinario("Juan", "Pérez", "123456789", "password123",
-                                                "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                150),
                                 new Veterinario("María", "González", "987654321", "password456",
                                                 "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                200),
+                                                200, true),
                                 new Veterinario("Carlos", "Rodríguez", "456789123", "password789",
                                                 "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                120),
+                                                120, true),
                                 new Veterinario("Ana", "López", "321654987", "password101",
                                                 "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                180),
+                                                180, true),
                                 new Veterinario("Luis", "Martínez", "654321789", "password202",
                                                 "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                220),
+                                                220, true),
                                 new Veterinario("Marta", "Sánchez", "789123456", "password303",
                                                 "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                130),
+                                                130, true),
                                 new Veterinario("José", "Ramírez", "963852741", "password404",
                                                 "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                160),
+                                                160, true),
                                 new Veterinario("Laura", "Torres", "741258963", "password505",
                                                 "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                210),
+                                                210, true),
                                 new Veterinario("Javier", "Fernández", "258369147", "password606",
                                                 "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                140),
+                                                140, true),
                                 new Veterinario("Paula", "Gómez", "147258369", "password707",
                                                 "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                190),
+                                                190, true),
                                 new Veterinario("Raúl", "Jiménez", "369852147", "password808",
                                                 "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                170),
+                                                170, true),
                                 new Veterinario("Andrea", "Hernández", "258147369", "password909",
                                                 "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                230),
+                                                230, true),
                                 new Veterinario("Miguel", "Ruiz", "852963741", "password010",
                                                 "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                110),
+                                                110, true),
                                 new Veterinario("Clara", "Ortiz", "741369258", "password111",
                                                 "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                250),
+                                                250, true),
                                 new Veterinario("Roberto", "Moreno", "963741852", "password212",
                                                 "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                140),
+                                                140, true),
                                 new Veterinario("Elena", "Vargas", "258741369", "password313",
                                                 "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                180),
+                                                180, true),
                                 new Veterinario("Fernando", "Cruz", "852147963", "password414",
                                                 "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                130),
+                                                130, true),
                                 new Veterinario("Patricia", "Castro", "741852963", "password515",
                                                 "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                210),
+                                                210, true),
                                 new Veterinario("Santiago", "Molina", "369147852", "password616",
                                                 "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                160),
+                                                160, true),
                                 new Veterinario("Isabel", "Romero", "147369258", "password717",
                                                 "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                200),
+                                                200, true),
                                 new Veterinario("Pablo", "Díaz", "258963147", "password818",
                                                 "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                170),
+                                                170, true),
                                 new Veterinario("Lucía", "Silva", "741963258", "password919",
                                                 "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                150),
+                                                150, true),
                                 new Veterinario("Ricardo", "Méndez", "852741369", "password020",
                                                 "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                240),
+                                                240, true),
                                 new Veterinario("Sofía", "Herrera", "369258741", "password121",
                                                 "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                180),
+                                                180, true),
                                 new Veterinario("Gabriel", "Ríos", "147852369", "password222",
                                                 "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                200),
+                                                200, true),
                                 new Veterinario("Daniela", "Flores", "258741963", "password323",
                                                 "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                130),
+                                                130, true),
                                 new Veterinario("Tomás", "Navarro", "741258369", "password424",
                                                 "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                220),
+                                                220, true),
                                 new Veterinario("Lorena", "Vega", "963258741", "password525",
                                                 "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                150),
+                                                150, true),
                                 new Veterinario("Francisco", "Acosta", "852369147", "password626",
                                                 "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                190),
+                                                190, true),
                                 new Veterinario("Adriana", "Rojas", "369741258", "password727",
                                                 "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                140)
+                                                140, false)
                 };
 
                 // entidades de Medicamentos
@@ -893,12 +892,28 @@ public class DatabaseInit implements ApplicationRunner {
                                         activoRandom,
                                         "Indicaciones mencionadas al dueño" + (i + 1));
 
-                        int veterinarioRandom = ThreadLocalRandom.current().nextInt(1, 30 + 1);
+                        int veterinarioRandom = ThreadLocalRandom.current().nextInt(1, 28 + 1);
                         int mascotaRandom = ThreadLocalRandom.current().nextInt(1, 100 + 1);
 
                         // Asigna el veterinario y la mascota
-                        tratamiento.setVeterinario(veterinarioRepository.findById((long) veterinarioRandom).get());
-                        tratamiento.setMascota(mascotaRepository.findById((long) mascotaRandom).get());
+                        Optional<Veterinario> optionalVeterinario = veterinarioRepository
+                                        .findById((long) veterinarioRandom);
+                        if (optionalVeterinario.isPresent()) {
+                                tratamiento.setVeterinario(optionalVeterinario.get());
+                        } else {
+                                // Handle the case where the veterinarian is not found
+                                // For example, you can log an error or throw an exception
+                                throw new RuntimeException("Veterinario not found for id: " + veterinarioRandom);
+                        }
+
+                        Optional<Mascota> optionalMascota = mascotaRepository.findById((long) mascotaRandom);
+                        if (optionalMascota.isPresent()) {
+                                tratamiento.setMascota(optionalMascota.get());
+                        } else {
+                                // Handle the case where the pet is not found
+                                // For example, you can log an error or throw an exception
+                                throw new RuntimeException("Mascota not found for id: " + mascotaRandom);
+                        }
 
                         // Comprobar si la lista de drogas ya fue declarada
                         List<Droga> drogasList = new ArrayList<>(); // Si no fue declarada antes
@@ -906,15 +921,18 @@ public class DatabaseInit implements ApplicationRunner {
                                                                                    // aleatorias
                         for (int j = 0; j < numDrogas; j++) {
                                 int drogaRandom = ThreadLocalRandom.current().nextInt(1, 50 + 1);
-                                Droga droga = drogaRepository.findById((long) drogaRandom).get(); // Asegúrate de que el
-                                                                                                  // ID sea válido
-                                drogasList.add(droga); // Añadir cada droga a la lista
+                                Optional<Droga> optionalDroga = drogaRepository.findById((long) drogaRandom);
+                                if (optionalDroga.isPresent()) {
+                                        drogasList.add(optionalDroga.get());
+                                } else {
+                                        // Handle the case where the drug is not found
+                                        // For example, you can log an error or throw an exception
+                                        throw new RuntimeException("Droga not found for id: " + drogaRandom);
+                                }
                         }
 
                         // Asignar la lista de drogas al tratamiento
                         tratamiento.setDrogas(drogasList);
-
-                        // Añadir el tratamiento a la lista
                         tratamientos.add(tratamiento);
                 }
 

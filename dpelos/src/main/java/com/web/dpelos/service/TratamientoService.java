@@ -5,8 +5,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.web.dpelos.dto.DrogaTratamientoCountDTO;
 import com.web.dpelos.entity.Droga;
 import com.web.dpelos.entity.Tratamiento;
+// import com.web.dpelos.entity.TratamientoDrogasCountDTO;
 import com.web.dpelos.repository.TratamientoRepository;
 
 import java.util.List;
@@ -34,4 +36,7 @@ public interface TratamientoService {
 
     public void updateMedicamentosDelTratamiento(Long idTratamiento, List<Droga> medicamentos);
 
+    public List<String> tratamientosMasUnidadesVendidas();
+
+    List<DrogaTratamientoCountDTO> tratamientosPorTipoDrogas();
 }

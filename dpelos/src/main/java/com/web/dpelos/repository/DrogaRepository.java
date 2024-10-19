@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import com.web.dpelos.dto.DrogaTratamientoCountDTO;
 import com.web.dpelos.entity.Droga;
 import com.web.dpelos.entity.Mascota;
 
@@ -23,4 +24,9 @@ public interface DrogaRepository extends JpaRepository<Droga, Long> {
 
     @Query("SELECT SUM(d.unitVendidas * d.precioCompra) FROM Droga d")
     Double findTotalCost();
+
+    // @Query("SELECT new com.web.dpelos.dto.DrogaTratamientoCountDTO(d.idDroga,
+    // d.nombreDroga, COUNT(t)) " +
+    // "FROM Droga d JOIN d.tratamientos t GROUP BY d.idDroga, d.nombreDroga")
+    // List<DrogaTratamientoCountDTO> findDrogaTratamientoCounts();
 }

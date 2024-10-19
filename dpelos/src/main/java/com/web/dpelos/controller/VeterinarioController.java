@@ -1,5 +1,6 @@
 package com.web.dpelos.controller;
 
+import java.lang.annotation.Repeatable;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import com.web.dpelos.entity.Mascota;
 import com.web.dpelos.entity.Veterinario;
 import com.web.dpelos.service.VeterinarioService;
 
+import io.micrometer.core.ipc.http.HttpSender.Response;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,33 +33,34 @@ public class VeterinarioController {
     @Autowired
     VeterinarioService veterinarioService;
 
-    //Retornar todos los veterinarios
+    // Retornar todos los veterinarios
     @GetMapping
-    public List<Veterinario> findAll(){
+    public List<Veterinario> findAll() {
         return veterinarioService.findAll();
     }
 
-    //Retornar un veterinario por su id
+    // Retornar un veterinario por su id
     @GetMapping("/{id}")
-    public Veterinario findVetById(@PathVariable Long id){
+    public Veterinario findVetById(@PathVariable Long id) {
         return veterinarioService.buscarVetPorId(id);
     }
 
-    //Crear un veterinario
+    // Crear un veterinario
     @PostMapping
-    public void crearVet(@RequestBody Veterinario vet){
-        System.out.println("Password: " + vet.getPasswordVeterinario());  // Verificar si llega la contraseña
+    public void crearVet(@RequestBody Veterinario vet) {
+        System.out.println("Password: " + vet.getPasswordVeterinario()); // Verificar si llega la contraseña
         veterinarioService.addVet(vet);
     }
 
-    //Eliminar un veterinario por su id
+    // Eliminar un veterinario por su id
     @DeleteMapping("/delete/{id}")
-    public void deleteVet(@PathVariable Long id){
+    public void deleteVet(@PathVariable Long id) {
         veterinarioService.deleteVet(id);
     }
-    //Actualizar un veterinario
+
+    // Actualizar un veterinario
     @PutMapping("/update")
-    public void updateVet(@RequestBody Veterinario vet){
+    public void updateVet(@RequestBody Veterinario vet) {
         veterinarioService.updateVet(vet);
     }
 
@@ -84,5 +87,17 @@ public class VeterinarioController {
     public ResponseEntity<Long> obtenerTotalVeterinarios() {
         long totalVeterinarios = veterinarioService.obtenerTotalVeterinarios();
         return new ResponseEntity<>(totalVeterinarios, HttpStatus.OK);
+    }
+
+    @GetMapping("/totalActivos")
+    public ResponseEntity<Long> obtenerTotalVeterinariosActivos() {
+        long totalVeterinariosActivos = veterinarioService.obtenerTotalVeterinariosActivos();
+        return new ResponseEntity<>(totalVeterinariosActivos, HttpStatus.OK);
+    }
+
+    @GetMapping("/totalInactivos")
+    public ResponseEntity<Long> obtenerTotalVeterinariosInactivos() {
+        long totalVeterinariosInactivos = veterinarioService.obtenerTotalVeterinariosInactivos();
+        return new ResponseEntity<>(totalVeterinariosInactivos, HttpStatus.OK);
     }
 }
