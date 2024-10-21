@@ -17,6 +17,9 @@ import com.web.dpelos.entity.Tratamiento;
 @Repository
 public interface TratamientoRepository extends JpaRepository<Tratamiento, Long> {
 
+    @Query("SELECT t FROM Tratamiento t WHERE t.mascota.id = ?1")
+    List<Tratamiento> findByMascotaId(Long idMascota);
+
     @Query("SELECT t FROM Tratamiento t WHERE t.estado = true")
     List<Tratamiento> findActiveTratamientos();
 
