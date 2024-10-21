@@ -39,4 +39,6 @@ public interface TratamientoService {
     public List<String> tratamientosMasUnidadesVendidas();
 
     List<DrogaTratamientoCountDTO> tratamientosPorTipoDrogas();
+
+    List<Tratamiento> findTratamientosByMascotaId(Long idMascota);
 }

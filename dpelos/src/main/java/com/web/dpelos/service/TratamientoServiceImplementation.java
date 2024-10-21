@@ -105,4 +105,9 @@ public class TratamientoServiceImplementation implements TratamientoService {
     public List<DrogaTratamientoCountDTO> tratamientosPorTipoDrogas() {
         return tratamientoRepository.findDrogaTratamientoCounts();
     }
+
+    @Override
+    public List<Tratamiento> findTratamientosByMascotaId(Long idMascota) {
+        return tratamientoRepository.findByMascotaId(idMascota);
+    }
 }

@@ -95,6 +95,15 @@ public class TratamientosController {
         return new ResponseEntity<>(medicamentos, HttpStatus.OK);
     }
 
+    @GetMapping("/mascota/{idMascota}")
+    public ResponseEntity<List<Tratamiento>> findTratamientosByMascotaId(@PathVariable Long idMascota) {
+        List<Tratamiento> tratamientos = tratamientoService.findTratamientosByMascotaId(idMascota);
+        if (tratamientos.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(tratamientos, HttpStatus.OK);
+    }
+
     // Actualizar medicamentos del tratamiento
     @PutMapping("/{idTratamiento}/medicamentos")
     public ResponseEntity<Void> updateMedicamentosDelTratamiento(
