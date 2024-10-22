@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.web.dpelos.dto.DrogaTratamientoCountDTO;
 import com.web.dpelos.entity.Droga;
-import com.web.dpelos.entity.Mascota;
 import com.web.dpelos.entity.Tratamiento;
 // import com.web.dpelos.entity.TratamientoDrogasCountDTO;
 import com.web.dpelos.service.TratamientoService;
@@ -57,6 +56,22 @@ public class TratamientosController {
         tratamientoService.addTratamiento(tratamiento);
     }
 
+    @PostMapping("/add/{idMascota}")
+    public ResponseEntity<String> addTratamientoToMascota(
+            @PathVariable("idMascota") Long idMascota,
+            @RequestBody Tratamiento tratamiento) {
+        
+        boolean isCreated = tratamientoService.addTratamientoToMascota(idMascota, tratamiento);
+        
+        if (isCreated) {
+            // Si el tratamiento fue creado con éxito
+            return ResponseEntity.ok("Tratamiento creado exitosamente.");
+        } else {
+            // Si hubo algún error al crear el tratamiento
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al crear el tratamiento.");
+        }
+    }
+
     /* Metodo modificado para borrar una mascota usando su id */
     @DeleteMapping("/delete/{id}")
     public void deleteTratamiento(@PathVariable Long id) {
@@ -65,13 +80,13 @@ public class TratamientosController {
 
     /*Metodo que permite actualizar un tratramiento */
     @PutMapping("/update")
-    public ResponseEntity<?> updateTratamiento(@RequestBody Tratamiento tratamiento) {
+    public ResponseEntity<String> updateTratamiento(@RequestBody Tratamiento tratamiento) {
         try {
             tratamientoService.updateTratamiento(tratamiento);
             return ResponseEntity.ok("Tratamiento actualizado correctamente.");
         } catch (Exception e) {
-            String errorMessage = "Error al actualizar el tratamiento";
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
+           String errorMessage = "Error al actualizar el tratamiento";
+           return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
         }
     }
 

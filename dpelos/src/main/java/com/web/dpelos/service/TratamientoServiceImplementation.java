@@ -1,11 +1,11 @@
 package com.web.dpelos.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -16,9 +16,9 @@ import com.web.dpelos.entity.Mascota;
 import com.web.dpelos.entity.Tratamiento;
 import com.web.dpelos.exception.NotFoundException;
 import com.web.dpelos.repository.DrogaRepository;
+import com.web.dpelos.repository.MascotaRepository;
 import com.web.dpelos.repository.TratamientoRepository;
 
-import io.micrometer.observation.annotation.Observed;
 
 @EnableAutoConfiguration
 @Service
@@ -27,6 +27,9 @@ public class TratamientoServiceImplementation implements TratamientoService {
     TratamientoRepository tratamientoRepository;
     @Autowired
     DrogaRepository drogaRepository;
+
+    @Autowired
+    MascotaRepository mascotaRepository;
 
     @Override
     public List<Tratamiento> obtenerTratamientos() {
@@ -109,5 +112,18 @@ public class TratamientoServiceImplementation implements TratamientoService {
     @Override
     public List<Tratamiento> findTratamientosByMascotaId(Long idMascota) {
         return tratamientoRepository.findByMascotaId(idMascota);
+    }
+
+    public boolean addTratamientoToMascota(Long idMascota, Tratamiento tratamiento) {
+        Optional<Mascota> mascotaOptional = mascotaRepository.findById(idMascota);
+
+        if (mascotaOptional.isPresent()) {
+            Mascota mascota = mascotaOptional.get();
+            tratamiento.setMascota(mascota); // Asociar el tratamiento con la mascota
+            tratamientoRepository.save(tratamiento);
+            return true; 
+        } else {
+            return false;
+        }
     }
 }
