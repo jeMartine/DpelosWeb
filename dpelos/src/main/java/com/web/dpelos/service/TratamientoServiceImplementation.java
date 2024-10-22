@@ -126,4 +126,9 @@ public class TratamientoServiceImplementation implements TratamientoService {
             return false;
         }
     }
+
+    @Override
+    public List<Tratamiento> getTratamientosByVeterinario(Long idVeterinario) {
+        return tratamientoRepository.findTratamientosByVeterinario(idVeterinario);
+    }
 }

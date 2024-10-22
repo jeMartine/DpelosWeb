@@ -38,4 +38,6 @@ public interface TratamientoService {
     List<Tratamiento> findTratamientosByMascotaId(Long idMascota);
 
     public boolean addTratamientoToMascota(Long idMascota, Tratamiento tratamiento);
+
+    public List<Tratamiento> getTratamientosByVeterinario(Long idVeterinario);
 }

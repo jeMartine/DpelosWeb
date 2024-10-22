@@ -137,4 +137,13 @@ public class TratamientosController {
     public List<DrogaTratamientoCountDTO> getTratamientosPorTipoDrogas() {
         return tratamientoService.tratamientosPorTipoDrogas();
     }
+
+    @GetMapping("/veterinario/{idVeterinario}")
+    public ResponseEntity<List<Tratamiento>> getTratamientosByVeterinario(@PathVariable Long idVeterinario) {
+        List<Tratamiento> tratamientos = tratamientoService.getTratamientosByVeterinario(idVeterinario);
+        if (tratamientos.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(tratamientos);
+    }
 }

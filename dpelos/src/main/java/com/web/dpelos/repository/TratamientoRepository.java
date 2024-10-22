@@ -43,4 +43,7 @@ public interface TratamientoRepository extends JpaRepository<Tratamiento, Long> 
     @Query("SELECT new com.web.dpelos.dto.DrogaTratamientoCountDTO(d.idDroga, d.nombreDroga, COUNT(t)) " +
             "FROM Tratamiento t JOIN t.drogas d GROUP BY d.idDroga, d.nombreDroga")
     List<DrogaTratamientoCountDTO> findDrogaTratamientoCounts();
+
+    @Query("SELECT t FROM Tratamiento t WHERE t.veterinario.idVeterinario = :idVeterinario")
+    List<Tratamiento> findTratamientosByVeterinario(@Param("idVeterinario") Long idVeterinario);
 }
