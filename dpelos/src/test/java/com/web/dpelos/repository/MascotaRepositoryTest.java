@@ -19,6 +19,7 @@ import com.web.dpelos.entity.Enfermedad;
 import com.web.dpelos.entity.Mascota;
 import com.web.dpelos.entity.Raza;
 
+//Clase para los Test relacionados al repositorio de Mascotas. MascotaRepository.java
 @DataJpaTest
 @RunWith(SpringRunner.class)
 @ActiveProfiles("test")
