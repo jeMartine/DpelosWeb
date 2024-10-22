@@ -938,6 +938,58 @@ public class DatabaseInit implements ApplicationRunner {
                         tratamientos.add(tratamiento);
                 }
 
+                // TRATAMINTTO MASCOTA 34 -PRUEBA
+                Optional<Mascota> mascotaConId34 = mascotaRepository.findById(34L);
+                if (mascotaConId34.isPresent()) {
+                        Mascota mascota34 = mascotaConId34.get();
+
+                        // Tratamiento 1 (finalizado - activo = false)
+                        Tratamiento tratamiento1 = new Tratamiento(
+                                        Date.valueOf(LocalDate.now().minusDays(20)), // Fecha aleatoria de inicio
+                                        "Tratamiento especial 1",
+                                        false, // Finalizado
+                                        "Indicaciones para el tratamiento especial 1");
+                        tratamiento1.setMascota(mascota34);
+
+                        // Asignar un veterinario aleatorio al tratamiento 1
+                        Optional<Veterinario> veterinarioRandom1 = veterinarioRepository
+                                        .findById((long) ThreadLocalRandom.current().nextInt(1, 28 + 1));
+                        veterinarioRandom1.ifPresent(tratamiento1::setVeterinario);
+
+                        // Tratamiento 2 (finalizado - activo = false)
+                        Tratamiento tratamiento2 = new Tratamiento(
+                                        Date.valueOf(LocalDate.now().minusDays(15)), // Fecha aleatoria de inicio
+                                        "Tratamiento especial 2",
+                                        false, // Finalizado
+                                        "Indicaciones para el tratamiento especial 2");
+                        tratamiento2.setMascota(mascota34);
+
+                        // Asignar un veterinario aleatorio al tratamiento 2
+                        Optional<Veterinario> veterinarioRandom2 = veterinarioRepository
+                                        .findById((long) ThreadLocalRandom.current().nextInt(1, 28 + 1));
+                        veterinarioRandom2.ifPresent(tratamiento2::setVeterinario);
+
+                        // Tratamiento 3 (activo - activo = true)
+                        Tratamiento tratamiento3 = new Tratamiento(
+                                        Date.valueOf(LocalDate.now().minusDays(5)), // Fecha aleatoria de inicio
+                                        "Tratamiento activo especial",
+                                        true, // Activo
+                                        "Indicaciones para el tratamiento activo especial");
+                        tratamiento3.setMascota(mascota34);
+
+                        // Asignar un veterinario aleatorio al tratamiento 3
+                        Optional<Veterinario> veterinarioRandom3 = veterinarioRepository
+                                        .findById((long) ThreadLocalRandom.current().nextInt(1, 28 + 1));
+                        veterinarioRandom3.ifPresent(tratamiento3::setVeterinario);
+
+                        // Añadir los tratamientos a la lista
+                        tratamientos.add(tratamiento1);
+                        tratamientos.add(tratamiento2);
+                        tratamientos.add(tratamiento3);
+
+                } else {
+                        throw new RuntimeException("Mascota not found with id 34");
+                }
                 // Guardar cada tratamiento en la base de datos
                 for (Tratamiento tratamiento : tratamientos) {
                         tratamientoRepository.save(tratamiento);

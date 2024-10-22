@@ -17,6 +17,9 @@ import com.web.dpelos.entity.Tratamiento;
 @Repository
 public interface TratamientoRepository extends JpaRepository<Tratamiento, Long> {
 
+    @Query("SELECT t FROM Tratamiento t WHERE t.mascota.id = ?1")
+    List<Tratamiento> findByMascotaId(Long idMascota);
+
     @Query("SELECT t FROM Tratamiento t WHERE t.estado = true")
     List<Tratamiento> findActiveTratamientos();
 
@@ -40,4 +43,7 @@ public interface TratamientoRepository extends JpaRepository<Tratamiento, Long> 
     @Query("SELECT new com.web.dpelos.dto.DrogaTratamientoCountDTO(d.idDroga, d.nombreDroga, COUNT(t)) " +
             "FROM Tratamiento t JOIN t.drogas d GROUP BY d.idDroga, d.nombreDroga")
     List<DrogaTratamientoCountDTO> findDrogaTratamientoCounts();
+
+    @Query("SELECT t FROM Tratamiento t WHERE t.veterinario.idVeterinario = :idVeterinario")
+    List<Tratamiento> findTratamientosByVeterinario(@Param("idVeterinario") Long idVeterinario);
 }

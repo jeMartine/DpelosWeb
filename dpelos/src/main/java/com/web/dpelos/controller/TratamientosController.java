@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.web.dpelos.dto.DrogaTratamientoCountDTO;
 import com.web.dpelos.entity.Droga;
-import com.web.dpelos.entity.Mascota;
 import com.web.dpelos.entity.Tratamiento;
 // import com.web.dpelos.entity.TratamientoDrogasCountDTO;
 import com.web.dpelos.service.TratamientoService;
@@ -57,10 +56,38 @@ public class TratamientosController {
         tratamientoService.addTratamiento(tratamiento);
     }
 
+    @PostMapping("/add/{idMascota}")
+    public ResponseEntity<String> addTratamientoToMascota(
+            @PathVariable("idMascota") Long idMascota,
+            @RequestBody Tratamiento tratamiento) {
+        
+        boolean isCreated = tratamientoService.addTratamientoToMascota(idMascota, tratamiento);
+        
+        if (isCreated) {
+            // Si el tratamiento fue creado con éxito
+            return ResponseEntity.ok("Tratamiento creado exitosamente.");
+        } else {
+            // Si hubo algún error al crear el tratamiento
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al crear el tratamiento.");
+        }
+    }
+
     /* Metodo modificado para borrar una mascota usando su id */
     @DeleteMapping("/delete/{id}")
     public void deleteTratamiento(@PathVariable Long id) {
         tratamientoService.deleteTratamiento(id);
+    }
+
+    /*Metodo que permite actualizar un tratramiento */
+    @PutMapping("/update")
+    public ResponseEntity<String> updateTratamiento(@RequestBody Tratamiento tratamiento) {
+        try {
+            tratamientoService.updateTratamiento(tratamiento);
+            return ResponseEntity.ok("Tratamiento actualizado correctamente.");
+        } catch (Exception e) {
+           String errorMessage = "Error al actualizar el tratamiento";
+           return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
+        }
     }
 
     @GetMapping("/activos")
@@ -83,6 +110,15 @@ public class TratamientosController {
         return new ResponseEntity<>(medicamentos, HttpStatus.OK);
     }
 
+    @GetMapping("/mascota/{idMascota}")
+    public ResponseEntity<List<Tratamiento>> findTratamientosByMascotaId(@PathVariable Long idMascota) {
+        List<Tratamiento> tratamientos = tratamientoService.findTratamientosByMascotaId(idMascota);
+        if (tratamientos.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(tratamientos, HttpStatus.OK);
+    }
+
     // Actualizar medicamentos del tratamiento
     @PutMapping("/{idTratamiento}/medicamentos")
     public ResponseEntity<Void> updateMedicamentosDelTratamiento(
@@ -100,5 +136,14 @@ public class TratamientosController {
     @GetMapping("/tratamientos-por-tipo-drogas")
     public List<DrogaTratamientoCountDTO> getTratamientosPorTipoDrogas() {
         return tratamientoService.tratamientosPorTipoDrogas();
+    }
+
+    @GetMapping("/veterinario/{idVeterinario}")
+    public ResponseEntity<List<Tratamiento>> getTratamientosByVeterinario(@PathVariable Long idVeterinario) {
+        List<Tratamiento> tratamientos = tratamientoService.getTratamientosByVeterinario(idVeterinario);
+        if (tratamientos.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(tratamientos);
     }
 }
