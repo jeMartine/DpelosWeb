@@ -19,7 +19,6 @@ import com.web.dpelos.entity.Dueno;
 import com.web.dpelos.service.DuenoService;
 import com.web.dpelos.service.VeterinarioService;
 
-
 import jakarta.servlet.http.HttpSession;
 
 /*Controlador de las peticiones relacionadas con la entidad Dueno */
@@ -27,7 +26,7 @@ import jakarta.servlet.http.HttpSession;
 @RequestMapping("/dueno")
 @CrossOrigin(origins = "http://localhost:4200") // Esta anotacion indica que se permite el acceso a esta URL desde un
                                                 // origen diferente (Angular)
-public class DuenoControler {
+public class DuenoController {
     @Autowired
     DuenoService duenoService;
 
@@ -51,7 +50,7 @@ public class DuenoControler {
         if (dueno == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<Dueno>(dueno, HttpStatus.OK); 
+        return new ResponseEntity<Dueno>(dueno, HttpStatus.OK);
     }
 
     /* Método que agrega un dueño a la base de datos */
@@ -59,7 +58,7 @@ public class DuenoControler {
     public ResponseEntity<Dueno> addDueno(@RequestBody Dueno dueno) {
         Dueno nuevoDueno = duenoService.addDueno(dueno);
         if (nuevoDueno == null) {
-            return new ResponseEntity<>( HttpStatus.BAD_REQUEST); 
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<Dueno>(nuevoDueno, HttpStatus.CREATED);
     }
@@ -68,8 +67,8 @@ public class DuenoControler {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteDueno(@PathVariable Long id) {
         duenoService.deleteDueno(id);
-        
-        return new ResponseEntity<>("Dueño eliminado exitosamente", HttpStatus.NO_CONTENT); 
+
+        return new ResponseEntity<>("Dueño eliminado exitosamente", HttpStatus.NO_CONTENT);
     }
 
     /* Método para actualizar la información del dueño */
@@ -79,7 +78,7 @@ public class DuenoControler {
         if (duenoActualizado == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<Dueno>(duenoActualizado, HttpStatus.OK); 
+        return new ResponseEntity<Dueno>(duenoActualizado, HttpStatus.OK);
     }
 
     /* Método que busca al dueño según su cédula */
@@ -87,9 +86,9 @@ public class DuenoControler {
     public ResponseEntity<Dueno> buscarDueno(@PathVariable("cedula") String cedula, HttpSession session) {
         Dueno dueno = duenoService.buscarDuenoPorCedula(cedula);
         if (dueno == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND); 
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<Dueno>(dueno, HttpStatus.OK); 
+        return new ResponseEntity<Dueno>(dueno, HttpStatus.OK);
     }
 
 }
