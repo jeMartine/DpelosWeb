@@ -1,9 +1,11 @@
 package com.web.dpelos.service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+// import org.hibernate.engine.internal.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.data.domain.PageRequest;
@@ -18,7 +20,6 @@ import com.web.dpelos.exception.NotFoundException;
 import com.web.dpelos.repository.DrogaRepository;
 import com.web.dpelos.repository.MascotaRepository;
 import com.web.dpelos.repository.TratamientoRepository;
-
 
 @EnableAutoConfiguration
 @Service
@@ -77,7 +78,12 @@ public class TratamientoServiceImplementation implements TratamientoService {
 
     @Override
     public List<Droga> getMedicamentosPorTratamiento(Long idTratamiento) {
-        return tratamientoRepository.findMedicamentosByIdTratamiento(idTratamiento);
+        Optional<Tratamiento> tratamientoOpt = tratamientoRepository.findById(idTratamiento);
+        if (tratamientoOpt.isPresent()) {
+            Tratamiento tratamiento = tratamientoOpt.get();
+            return tratamiento.getDroga(); // Ensure this returns the list of Droga
+        }
+        return Collections.emptyList();
     }
 
     @Override
@@ -121,7 +127,7 @@ public class TratamientoServiceImplementation implements TratamientoService {
             Mascota mascota = mascotaOptional.get();
             tratamiento.setMascota(mascota); // Asociar el tratamiento con la mascota
             tratamientoRepository.save(tratamiento);
-            return true; 
+            return true;
         } else {
             return false;
         }

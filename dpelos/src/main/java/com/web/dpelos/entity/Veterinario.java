@@ -51,4 +51,84 @@ public class Veterinario {
         this.numeroAtenciones = numeroAtenciones;
         this.estadoVeterinario = estadoVeterinario;
     }
+
+    public Long getIdVeterinario() {
+        return idVeterinario;
+    }
+
+    public void setIdVeterinario(Long idVeterinario) {
+        this.idVeterinario = idVeterinario;
+    }
+
+    public String getNombreVeterinario() {
+        return nombreVeterinario;
+    }
+
+    public void setNombreVeterinario(String nombreVeterinario) {
+        this.nombreVeterinario = nombreVeterinario;
+    }
+
+    public String getApellidoVeterinario() {
+        return apellidoVeterinario;
+    }
+
+    public void setApellidoVeterinario(String apellidoVeterinario) {
+        this.apellidoVeterinario = apellidoVeterinario;
+    }
+
+    public String getCedulaVeterinario() {
+        return cedulaVeterinario;
+    }
+
+    public void setCedulaVeterinario(String cedulaVeterinario) {
+        this.cedulaVeterinario = cedulaVeterinario;
+    }
+
+    public boolean isEstadoVeterinario() {
+        return estadoVeterinario;
+    }
+
+    public void setEstadoVeterinario(boolean estadoVeterinario) {
+        this.estadoVeterinario = estadoVeterinario;
+    }
+
+    public String getPasswordVeterinario() {
+        return passwordVeterinario;
+    }
+
+    public void setPasswordVeterinario(String passwordVeterinario) {
+        this.passwordVeterinario = passwordVeterinario;
+    }
+
+    public String getFotoUrl() {
+        return fotoUrl;
+    }
+
+    public void setFotoUrl(String fotoUrl) {
+        this.fotoUrl = fotoUrl;
+    }
+
+    public int getNumeroAtenciones() {
+        return numeroAtenciones;
+    }
+
+    public void setNumeroAtenciones(int numeroAtenciones) {
+        this.numeroAtenciones = numeroAtenciones;
+    }
+
+    public Especialidad getEspecialidad() {
+        return especialidad;
+    }
+
+    public void setEspecialidad(Especialidad especialidad) {
+        this.especialidad = especialidad;
+    }
+
+    public List<Tratamiento> getTratamientos() {
+        return tratamientos;
+    }
+
+    public void setTratamientos(List<Tratamiento> tratamientos) {
+        this.tratamientos = tratamientos;
+    }
 }
