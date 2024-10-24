@@ -1,6 +1,4 @@
 package com.web.dpelos.controller;
-
-import java.lang.annotation.Repeatable;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.web.dpelos.entity.Mascota;
 import com.web.dpelos.entity.Veterinario;
 import com.web.dpelos.service.VeterinarioService;
-
-import io.micrometer.core.ipc.http.HttpSender.Response;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -35,42 +30,63 @@ public class VeterinarioController {
 
     // Retornar todos los veterinarios
     @GetMapping
-    public List<Veterinario> findAll() {
-        return veterinarioService.findAll();
+    public ResponseEntity< List<Veterinario>> findAll() {
+        List <Veterinario> lista = veterinarioService.findAll();
+        
+        //Si la lista es vacia envio el codigo no encontrado con la lisata
+        if(lista.isEmpty()){
+            return new ResponseEntity<List<Veterinario>>(lista, HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<Veterinario>>(lista, HttpStatus.OK);
     }
 
     // Retornar un veterinario por su id
     @GetMapping("/{id}")
-    public Veterinario findVetById(@PathVariable Long id) {
-        return veterinarioService.buscarVetPorId(id);
+    public ResponseEntity<Veterinario> findVetById(@PathVariable Long id) {
+        Veterinario vet = veterinarioService.buscarVetPorId(id);
+        if(vet ==null){
+            return new ResponseEntity<Veterinario>(vet, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<Veterinario>(vet, HttpStatus.OK);
     }
 
     // Crear un veterinario
     @PostMapping
-    public void crearVet(@RequestBody Veterinario vet) {
-        System.out.println("Password: " + vet.getPasswordVeterinario()); // Verificar si llega la contraseña
-        veterinarioService.addVet(vet);
+    public ResponseEntity<Veterinario> crearVet(@RequestBody Veterinario vet) {
+        Veterinario nuevoVet = veterinarioService.addVet(vet);
+        if(nuevoVet == null){
+            return new ResponseEntity<Veterinario>(nuevoVet, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<Veterinario>(nuevoVet, HttpStatus.CREATED);
+
     }
 
     // Eliminar un veterinario por su id
     @DeleteMapping("/delete/{id}")
-    public void deleteVet(@PathVariable Long id) {
+    public ResponseEntity<String> deleteVet(@PathVariable Long id) {
         veterinarioService.deleteVet(id);
+        return new ResponseEntity<>("Veterinario Eliminado", HttpStatus.NOT_FOUND);
     }
 
     // Actualizar un veterinario
     @PutMapping("/update")
-    public void updateVet(@RequestBody Veterinario vet) {
-        veterinarioService.updateVet(vet);
+    public ResponseEntity<Veterinario> updateVet(@RequestBody Veterinario vet) {
+        Veterinario vetFind = veterinarioService.updateVet(vet);
+        return new ResponseEntity<>(vetFind, HttpStatus.OK);
     }
 
     /* Metodo para buscar veterianrio por su nombre */
     @GetMapping("/buscar")
-    public Page<Veterinario> buscarVeterinario(
+    public ResponseEntity< Page<Veterinario>> buscarVeterinario(
             @RequestParam String nombre,
             @RequestParam int page,
             @RequestParam int size) {
-        return veterinarioService.buscarVeterinarioPorNombre(nombre, page, size);
+        
+        Page <Veterinario> vets = veterinarioService.buscarVeterinarioPorNombre(nombre, page, size);
+        if(vets.isEmpty()){
+            return new ResponseEntity<Page<Veterinario>>(vets, HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<Page<Veterinario>>(vets, HttpStatus.OK);
     }
 
     /* Metodo para obtener todos los veterinarios por paginación */
@@ -80,24 +96,36 @@ public class VeterinarioController {
             @RequestParam(defaultValue = "30") int size) {
 
         Page<Veterinario> veterinarioPaginadas = veterinarioService.getVeterinarioPaginadas(page, size);
-        return new ResponseEntity<>(veterinarioPaginadas, HttpStatus.OK);
+        if(veterinarioPaginadas.isEmpty()){
+            return new ResponseEntity<Page<Veterinario>>(veterinarioPaginadas, HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<Page<Veterinario>>(veterinarioPaginadas, HttpStatus.OK);
     }
 
     @GetMapping("/total")
     public ResponseEntity<Long> obtenerTotalVeterinarios() {
         long totalVeterinarios = veterinarioService.obtenerTotalVeterinarios();
-        return new ResponseEntity<>(totalVeterinarios, HttpStatus.OK);
+        if(totalVeterinarios<=0){
+            return new ResponseEntity<Long>(totalVeterinarios, HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<Long>(totalVeterinarios, HttpStatus.OK);
     }
 
     @GetMapping("/totalActivos")
     public ResponseEntity<Long> obtenerTotalVeterinariosActivos() {
         long totalVeterinariosActivos = veterinarioService.obtenerTotalVeterinariosActivos();
-        return new ResponseEntity<>(totalVeterinariosActivos, HttpStatus.OK);
+        if(totalVeterinariosActivos<=0){
+            return new ResponseEntity<Long>(totalVeterinariosActivos, HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<Long>(totalVeterinariosActivos, HttpStatus.OK);
     }
 
     @GetMapping("/totalInactivos")
     public ResponseEntity<Long> obtenerTotalVeterinariosInactivos() {
         long totalVeterinariosInactivos = veterinarioService.obtenerTotalVeterinariosInactivos();
-        return new ResponseEntity<>(totalVeterinariosInactivos, HttpStatus.OK);
+        if(totalVeterinariosInactivos<=0){
+            return new ResponseEntity<Long>(totalVeterinariosInactivos, HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<Long>(totalVeterinariosInactivos, HttpStatus.OK);
     }
 }

@@ -3,6 +3,8 @@ package com.web.dpelos.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,36 +29,59 @@ public class RazaController {
 
     @Autowired
     private RazaService razaService;
-
-    /* Metodo para agregar razas a la base de datos. */
-
     
+    /* Método para obtener todas las razas */
     @GetMapping()
-    public List<Raza> obtenerRazas() {
-        return razaService.obtenerRazas();
+    public ResponseEntity<List<Raza>> obtenerRazas() {
+        List<Raza> razas = razaService.obtenerRazas();
+        if (razas.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<Raza>>(razas, HttpStatus.OK);
     }
 
+    /* Método para obtener una raza por ID */
     @GetMapping("/{id}")
-    public Raza getRazaById(@PathVariable Long id){
-        return razaService.buscarRazaPorId(id);
+    public ResponseEntity<Raza> getRazaById(@PathVariable Long id) {
+        Raza raza = razaService.buscarRazaPorId(id);
+        if (raza == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<Raza>(raza, HttpStatus.OK);
     }
 
+    /* Método para agregar una raza a la base de datos */
     @PostMapping()
-    public void addRaza(@RequestBody Raza raza) {
-        System.out.println("Raza recibida" + raza.getRazaMascota());
-        razaService.addRaza(raza);
-    }
+    public ResponseEntity<Raza> addRaza(@RequestBody Raza raza) {
 
+        Raza nuevaRaza = razaService.addRaza(raza);
+        if(nuevaRaza==null){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<Raza>(nuevaRaza, HttpStatus.CREATED);
+    }
+    
+    /* Método para eliminar una raza por ID */
     @DeleteMapping("/delete/{id}")
-    public void deleteRaza(@PathVariable Long id){
+    public ResponseEntity<String> deleteRaza(@PathVariable Long id) {
+        //boolean isDeleted = razaService.deleteRaza(id);
         razaService.deleteRaza(id);
+        return new ResponseEntity<>("Raza eliminada.", HttpStatus.OK);
+
+        // if (!isDeleted) {
+        //     return new ResponseEntity<>("Raza no encontrada.", HttpStatus.NOT_FOUND);
+        // }
     }
 
+    /* Método para actualizar una raza */
     @PutMapping("/update")
-    public void updateRaza(@RequestBody Raza raza){
-        razaService.updateRaza(raza);
+    public ResponseEntity<Raza> updateRaza(@RequestBody Raza raza) {
+    Raza nuevRaza = razaService.updateRaza(raza);
+    if (nuevRaza==null) {
+        return new ResponseEntity<>( HttpStatus.NOT_FOUND);
     }
-
+    return new ResponseEntity<Raza>(HttpStatus.OK);
+    }
 
 
 }
