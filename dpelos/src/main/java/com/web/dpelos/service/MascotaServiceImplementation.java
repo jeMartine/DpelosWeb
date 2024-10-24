@@ -31,9 +31,6 @@ public class MascotaServiceImplementation implements MascotaService {
     @Autowired
     private DuenoRepository duenoRepository;
 
-    @Autowired
-    private TratamientoRepository tratamientoRepository;
-
     @Override
     public Mascota buscarMascotaPorId(Long id) {
         return mascotaRepository.findById(id)
@@ -55,8 +52,8 @@ public class MascotaServiceImplementation implements MascotaService {
     }
 
     @Override
-    public void addMascota(Mascota mascota) {
-        mascotaRepository.save(mascota);
+    public Mascota addMascota(Mascota mascota) {
+        return mascotaRepository.save(mascota);
     }
 
     @Override
@@ -65,8 +62,8 @@ public class MascotaServiceImplementation implements MascotaService {
     }
 
     @Override
-    public void updateMascota(Mascota mascota) {
-        mascotaRepository.save(mascota);
+    public Mascota updateMascota(Mascota mascota) {
+        return mascotaRepository.save(mascota);
     }
 
     public Page<Mascota> buscarMascotasPorNombre(String nombreMascota, int page, int size) {

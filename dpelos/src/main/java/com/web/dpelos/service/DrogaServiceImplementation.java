@@ -10,7 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.web.dpelos.entity.Droga;
-import com.web.dpelos.entity.Mascota;
 import com.web.dpelos.exception.NotFoundException;
 import com.web.dpelos.repository.DrogaRepository;
 
@@ -34,13 +33,18 @@ public class DrogaServiceImplementation implements DrogaService {
     }
 
     @Override
-    public void addDroga(Droga raza) {
-        drogaRepository.save(raza);
+    public Droga addDroga(Droga raza) {
+        return drogaRepository.save(raza);
     }
 
     @Override
-    public void saveAllExcel(List<Droga> drogas) {
-        drogaRepository.saveAll(drogas);
+    public boolean saveAllExcel(List<Droga> drogas) {
+        try {
+            List<Droga> drogasGuardadas = drogaRepository.saveAll(drogas);    
+            return drogasGuardadas.size() == drogas.size();
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override
@@ -55,8 +59,8 @@ public class DrogaServiceImplementation implements DrogaService {
 
     @Override
     @Transactional
-    public void updateDroga(Droga raza) {
-        drogaRepository.save(raza);
+    public Droga updateDroga(Droga raza) {
+        return drogaRepository.save(raza);
     }
 
     public Page<Droga> buscarMedicamentosPorNombre(String nombreMedicamento, int page, int size) {

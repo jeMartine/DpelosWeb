@@ -12,13 +12,13 @@ public interface DrogaService {
 
     public List<Droga> obtenerDrogas();
 
-    public void saveAllExcel(List<Droga> drogas);
+    public boolean saveAllExcel(List<Droga> drogas);
 
-    public void addDroga(Droga droga);
+    public Droga addDroga(Droga droga);
 
     public void deleteDroga(Long id);
 
-    public void updateDroga(Droga droga);
+    public Droga updateDroga(Droga droga);
 
     public Page<Droga> buscarMedicamentosPorNombre(String nombreMedicamento, int page, int size);
 

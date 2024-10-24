@@ -9,9 +9,9 @@ public interface EnfermedadService {
 
     public List<Enfermedad> obtenerEnfermedades();
 
-    public void addEnfermedad(Enfermedad enfermedad);
+    public Enfermedad addEnfermedad(Enfermedad enfermedad);
 
     public void deleteEnfermedad(Long id);
 
-    public void updateEnfermedad(Enfermedad raza);
+    public Enfermedad updateEnfermedad(Enfermedad raza);
 }

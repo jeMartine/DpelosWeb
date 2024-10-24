@@ -3,17 +3,14 @@ package com.web.dpelos.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.web.dpelos.entity.Enfermedad;
 import com.web.dpelos.entity.Especialidad;
-import com.web.dpelos.service.EnfermedadService;
 import com.web.dpelos.service.EspecialidadService;
 
 @RestController // Esta anotacion indica que esta clase es un controlador REST
@@ -27,8 +24,12 @@ public class EspecialidadController {
 
     /* Metodo que obtiene todas las especialidades */
     @GetMapping
-    public List<Especialidad> findAll(){
-        return especialidadService.obtenerEspecialidades();
+    public ResponseEntity< List<Especialidad>> findAll(){
+        List<Especialidad> esp = especialidadService.obtenerEspecialidades();
+        if(esp.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<Especialidad>>(esp, HttpStatus.OK);
     }
     
 }

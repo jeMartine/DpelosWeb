@@ -33,8 +33,8 @@ public class DuenoServiceImplementation implements DuenoService {
     }
 
     @Override
-    public void addDueno(Dueno dueno) {
-        duenoRepository.save(dueno);
+    public Dueno addDueno(Dueno dueno) {
+        return duenoRepository.save(dueno);
     }
 
     @Transactional
@@ -51,8 +51,8 @@ public class DuenoServiceImplementation implements DuenoService {
 
     @Transactional
     @Override
-    public void updateDueno(Dueno dueno) {
-        duenoRepository.save(dueno);
+    public Dueno updateDueno(Dueno dueno) {
+        return duenoRepository.save(dueno);
     }
 
     @Override

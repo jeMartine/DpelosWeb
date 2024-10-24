@@ -3,6 +3,8 @@ package com.web.dpelos.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,43 +34,62 @@ public class DuenoControler {
     @Autowired
     VeterinarioService veterinarioService;
 
-    /*
-     * Metodo que retorna un array dentor de un JSON que contiene los duenos
-     * registrados.
-     */
+    /* Método que retorna la lista de dueños registrados */
     @GetMapping()
-    public List<Dueno> listaDuenos() {
-        return duenoService.obtenerDuenos();
+    public ResponseEntity<List<Dueno>> listaDuenos() {
+        List<Dueno> duenos = duenoService.obtenerDuenos();
+        if (duenos.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<Dueno>>(duenos, HttpStatus.OK);
     }
 
-    /*Retorna un dueño por su id*/
+    /* Retorna un dueño por su id */
     @GetMapping("/{id}")
-    public Dueno getDuenoById(@PathVariable Long id) {
-        return duenoService.buscarDuenoPorId(id);
+    public ResponseEntity<Dueno> getDuenoById(@PathVariable Long id) {
+        Dueno dueno = duenoService.buscarDuenoPorId(id);
+        if (dueno == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<Dueno>(dueno, HttpStatus.OK); 
     }
 
-    /* Metodo que agrega un dueno a la base de datos */
+    /* Método que agrega un dueño a la base de datos */
     @PostMapping()
-    public void addDueno(@RequestBody Dueno dueno) {
-        duenoService.addDueno(dueno);
+    public ResponseEntity<Dueno> addDueno(@RequestBody Dueno dueno) {
+        Dueno nuevoDueno = duenoService.addDueno(dueno);
+        if (nuevoDueno == null) {
+            return new ResponseEntity<>( HttpStatus.BAD_REQUEST); 
+        }
+        return new ResponseEntity<Dueno>(nuevoDueno, HttpStatus.CREATED);
     }
 
-    /* Metodo que elimina el dueno segun el id */
+    /* Método que elimina el dueño según su id */
     @DeleteMapping("/delete/{id}")
-    public void deleteDueno(@PathVariable Long id) {
+    public ResponseEntity<String> deleteDueno(@PathVariable Long id) {
         duenoService.deleteDueno(id);
+        
+        return new ResponseEntity<>("Dueño eliminado exitosamente", HttpStatus.NO_CONTENT); 
     }
 
-    /* Metodo para mostrar el perfil de dueno actualizado */
+    /* Método para actualizar la información del dueño */
     @PutMapping("/update")
-    public void mostrarDuenoActualizado(@RequestBody Dueno dueno) {
-        duenoService.updateDueno(dueno);
+    public ResponseEntity<Dueno> mostrarDuenoActualizado(@RequestBody Dueno dueno) {
+        Dueno duenoActualizado = duenoService.updateDueno(dueno);
+        if (duenoActualizado == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<Dueno>(duenoActualizado, HttpStatus.OK); 
     }
 
-    /* Metodo que busca al dueno segun su cedula */
+    /* Método que busca al dueño según su cédula */
     @GetMapping("/buscarCedula/{cedula}")
-    public Dueno buscarDueno(@PathVariable("cedula") String cedula, HttpSession session) {
-        return duenoService.buscarDuenoPorCedula(cedula);
+    public ResponseEntity<Dueno> buscarDueno(@PathVariable("cedula") String cedula, HttpSession session) {
+        Dueno dueno = duenoService.buscarDuenoPorCedula(cedula);
+        if (dueno == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND); 
+        }
+        return new ResponseEntity<>(dueno, HttpStatus.OK); 
     }
 
 }
