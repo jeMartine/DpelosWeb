@@ -89,7 +89,7 @@ public class DuenoControler {
         if (dueno == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND); 
         }
-        return new ResponseEntity<>(dueno, HttpStatus.OK); 
+        return new ResponseEntity<Dueno>(dueno, HttpStatus.OK); 
     }
 
 }
