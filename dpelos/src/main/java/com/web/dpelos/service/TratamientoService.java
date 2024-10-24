@@ -15,11 +15,11 @@ public interface TratamientoService {
 
     public Tratamiento buscarTratamientoPorId(Long id);
 
-    public void addTratamiento(Tratamiento tratamiento);
+    public Tratamiento addTratamiento(Tratamiento tratamiento);
 
     public void deleteTratamiento(Long id);
 
-    public void updateTratamiento(Tratamiento tratamiento);
+    public Tratamiento updateTratamiento(Tratamiento tratamiento);
 
     public List<Tratamiento> getActiveTratamientos();
 
@@ -29,7 +29,7 @@ public interface TratamientoService {
 
     public List<Droga> getMedicamentosPorTratamiento(Long idTratamiento);
 
-    public void updateMedicamentosDelTratamiento(Long idTratamiento, List<Droga> medicamentos);
+    public Tratamiento updateMedicamentosDelTratamiento(Long idTratamiento, List<Droga> medicamentos);
 
     public List<String> tratamientosMasUnidadesVendidas();
 

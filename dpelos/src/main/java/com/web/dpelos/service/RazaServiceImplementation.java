@@ -30,8 +30,8 @@ public class RazaServiceImplementation implements RazaService {
     }
 
     @Override
-    public void addRaza(Raza raza) {
-        razaRepository.save(raza);
+    public Raza addRaza(Raza raza) {
+        return razaRepository.save(raza);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class RazaServiceImplementation implements RazaService {
 
     @Override
     @Transactional
-    public void updateRaza(Raza raza) {
-        razaRepository.save(raza);
+    public Raza updateRaza(Raza raza) {
+        return razaRepository.save(raza);
     }
 }

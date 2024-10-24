@@ -1,6 +1,5 @@
 package com.web.dpelos.service;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.web.dpelos.entity.Mascota;
 import com.web.dpelos.entity.Veterinario;
 import com.web.dpelos.exception.NotFoundException;
 import com.web.dpelos.repository.VeterinarioRepository;
@@ -34,8 +32,8 @@ public class VeterinarioServiceImplentation implements VeterinarioService {
     }
 
     @Override
-    public void addVet(Veterinario Vet) {
-        veterinarioRepository.save(Vet);
+    public Veterinario addVet(Veterinario Vet) {
+        return veterinarioRepository.save(Vet);
     }
 
     @Transactional
@@ -58,8 +56,8 @@ public class VeterinarioServiceImplentation implements VeterinarioService {
 
     @Transactional
     @Override
-    public void updateVet(Veterinario Vet) {
-        veterinarioRepository.save(Vet);
+    public Veterinario updateVet(Veterinario Vet) {
+        return veterinarioRepository.save(Vet);
     }
 
     @Override

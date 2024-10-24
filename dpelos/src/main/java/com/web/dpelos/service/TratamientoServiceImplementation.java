@@ -43,8 +43,8 @@ public class TratamientoServiceImplementation implements TratamientoService {
     }
 
     @Override
-    public void addTratamiento(Tratamiento tratamiento) {
-        tratamientoRepository.save(tratamiento);
+    public Tratamiento addTratamiento(Tratamiento tratamiento) {
+        return tratamientoRepository.save(tratamiento);
     }
 
     @Override
@@ -53,8 +53,8 @@ public class TratamientoServiceImplementation implements TratamientoService {
     }
 
     @Override
-    public void updateTratamiento(Tratamiento tratamiento) {
-        tratamientoRepository.save(tratamiento);
+    public Tratamiento updateTratamiento(Tratamiento tratamiento) {
+        return tratamientoRepository.save(tratamiento);
     }
 
     @Override
@@ -81,11 +81,11 @@ public class TratamientoServiceImplementation implements TratamientoService {
     }
 
     @Override
-    public void updateMedicamentosDelTratamiento(Long idTratamiento, List<Droga> medicamentos) {
+    public Tratamiento updateMedicamentosDelTratamiento(Long idTratamiento, List<Droga> medicamentos) {
         Tratamiento tratamiento = tratamientoRepository.findById(idTratamiento)
                 .orElseThrow(() -> new RuntimeException("Tratamiento no encontrado"));
         tratamiento.setDroga(medicamentos);
-        tratamientoRepository.save(tratamiento);
+        return tratamientoRepository.save(tratamiento);
     }
 
     // public List<TratamientoDrogasCountDTO> tratamientosMasUnidadesVendidas() {
