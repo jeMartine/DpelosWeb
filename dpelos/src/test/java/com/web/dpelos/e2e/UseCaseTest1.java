@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -58,6 +59,22 @@ public class UseCaseTest1 {
                 // options.addArguments("--headless");
         }
 
+        // Method to safely interact with an element using retries
+        private void safeClick(By locator) {
+                for (int i = 0; i < 3; i++) { // Retry up to 3 times
+                        try {
+                                WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+                                ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",
+                                                element);
+                                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+                                break; // Break the loop if the element is found and no exception is thrown
+                        } catch (StaleElementReferenceException e) {
+                                // Retry locating the element
+                                System.out.println("StaleElementReferenceException caught. Retrying...");
+                        }
+                }
+        }
+
         /*
          * Test Case Description:
          * Llega un usuario nuevo a la veterinaria con su mascota. El veterinario que
@@ -79,18 +96,12 @@ public class UseCaseTest1 {
                 long initialCount = mascotaRepository.count();
                 System.out.println("Initial count of Mascota entities: " + initialCount);
                 long duenoCount = duenoRepository.count();
+
                 // Navigate to the login page
                 driver.get(BASE_URL + "login");
 
-                // Wait for the "veterinario-login" button to be present
-                WebElement btnVeterinarioLogin = wait
-                                .until(ExpectedConditions.presenceOfElementLocated(By.id("veterinario-login")));
-
-                // Scroll to the "veterinario-login" button
-                ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", btnVeterinarioLogin);
-
-                // Use JavaScript to click the "veterinario-login" button
-                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", btnVeterinarioLogin);
+                // Wait for the "veterinario-login" button to be present and click it
+                safeClick(By.id("veterinario-login"));
 
                 // Capture the fields of the login form
                 WebElement inputCedulaVet = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("cedulaVet")));
@@ -101,10 +112,7 @@ public class UseCaseTest1 {
                 inputPasswordVet.sendKeys("wrongPassword");
 
                 // Get the login button and click it
-                WebElement btnIniciarSesionVet = wait
-                                .until(ExpectedConditions.presenceOfElementLocated(By.id("btnVeterinario")));
-                ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", btnIniciarSesionVet);
-                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", btnIniciarSesionVet);
+                safeClick(By.id("btnVeterinario"));
 
                 // Wait for the error message to appear
                 wait.until(ExpectedConditions.presenceOfElementLocated(By.id("toast-container")));
@@ -118,19 +126,13 @@ public class UseCaseTest1 {
                 inputPasswordVet.sendKeys("password456");
 
                 // Click the login button again
-                ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", btnIniciarSesionVet);
-                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", btnIniciarSesionVet);
+                safeClick(By.id("btnVeterinario"));
 
-                // Wait for the "btnRegistrarMascota" button to be present
-                WebElement btnRegistrarMascota = wait
-                                .until(ExpectedConditions.presenceOfElementLocated(By.id("btnRegistrarMascota")));
-                ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", btnRegistrarMascota);
-                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", btnRegistrarMascota);
-                // Wait for the "btnAgregarDueno" button to be present
-                WebElement btnAgregarDueno = wait
-                                .until(ExpectedConditions.presenceOfElementLocated(By.id("btnAgregarDueno")));
-                ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", btnAgregarDueno);
-                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", btnAgregarDueno);
+                // Wait for the "btnRegistrarMascota" button to be present and click it
+                safeClick(By.id("btnRegistrarMascota"));
+
+                // Wait for the "btnAgregarDueno" button to be present and click it
+                safeClick(By.id("btnAgregarDueno"));
 
                 // Wait for the "cedulaDueno" input to be present
                 WebElement inputCedulaDueno = wait
@@ -151,21 +153,20 @@ public class UseCaseTest1 {
                                 "https://media.licdn.com/dms/image/v2/D4E03AQF0sXyuzyiN8g/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1718231100540?e=1735776000&v=beta&t=IUS8ZRAGMAapj31SUKD5mz1VEAJ2svTbQH94Rro0yRI");
 
                 // Get the Registrar Dueno button and click it
-                WebElement btnRegistrarDueno = wait
-                                .until(ExpectedConditions.presenceOfElementLocated(By.id("btnRegistrarDueno")));
-                ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", btnRegistrarDueno);
-                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", btnRegistrarDueno);
+                safeClick(By.id("btnRegistrarDueno"));
+
                 // Correcting the information
                 inputApellidoDueno.clear();
                 inputApellidoDueno.sendKeys("Albarracin");
-                // Get the Registrar Dueno button and click it
-                ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", btnRegistrarDueno);
-                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", btnRegistrarDueno);
+
+                // Get the Registrar Dueno button and click it again
+                safeClick(By.id("btnRegistrarDueno"));
 
                 // Get the new count of Dueno entities
                 long newDuenoCount = duenoRepository.count();
                 // Assert that the new count is equal to the initial count plus 1
                 Assertions.assertThat(newDuenoCount).isEqualTo(duenoCount + 1);
+
                 // Getting the elements inside the form Crear Mascota.
                 WebElement inputCedulaDuenoMascota = wait
                                 .until(ExpectedConditions.presenceOfElementLocated(By.id("cedulaDueno")));
@@ -186,65 +187,37 @@ public class UseCaseTest1 {
                 selectRaza.selectByVisibleText("Labrador");
                 Select selectEnfermedad = new Select(enfermedadDropdown);
                 selectEnfermedad.selectByVisibleText("Parvovirus");
+
                 // Get the Registrar Mascota button and click it
-                WebElement btnAgregarRegistrarMascota = wait
-                                .until(ExpectedConditions.presenceOfElementLocated(By.id("btnRegistrarMascota")));
-                ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",
-                                btnAgregarRegistrarMascota);
-                ((JavascriptExecutor) driver).executeScript("arguments[0].click();",
-                                btnAgregarRegistrarMascota);
-
-                // // Wait for the "btnVerMascotas" button to be present and click it
-                // WebElement btnVerMascotas = wait
-                // .until(ExpectedConditions.presenceOfElementLocated(By.id("btnVerMascotas")));
-                // ((JavascriptExecutor)
-                // driver).executeScript("arguments[0].scrollIntoView(true);", btnVerMascotas);
-                // ((JavascriptExecutor) driver).executeScript("arguments[0].click();",
-                // btnVerMascotas);
-
-                // // Wait for the "search-input" input to be present
-                // WebElement inputSearchMascota =
-                // wait.until(ExpectedConditions.presenceOfElementLocated(By.id("search-input")));
-                // // Assign correct information to the search input
-                // inputSearchMascota.sendKeys("Pagani");
-
-                // // Wait for the "btnBuscarMascota" button to be present and click it
-                // WebElement btnSearchMascota = wait
-                // .until(ExpectedConditions.presenceOfElementLocated(By.id("btnSearchMascota")));
-                // ((JavascriptExecutor)
-                // driver).executeScript("arguments[0].scrollIntoView(true);",
-                // btnSearchMascota);
-                // ((JavascriptExecutor) driver).executeScript("arguments[0].click();",
-                // btnSearchMascota);
-                // Assert that the new count is equal to the initial count plus 1
+                safeClick(By.id("btnRegistrarMascota"));
 
                 // Login as a Dueno
                 driver.get(BASE_URL + "login");
+
                 // Typing the cedula in the input field.
                 WebElement inputCedulaCliente = wait
                                 .until(ExpectedConditions.presenceOfElementLocated(By.id("cedulaDueno")));
                 inputCedulaCliente.sendKeys("1029641463");
+
                 // Getting the login button and clicking it.
-                WebElement btnIniciarSesionDueno = wait
-                                .until(ExpectedConditions.presenceOfElementLocated(By.id("btnDueno")));
-                ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",
-                                btnIniciarSesionDueno);
-                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", btnIniciarSesionDueno);
+                safeClick(By.id("btnDueno"));
 
                 // Get the new count of Mascota entities
                 long newCount = mascotaRepository.count();
                 Assertions.assertThat(newCount).isEqualTo(initialCount + 1);
+
                 // Retrieve all Mascota entities associated with the Dueno
                 Dueno dueno = duenoRepository.findByCedulaDueno("1029641463");
                 Collection<Mascota> mascotas = mascotaRepository.findByIdDueno(dueno);
+
                 // Assert that the retrieved Mascota's name is equal to the one created in the
                 // test
                 Assertions.assertThat(mascotas).isNotNull();
                 Assertions.assertThat(mascotas.size()).isEqualTo(1);
                 Assertions.assertThat(mascotas.iterator().next().getNombreMascota()).isEqualTo("Pagani");
-
         }
 
+        /* Closes the browser after have finished the test. */
         @AfterEach
         public void tearDown() {
                 driver.quit();

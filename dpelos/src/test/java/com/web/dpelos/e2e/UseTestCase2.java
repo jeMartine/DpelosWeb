@@ -80,21 +80,28 @@ public class UseTestCase2 {
                 }
         }
 
+        /*
+         * Test Case Description:
+         * El veterinario va a suministrar un nuevo medicamento a una mascota. Busca la
+         * mascota en la barra de búsqueda, la selecciona para darle un nuevo
+         * tratamiento.  selecciona tratamiento y da en guardar. Para verificar que todo
+         * salió bien, busca la mascota, ve sus detalles y se da cuenta que el nuevo
+         * tratamiento quedó guardado de manera correcta.
+         * 
+         * Después se ingresa con el perfil de administrador y que la cantidad de
+         * medicamentos suministrados y las ganancias sean correctas.
+         */
         @Test
         public void SystemTest_UseCase2() {
                 long initialNumberOfTratamientos = tratamientoRepository.count();
                 long initialNumberOfSoldDrogas = drogaService.obtenerTotalUnidadesVendidas();
                 Double initialGanancias = drogaService.obtenerTotalVentas();
+
                 // Navigate to the login page
                 driver.get(BASE_URL + "login");
-                // Wait for the "veterinario-login" button to be present
-                WebElement btnVeterinarioLogin = wait
-                                .until(ExpectedConditions.presenceOfElementLocated(By.id("veterinario-login")));
 
-                // Scroll to the "veterinario-login" button
-                ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", btnVeterinarioLogin);
-                // Use JavaScript to click the "veterinario-login" button
-                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", btnVeterinarioLogin);
+                // Wait for the "veterinario-login" button to be present and click it
+                safeClick(By.id("veterinario-login"));
 
                 // Capture the fields of the login form
                 WebElement inputCedulaVet = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("cedulaVet")));
@@ -103,111 +110,32 @@ public class UseTestCase2 {
                 // Assign correct information to the fields
                 inputCedulaVet.sendKeys("741258963");
                 inputPasswordVet.sendKeys("password505");
+
                 // Get the login button and click it
-                WebElement btnIniciarSesionVet = wait
-                                .until(ExpectedConditions.presenceOfElementLocated(By.id("btnVeterinario")));
-                ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", btnIniciarSesionVet);
-                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", btnIniciarSesionVet);
+                safeClick(By.id("btnVeterinario"));
 
                 // Wait for the "btnVerMascotas" button to be present and click it
-                WebElement btnVerMascotas = wait
-                                .until(ExpectedConditions.presenceOfElementLocated(By.id("btnVerMascotas")));
-                ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", btnVerMascotas);
-                ((JavascriptExecutor) driver).executeScript("arguments[0].click();",
-                                btnVerMascotas);
+                safeClick(By.id("btnVerMascotas"));
 
                 // Wait for the "search-input" input to be present
                 WebElement inputSearchMascota = wait
                                 .until(ExpectedConditions.presenceOfElementLocated(By.id("search-input")));
+
                 // Assign correct information to the search input
                 inputSearchMascota.sendKeys("Firulais");
 
                 // Wait for the "btnBuscarMascota" button to be present and click it
-                WebElement btnSearchMascota = wait
-                                .until(ExpectedConditions.presenceOfElementLocated(By.id("btnSearchMascota")));
-                ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",
-                                btnSearchMascota);
-                ((JavascriptExecutor) driver).executeScript("arguments[0].click();",
-                                btnSearchMascota);
+                safeClick(By.id("btnSearchMascota"));
 
-                // Wait for the "cardMascota" element to be present anc then clicking on it
-                WebElement tajetaMascotaElement = wait
-                                .until(ExpectedConditions.presenceOfElementLocated(By.id("cardMascota")));
-                ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",
-                                tajetaMascotaElement);
-                ((JavascriptExecutor) driver).executeScript("arguments[0].click();",
-                                tajetaMascotaElement);
-                // Getting elements from the form for assignning a Tratamiento to a Mascota
+                // Wait for the "cardMascota" element to be present and click it
+                safeClick(By.id("cardMascota"));
+
+                // Getting elements from the form for assigning a Tratamiento to a Mascota
                 WebElement inputMotivoTratamiento = wait
                                 .until(ExpectedConditions.presenceOfElementLocated(By.id("motivoTratamiento")));
                 WebElement inputRecomendacionesGenerales = driver.findElement(By.id("recomendacionesGenerales"));
-                inputMotivoTratamiento.sendKeys("Lele pancha");
-                inputRecomendacionesGenerales.sendKeys("No se le de comida chatarra");
-                // // Redirecting to add Medicamento
-                // WebElement addMedicamentoTratamiento = wait
-                // .until(ExpectedConditions.presenceOfElementLocated(By.id("irAMedicamentos")));
-                // ((JavascriptExecutor)
-                // driver).executeScript("arguments[0].scrollIntoView(true);",
-                // addMedicamentoTratamiento);
-                // ((JavascriptExecutor) driver).executeScript("arguments[0].click();",
-                // addMedicamentoTratamiento);
-                // // Getting elements from the form for assignning a Medicamento to a
-                // Tratamiento
-                // // Search for a Medicamento
-                // WebElement inputSearchMedicamento = wait
-                // .until(ExpectedConditions.presenceOfElementLocated(By.id("inputMedicamento")));
-                // // Assign correct information to the search input
-                // inputSearchMedicamento.sendKeys("Amitriptilina");
-                // // Searching the Medicamento
-                // WebElement btnSearchMedicamento = wait
-                // .until(ExpectedConditions.presenceOfElementLocated(By.id("btnSearchMedicamento")));
-                // ((JavascriptExecutor)
-                // driver).executeScript("arguments[0].scrollIntoView(true);",
-                // btnSearchMedicamento);
-                // ((JavascriptExecutor) driver).executeScript("arguments[0].click();",
-                // btnSearchMedicamento);
-                // // Select the Medicamento
-                // WebElement btnAddMedicamento = wait
-                // .until(ExpectedConditions.presenceOfElementLocated(By.id("addMedicamento")));
-                // ((JavascriptExecutor)
-                // driver).executeScript("arguments[0].scrollIntoView(true);",
-                // btnAddMedicamento);
-                // ((JavascriptExecutor) driver).executeScript("arguments[0].click();",
-                // btnAddMedicamento);
-                // // Redirecting to add Tratamiento to a Mascota
-                // WebElement btnActualizarMedicamentos = wait
-                // .until(ExpectedConditions
-                // .presenceOfElementLocated(By.id("btnActualizarMedicamentos")));
-                // ((JavascriptExecutor)
-                // driver).executeScript("arguments[0].scrollIntoView(true);",
-                // btnActualizarMedicamentos);
-                // ((JavascriptExecutor) driver).executeScript("arguments[0].click();",
-                // btnActualizarMedicamentos);
-                // // Getting the button guardarTratamiento and clicking on it
-                // WebElement btnGuardarTratamiento = wait
-                // .until(ExpectedConditions
-                // .presenceOfElementLocated(By.id("btnGuardarTratamiento")));
-                // ((JavascriptExecutor)
-                // driver).executeScript("arguments[0].scrollIntoView(true);",
-                // btnGuardarTratamiento);
-                // ((JavascriptExecutor) driver).executeScript("arguments[0].click();",
-                // btnGuardarTratamiento);
-                // // Getting the Tratamientos button and clicking on it
-                // WebElement btnTratamientos = wait
-                // .until(ExpectedConditions.presenceOfElementLocated(By.id("btnTratamientos")));
-                // ((JavascriptExecutor)
-                // driver).executeScript("arguments[0].scrollIntoView(true);",
-                // btnTratamientos);
-                // ((JavascriptExecutor) driver).executeScript("arguments[0].click();",
-                // btnTratamientos);
-
-                // // Find the <span> element within the parent element
-                // WebElement spanElement = wait
-                // .until(ExpectedConditions.presenceOfElementLocated(By.id("spanNombreMascota")));
-                // // Capture the text inside the <span> element
-                // String spanText = spanElement.getText();
-                // // Making sure the tratamiento was added to the Mascota "Firulais"
-                // Assertions.assertThat(spanText).isEqualTo("Firulais");
+                inputMotivoTratamiento.sendKeys("A la mascota le Lele pancha.");
+                inputRecomendacionesGenerales.sendKeys("Dar mucho amor.");
 
                 // Redirecting to add Medicamento
                 safeClick(By.id("irAMedicamentos"));
@@ -216,6 +144,7 @@ public class UseTestCase2 {
                 // Search for a Medicamento
                 WebElement inputSearchMedicamento = wait
                                 .until(ExpectedConditions.presenceOfElementLocated(By.id("inputMedicamento")));
+
                 // Assign correct information to the search input
                 inputSearchMedicamento.sendKeys("Amitriptilina");
 
@@ -234,67 +163,43 @@ public class UseTestCase2 {
                 // Getting the Tratamientos button and clicking on it
                 safeClick(By.id("btnTratamientos"));
 
-                // // Find the <span> element within the parent element
-                // WebElement spanElement = null;
-                // for (int i = 0; i < 3; i++) { // Retry up to 3 times
-                // try {
-                // WebElement parentElement = wait.until(
-                // ExpectedConditions.presenceOfElementLocated(By.cssSelector(".titulo")));
-                // spanElement = parentElement.findElement(By.tagName("span"));
-                // break; // Break the loop if the element is found and no exception is thrown
-                // } catch (StaleElementReferenceException e) {
-                // // Retry locating the element
-                // System.out.println("StaleElementReferenceException caught. Retrying...");
-                // }
-                // }
-
-                // if (spanElement != null) {
-                // // Capture the text inside the <span> element
-                // String spanText = spanElement.getText();
-                // System.out.println("Text inside the <span> element: " + spanText);
-
-                // // Add assertions to verify the text inside the <span> element
-                // Assertions.assertThat(spanText).isEqualTo("Expected Mascota Name");
-                // } else {
-                // System.out.println("Failed to locate the <span> element after retries.");
-                // }
+                /* Entering as the Admin */
                 // Navigate to the login page
                 driver.get(BASE_URL + "login");
-                // Wait for the "veterinario-login" button to be present
-                btnVeterinarioLogin = wait
-                                .until(ExpectedConditions.presenceOfElementLocated(By.id("veterinario-login")));
-                // Scroll to the "veterinario-login" button
-                ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", btnVeterinarioLogin);
-                // Use JavaScript to click the "veterinario-login" button
-                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", btnVeterinarioLogin);
-                // Assign correct information to the fields
+
+                // Wait for the "veterinario-login" button to be present and click it
+                safeClick(By.id("veterinario-login"));
+
                 // Capture the fields of the login form
                 inputCedulaVet = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("cedulaVet")));
                 inputPasswordVet = driver.findElement(By.id("passwordVet"));
                 inputCedulaVet.sendKeys("998877");
                 inputPasswordVet.sendKeys("pass123");
-                btnIniciarSesionVet = wait
-                                .until(ExpectedConditions.presenceOfElementLocated(By.id("btnVeterinario")));
-                ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", btnIniciarSesionVet);
-                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", btnIniciarSesionVet);
 
-                WebElement btnDashboard = wait
-                                .until(ExpectedConditions.presenceOfElementLocated(By.id("btnDashboard")));
-                ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", btnDashboard);
-                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", btnDashboard);
+                // Get the login button and click it
+                safeClick(By.id("btnVeterinario"));
+
+                // Wait for the "btnDashboard" button to be present and click it
+                safeClick(By.id("btnDashboard"));
+
                 // Comparing the values of the Tratamientos and the Sold Drogas
                 long finalNumberOfTratamientos = tratamientoRepository.count();
                 long finalNumberOfSoldDrogas = drogaService.obtenerTotalUnidadesVendidas();
                 Double finalGanancias = drogaService.obtenerTotalVentas();
                 Assertions.assertThat(finalNumberOfTratamientos).isEqualTo(initialNumberOfTratamientos + 1);
+                /*
+                 * Descomentar una vez se corrija el error de porque no se estan actualizando
+                 * los datos correspondientes en la base de datos..
+                 */
                 // Assertions.assertThat(finalNumberOfSoldDrogas).isEqualTo(initialNumberOfSoldDrogas
                 // + 1);
                 // Assertions.assertThat(finalGanancias > initialGanancias).isTrue();
         }
 
-        // @AfterEach
-        // public void tearDown() {
-        // driver.quit();
-        // }
+        /* Closes the browser after have finished the test. */
+        @AfterEach
+        public void tearDown() {
+                driver.quit();
+        }
 
 }
