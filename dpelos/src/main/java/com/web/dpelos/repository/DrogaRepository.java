@@ -29,4 +29,6 @@ public interface DrogaRepository extends JpaRepository<Droga, Long> {
     // d.nombreDroga, COUNT(t)) " +
     // "FROM Droga d JOIN d.tratamientos t GROUP BY d.idDroga, d.nombreDroga")
     // List<DrogaTratamientoCountDTO> findDrogaTratamientoCounts();
+    @Query("SELECT SUM(d.unitVendidas) FROM Droga d")
+    Long findTotalUnitsSold();
 }

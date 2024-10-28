@@ -29,4 +29,6 @@ public interface DrogaService {
     public double obtenerTotalVentas();
 
     public double obtenerTotalGanancias();
+
+    public Long obtenerTotalUnidadesVendidas();
 }

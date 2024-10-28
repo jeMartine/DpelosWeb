@@ -40,7 +40,7 @@ public class DrogaServiceImplementation implements DrogaService {
     @Override
     public boolean saveAllExcel(List<Droga> drogas) {
         try {
-            List<Droga> drogasGuardadas = drogaRepository.saveAll(drogas);    
+            List<Droga> drogasGuardadas = drogaRepository.saveAll(drogas);
             return drogasGuardadas.size() == drogas.size();
         } catch (Exception e) {
             return false;
@@ -68,20 +68,24 @@ public class DrogaServiceImplementation implements DrogaService {
         return drogaRepository.findByNombreDrogaContainingIgnoreCase(nombreMedicamento, pageable);
     }
 
+    @Override
     public Page<Droga> getMedicamentosPaginadas(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return drogaRepository.findAllDroga(pageable);
     }
 
+    @Override
     public long obtenerTotalDrogas() {
         return drogaRepository.count();
     }
 
+    @Override
     public double obtenerTotalVentas() {
         Double totalVentas = drogaRepository.findTotalVentas();
         return totalVentas != null ? totalVentas : 0.0;
     }
 
+    @Override
     public double obtenerTotalGanancias() {
         Double totalVentas = drogaRepository.findTotalVentas();
         Double totalCost = drogaRepository.findTotalCost();
@@ -95,5 +99,10 @@ public class DrogaServiceImplementation implements DrogaService {
         }
 
         return totalVentas - totalCost;
+    }
+
+    @Override
+    public Long obtenerTotalUnidadesVendidas() {
+        return drogaRepository.findTotalUnitsSold();
     }
 }
