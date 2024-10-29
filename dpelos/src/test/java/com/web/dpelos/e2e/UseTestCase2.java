@@ -109,7 +109,9 @@ public class UseTestCase2 {
                                 .until(ExpectedConditions.presenceOfElementLocated(By.id("totalGanancias")));
                 wait.until(ExpectedConditions.textToBePresentInElement(totalGananciasElement,
                                 "Total de Ganancias de la Veterinaria:"));
-                String totalGananciasText = totalGananciasElement.getText().replaceAll("[^0-9.]", "");
+                String totalGananciasText = totalGananciasElement.getText().replaceAll("[^0-9]", ""); // Remove all
+                                                                                                      // non-numeric
+                                                                                                      // characters
                 double totalGananciasInitial = 0.0;
                 if (!totalGananciasText.isEmpty()) {
                         totalGananciasInitial = Double.parseDouble(totalGananciasText);
