@@ -1,7 +1,7 @@
 package com.web.dpelos.e2e;
 
 import java.time.Duration;
-import java.util.Collection;
+import java.util.*;
 
 import org.aspectj.lang.annotation.After;
 import org.assertj.core.api.Assertions;
@@ -206,15 +206,27 @@ public class UseCaseTest1 {
                 long newCount = mascotaRepository.count();
                 Assertions.assertThat(newCount).isEqualTo(initialCount + 1);
 
-                // Retrieve all Mascota entities associated with the Dueno
-                Dueno dueno = duenoRepository.findByCedulaDueno("1029641463");
-                Collection<Mascota> mascotas = mascotaRepository.findByIdDueno(dueno);
+                // Retrieve all the mascota elements inside the carousel
+                List<WebElement> mascotaElements = driver.findElements(By.cssSelector(".card-mascota .img-caption p"));
 
-                // Assert that the retrieved Mascota's name is equal to the one created in the
-                // test
-                Assertions.assertThat(mascotas).isNotNull();
-                Assertions.assertThat(mascotas.size()).isEqualTo(1);
-                Assertions.assertThat(mascotas.iterator().next().getNombreMascota()).isEqualTo("Pagani");
+                // Check that each mascota's name and raza match the expected values
+                for (WebElement mascotaElement : mascotaElements) {
+                        String nombreMascota = mascotaElement.getText();
+
+                        // Click the mascota element to display the info-mascota div
+                        // mascotaElement.click();
+                        safeClick(By.id("btnImg-mascota"));
+                        // Wait for the info-mascota div to be present
+                        WebElement infoMascotaDiv = wait
+                                        .until(ExpectedConditions.presenceOfElementLocated(By.id("info-mascota")));
+
+                        // Retrieve the razaMascota element inside the info-mascota div
+                        WebElement razaElement = infoMascotaDiv.findElement(By.id("razaMascota"));
+                        String razaMascota = razaElement.getText();
+
+                        Assertions.assertThat(nombreMascota).isEqualTo("Pagani");
+                        Assertions.assertThat(razaMascota).isEqualTo("Labrador");
+                }
         }
 
         /* Closes the browser after have finished the test. */
