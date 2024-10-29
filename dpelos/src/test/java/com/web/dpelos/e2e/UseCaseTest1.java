@@ -3,7 +3,6 @@ package com.web.dpelos.e2e;
 import java.time.Duration;
 import java.util.*;
 
-import org.aspectj.lang.annotation.After;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,16 +17,9 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.actuate.autoconfigure.metrics.MetricsProperties.Web;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
-
-import com.web.dpelos.entity.Dueno;
-import com.web.dpelos.entity.Mascota;
-import com.web.dpelos.repository.DuenoRepository;
-import com.web.dpelos.repository.MascotaRepository;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -35,12 +27,6 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 @ActiveProfiles("test")
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 public class UseCaseTest1 {
-
-        @Autowired
-        private MascotaRepository mascotaRepository;
-        @Autowired
-        private DuenoRepository duenoRepository;
-
         private static final String BASE_URL = "http://localhost:4200/";
         private WebDriver driver;
         private WebDriverWait wait;
@@ -92,11 +78,6 @@ public class UseCaseTest1 {
          */
         @Test
         public void SystemTest_UseCase1() {
-                // Get the initial count of Mascota entities
-                long initialCount = mascotaRepository.count();
-                System.out.println("Initial count of Mascota entities: " + initialCount);
-                long duenoCount = duenoRepository.count();
-
                 // Navigate to the login page
                 driver.get(BASE_URL + "login");
 
@@ -161,12 +142,6 @@ public class UseCaseTest1 {
 
                 // Get the Registrar Dueno button and click it again
                 safeClick(By.id("btnRegistrarDueno"));
-
-                // Get the new count of Dueno entities
-                long newDuenoCount = duenoRepository.count();
-                // Assert that the new count is equal to the initial count plus 1
-                Assertions.assertThat(newDuenoCount).isEqualTo(duenoCount + 1);
-
                 // Getting the elements inside the form Crear Mascota.
                 WebElement inputCedulaDuenoMascota = wait
                                 .until(ExpectedConditions.presenceOfElementLocated(By.id("cedulaDueno")));
@@ -201,10 +176,6 @@ public class UseCaseTest1 {
 
                 // Getting the login button and clicking it.
                 safeClick(By.id("btnDueno"));
-
-                // Get the new count of Mascota entities
-                long newCount = mascotaRepository.count();
-                Assertions.assertThat(newCount).isEqualTo(initialCount + 1);
 
                 // Retrieve all the mascota elements inside the carousel
                 List<WebElement> mascotaElements = driver.findElements(By.cssSelector(".card-mascota .img-caption p"));

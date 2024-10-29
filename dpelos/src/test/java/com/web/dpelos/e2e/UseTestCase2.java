@@ -1,10 +1,8 @@
 package com.web.dpelos.e2e;
 
 import java.time.Duration;
-import java.util.Collection;
-
-import org.aspectj.lang.annotation.After;
 import org.assertj.core.api.Assertions;
+import org.hibernate.sql.results.graph.AssemblerCreationState;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,21 +14,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.actuate.autoconfigure.metrics.MetricsProperties.Web;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 
-import com.web.dpelos.entity.Dueno;
-import com.web.dpelos.entity.Mascota;
-import com.web.dpelos.repository.DrogaRepository;
-import com.web.dpelos.repository.DuenoRepository;
-import com.web.dpelos.repository.MascotaRepository;
-import com.web.dpelos.repository.TratamientoRepository;
 import com.web.dpelos.service.DrogaService;
+import com.web.dpelos.service.DrogaServiceImplementation;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -38,14 +29,8 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 @ActiveProfiles("test")
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 public class UseTestCase2 {
-
         @Autowired
-        private TratamientoRepository tratamientoRepository;
-        @Autowired
-        private DrogaRepository drogaRepository;
-        @Autowired
-        private DrogaService drogaService;
-
+        private DrogaServiceImplementation drogaService;
         private static final String BASE_URL = "http://localhost:4200/";
         private WebDriver driver;
         private WebDriverWait wait;
@@ -93,9 +78,11 @@ public class UseTestCase2 {
          */
         @Test
         public void SystemTest_UseCase2() {
+                /* Variable used for saving the initial number of drogas sold. */
+                Long initialUnitsSoldDrogas = drogaService.obtenerTotalUnidadesVendidas();
                 // Navigate to the login page
                 driver.get(BASE_URL + "login");
-                /* Entering as the Admin for the 1st */
+                /* Entering as the Admin for the 1st time */
                 // Capture the fields of the login form
                 WebElement inputCedulaVet = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("cedulaVet")));
                 WebElement inputPasswordVet = driver.findElement(By.id("passwordVet"));
@@ -127,9 +114,7 @@ public class UseTestCase2 {
                 if (!totalGananciasText.isEmpty()) {
                         totalGananciasInitial = Double.parseDouble(totalGananciasText);
                 }
-
-                // Print the extracted values'
-                // Navigate to the login page
+                // Navigate to the login page to enter as a Veterinario
                 driver.get(BASE_URL + "login");
 
                 // Wait for the "veterinario-login" button to be present and click it
@@ -146,9 +131,6 @@ public class UseTestCase2 {
 
                 // Wait for the "btnDashboard" button to be present and click it
                 safeClick(By.id("btnDashboard"));
-                long initialNumberOfTratamientos = tratamientoRepository.count();
-                long initialNumberOfSoldDrogas = drogaService.obtenerTotalUnidadesVendidas();
-                Double initialGanancias = drogaService.obtenerTotalVentas();
 
                 // Navigate to the login page
                 driver.get(BASE_URL + "login");
@@ -215,7 +197,12 @@ public class UseTestCase2 {
 
                 // Getting the Tratamientos button and clicking on it
                 safeClick(By.id("btnTratamientos"));
-
+                // Accesing the Tratamiento
+                safeClick(By.id("btnVerTratamientoActivo"));
+                // Clicking on Resumen
+                safeClick(By.id("btnResumenTratamiento"));
+                // Clicking on Finalizar Tratamiento
+                safeClick(By.id("btnFinalizarTratamiento"));
                 /* Entering as the Admin for the 2nd time */
                 // Navigate to the login page
                 driver.get(BASE_URL + "login");
@@ -251,23 +238,27 @@ public class UseTestCase2 {
                                 .until(ExpectedConditions.presenceOfElementLocated(By.id("totalGanancias")));
                 wait.until(ExpectedConditions.textToBePresentInElement(totalGananciasElement,
                                 "Total de Ganancias de la Veterinaria:"));
-                totalGananciasText = totalGananciasElement.getText().replaceAll("[^0-9.]", "");
+                totalGananciasText = totalGananciasElement.getText().replaceAll("[^0-9.]",
+                                "");
 
                 double totalGananciasFinal = 0.0;
                 if (!totalGananciasText.isEmpty()) {
                         totalGananciasFinal = Double.parseDouble(totalGananciasText);
                 }
 
-                // Assertions to verify the changes
-                Assertions.assertThat(totalTratamientosFinal).isEqualTo(totalTratamientosInitial + 1);
-                // Assertions.assertThat(totalGananciasFinal).isGreaterThan(totalGananciasInitial);
-
+                /* Verifying that the values actually change */
+                Assertions.assertThat(totalTratamientosFinal).isEqualTo(totalTratamientosInitial
+                                + 1);
+                Assertions.assertThat(totalGananciasFinal).isGreaterThan(totalGananciasInitial);
+                // Variable used for saving the final number of drogas sold.
+                Long finalUnitsSoldDrogas = drogaService.obtenerTotalUnidadesVendidas();
+                Assertions.assertThat(finalUnitsSoldDrogas).isGreaterThan(initialUnitsSoldDrogas);
         }
 
         /* Closes the browser after have finished the test. */
-        // @AfterEach
-        // public void tearDown() {
-        // driver.quit();
-        // }
+        @AfterEach
+        public void tearDown() {
+                driver.quit();
+        }
 
 }
