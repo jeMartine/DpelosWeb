@@ -93,7 +93,42 @@ public class UseTestCase2 {
          */
         @Test
         public void SystemTest_UseCase2() {
-                /* Entering as the Admin */
+                // Navigate to the login page
+                driver.get(BASE_URL + "login");
+                /* Entering as the Admin for the 1st */
+                // Capture the fields of the login form
+                WebElement inputCedulaVet = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("cedulaVet")));
+                WebElement inputPasswordVet = driver.findElement(By.id("passwordVet"));
+                inputCedulaVet.sendKeys("998877");
+                inputPasswordVet.sendKeys("pass123");
+                // Get the login button and click it
+                safeClick(By.id("btnVeterinario"));
+                // Wait for the "btnDashboard" button to be present and click it
+                safeClick(By.id("btnDashboard"));
+                // Extracting the initial values
+                // Locate the element with id "totalTratamientos" and retrieve its text content
+                WebElement totalTratamientosElement = wait
+                                .until(ExpectedConditions.presenceOfElementLocated(By.id("totalTratamientos")));
+                wait.until(ExpectedConditions.textToBePresentInElement(totalTratamientosElement,
+                                "Tratamientos en el último mes:"));
+                String totalTratamientosText = totalTratamientosElement.getText().replaceAll("[^0-9]", "");
+                int totalTratamientosInitial = 0;
+                if (!totalTratamientosText.isEmpty()) {
+                        totalTratamientosInitial = Integer.parseInt(totalTratamientosText);
+                }
+
+                // Locate the element with id "totalGanancias" and retrieve its text content
+                WebElement totalGananciasElement = wait
+                                .until(ExpectedConditions.presenceOfElementLocated(By.id("totalGanancias")));
+                wait.until(ExpectedConditions.textToBePresentInElement(totalGananciasElement,
+                                "Total de Ganancias de la Veterinaria:"));
+                String totalGananciasText = totalGananciasElement.getText().replaceAll("[^0-9.]", "");
+                double totalGananciasInitial = 0.0;
+                if (!totalGananciasText.isEmpty()) {
+                        totalGananciasInitial = Double.parseDouble(totalGananciasText);
+                }
+
+                // Print the extracted values'
                 // Navigate to the login page
                 driver.get(BASE_URL + "login");
 
@@ -101,8 +136,8 @@ public class UseTestCase2 {
                 safeClick(By.id("veterinario-login"));
 
                 // Capture the fields of the login form
-                WebElement inputCedulaVet = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("cedulaVet")));
-                WebElement inputPasswordVet = driver.findElement(By.id("passwordVet"));
+                inputCedulaVet = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("cedulaVet")));
+                inputPasswordVet = driver.findElement(By.id("passwordVet"));
                 inputCedulaVet.sendKeys("998877");
                 inputPasswordVet.sendKeys("pass123");
 
@@ -181,7 +216,7 @@ public class UseTestCase2 {
                 // Getting the Tratamientos button and clicking on it
                 safeClick(By.id("btnTratamientos"));
 
-                /* Entering as the Admin */
+                /* Entering as the Admin for the 2nd time */
                 // Navigate to the login page
                 driver.get(BASE_URL + "login");
 
@@ -200,18 +235,33 @@ public class UseTestCase2 {
                 // Wait for the "btnDashboard" button to be present and click it
                 safeClick(By.id("btnDashboard"));
 
-                // Comparing the values of the Tratamientos and the Sold Drogas
-                long finalNumberOfTratamientos = tratamientoRepository.count();
-                long finalNumberOfSoldDrogas = drogaService.obtenerTotalUnidadesVendidas();
-                Double finalGanancias = drogaService.obtenerTotalVentas();
-                Assertions.assertThat(finalNumberOfTratamientos).isEqualTo(initialNumberOfTratamientos + 1);
-                /*
-                 * Descomentar una vez se corrija el error de porque no se estan actualizando
-                 * los datos correspondientes en la base de datos..
-                 */
-                Assertions.assertThat(finalNumberOfSoldDrogas).isEqualTo(initialNumberOfSoldDrogas
-                                + 1);
-                Assertions.assertThat(finalGanancias > initialGanancias).isTrue();
+                // Locate the element with id "totalTratamientos" and retrieve its text content
+                totalTratamientosElement = wait
+                                .until(ExpectedConditions.presenceOfElementLocated(By.id("totalTratamientos")));
+                wait.until(ExpectedConditions.textToBePresentInElement(totalTratamientosElement,
+                                "Tratamientos en el último mes:"));
+                totalTratamientosText = totalTratamientosElement.getText().replaceAll("[^0-9]", "");
+                int totalTratamientosFinal = 0;
+                if (!totalTratamientosText.isEmpty()) {
+                        totalTratamientosFinal = Integer.parseInt(totalTratamientosText);
+                }
+
+                // Locate the element with id "totalGanancias" and retrieve its text content
+                totalGananciasElement = wait
+                                .until(ExpectedConditions.presenceOfElementLocated(By.id("totalGanancias")));
+                wait.until(ExpectedConditions.textToBePresentInElement(totalGananciasElement,
+                                "Total de Ganancias de la Veterinaria:"));
+                totalGananciasText = totalGananciasElement.getText().replaceAll("[^0-9.]", "");
+
+                double totalGananciasFinal = 0.0;
+                if (!totalGananciasText.isEmpty()) {
+                        totalGananciasFinal = Double.parseDouble(totalGananciasText);
+                }
+
+                // Assertions to verify the changes
+                Assertions.assertThat(totalTratamientosFinal).isEqualTo(totalTratamientosInitial + 1);
+                Assertions.assertThat(totalGananciasFinal).isGreaterThan(totalGananciasInitial);
+
         }
 
         /* Closes the browser after have finished the test. */
