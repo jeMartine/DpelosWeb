@@ -14,6 +14,8 @@ public interface DrogaService {
 
     public boolean saveAllExcel(List<Droga> drogas);
 
+    public void venderDroga(Droga droga, int cantidad);
+
     public Droga addDroga(Droga droga);
 
     public void deleteDroga(Long id);

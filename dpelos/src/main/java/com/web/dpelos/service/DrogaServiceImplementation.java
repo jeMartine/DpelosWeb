@@ -1,6 +1,7 @@
 package com.web.dpelos.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -45,6 +46,15 @@ public class DrogaServiceImplementation implements DrogaService {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    @Override
+    public void venderDroga(Droga droga, int cantidad){
+
+        int unidades = droga.getUnitVendidas();
+        droga.setUnitVendidas(unidades+cantidad);
+
+        drogaRepository.save(droga);
     }
 
     @Override

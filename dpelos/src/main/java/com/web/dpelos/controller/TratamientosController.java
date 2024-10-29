@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.web.dpelos.dto.DrogaTratamientoCountDTO;
 import com.web.dpelos.entity.Droga;
 import com.web.dpelos.entity.Tratamiento;
+import com.web.dpelos.service.DrogaService;
 // import com.web.dpelos.entity.TratamientoDrogasCountDTO;
 import com.web.dpelos.service.TratamientoService;
 
@@ -32,6 +33,9 @@ public class TratamientosController {
 
     @Autowired
     TratamientoService tratamientoService;
+
+    @Autowired
+    DrogaService drogaService;
 
     @GetMapping("/lista")
     public List<Tratamiento> listaTratamientos() {
@@ -83,6 +87,11 @@ public class TratamientosController {
     public ResponseEntity<String> updateTratamiento(@RequestBody Tratamiento tratamiento) {
         try {
             tratamientoService.updateTratamiento(tratamiento);
+            if(tratamiento.isEstado()==false){
+                for (Droga droga: tratamiento.getDrogas()){
+                    drogaService.venderDroga(droga, 1);
+                }
+            }
             return ResponseEntity.ok("Tratamiento actualizado correctamente.");
         } catch (Exception e) {
             String errorMessage = "Error al actualizar el tratamiento";
