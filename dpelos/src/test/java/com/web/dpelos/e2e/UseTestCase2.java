@@ -93,6 +93,24 @@ public class UseTestCase2 {
          */
         @Test
         public void SystemTest_UseCase2() {
+                /* Entering as the Admin */
+                // Navigate to the login page
+                driver.get(BASE_URL + "login");
+
+                // Wait for the "veterinario-login" button to be present and click it
+                safeClick(By.id("veterinario-login"));
+
+                // Capture the fields of the login form
+                WebElement inputCedulaVet = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("cedulaVet")));
+                WebElement inputPasswordVet = driver.findElement(By.id("passwordVet"));
+                inputCedulaVet.sendKeys("998877");
+                inputPasswordVet.sendKeys("pass123");
+
+                // Get the login button and click it
+                safeClick(By.id("btnVeterinario"));
+
+                // Wait for the "btnDashboard" button to be present and click it
+                safeClick(By.id("btnDashboard"));
                 long initialNumberOfTratamientos = tratamientoRepository.count();
                 long initialNumberOfSoldDrogas = drogaService.obtenerTotalUnidadesVendidas();
                 Double initialGanancias = drogaService.obtenerTotalVentas();
@@ -104,8 +122,8 @@ public class UseTestCase2 {
                 safeClick(By.id("veterinario-login"));
 
                 // Capture the fields of the login form
-                WebElement inputCedulaVet = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("cedulaVet")));
-                WebElement inputPasswordVet = driver.findElement(By.id("passwordVet"));
+                inputCedulaVet = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("cedulaVet")));
+                inputPasswordVet = driver.findElement(By.id("passwordVet"));
 
                 // Assign correct information to the fields
                 inputCedulaVet.sendKeys("741258963");
@@ -191,15 +209,15 @@ public class UseTestCase2 {
                  * Descomentar una vez se corrija el error de porque no se estan actualizando
                  * los datos correspondientes en la base de datos..
                  */
-                // Assertions.assertThat(finalNumberOfSoldDrogas).isEqualTo(initialNumberOfSoldDrogas
-                // + 1);
-                // Assertions.assertThat(finalGanancias > initialGanancias).isTrue();
+                Assertions.assertThat(finalNumberOfSoldDrogas).isEqualTo(initialNumberOfSoldDrogas
+                                + 1);
+                Assertions.assertThat(finalGanancias > initialGanancias).isTrue();
         }
 
         /* Closes the browser after have finished the test. */
-        @AfterEach
-        public void tearDown() {
-                driver.quit();
-        }
+        // @AfterEach
+        // public void tearDown() {
+        // driver.quit();
+        // }
 
 }
