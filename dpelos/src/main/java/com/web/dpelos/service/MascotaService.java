@@ -1,9 +1,9 @@
 package com.web.dpelos.service;
 
-import java.util.Collection;
 import java.util.List;
 
-import com.web.dpelos.entity.Droga;
+import org.springframework.data.domain.Page;
+
 import com.web.dpelos.entity.Mascota;
 
 /*Interfaz con la generalización de los métodos*/
@@ -14,11 +14,18 @@ public interface MascotaService {
 
     public List<Mascota> obtenerMascotasDelDueno(Long idDueno);
 
-    public void addMascota(Mascota mascota);
+    public Mascota addMascota(Mascota mascota);
 
     public void deleteMascota(Long id);
 
-    public void updateMascota(Mascota mascota);
+    public Mascota updateMascota(Mascota mascota);
 
-    public List<Mascota> buscarMascotasPorNombre(String nombreMascota);
+    public Page<Mascota> buscarMascotasPorNombre(String nombreMascota, int page, int size);
+
+    public Page<Mascota> getMascotasPaginadas(int page, int size);
+
+    public long obtenerTotalMascotas();
+
+    public long obtenerTotalMascotasActivas();
+
 }

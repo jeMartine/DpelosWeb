@@ -3,6 +3,8 @@ package com.web.dpelos.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,30 +26,51 @@ public class EnfermedadController {
     @Autowired
     private EnfermedadService enfermedadService;
 
-    /* Metodo que agrega una enfermedad a la base de datos. */
+        /* Método para obtener todas las enfermedades */
     @GetMapping
-    public List<Enfermedad> findAll(){
-        return enfermedadService.obtenerEnfermedades();
+    public ResponseEntity<List<Enfermedad>> findAll() {
+        List<Enfermedad> enfermedades = enfermedadService.obtenerEnfermedades();
+        if (enfermedades.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<Enfermedad>>(enfermedades, HttpStatus.OK);
     }
 
+    /* Método para obtener una enfermedad por su ID */
     @GetMapping("/{id}")
-    public Enfermedad getEnfermedadById(@PathVariable Long id){
-        return enfermedadService.buscarEnfermedadPorId(id);
+    public ResponseEntity<Enfermedad> getEnfermedadById(@PathVariable Long id) {
+        Enfermedad enfermedad = enfermedadService.buscarEnfermedadPorId(id);
+        if (enfermedad == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND); 
+        }
+        return new ResponseEntity<Enfermedad>(enfermedad, HttpStatus.OK); 
     }
 
-    @PostMapping()
-    public void addEnfermedad(@RequestBody Enfermedad enf){
-        enfermedadService.addEnfermedad(enf);
+    /* Método para agregar una nueva enfermedad */
+    @PostMapping
+    public ResponseEntity<Enfermedad> addEnfermedad(@RequestBody Enfermedad enf) {
+        Enfermedad nuevaEnfermedad = enfermedadService.addEnfermedad(enf);
+        if (nuevaEnfermedad == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST); 
+        }
+        return new ResponseEntity<Enfermedad>(nuevaEnfermedad, HttpStatus.CREATED);
     }
 
+    /* Método para actualizar una enfermedad existente */
     @PutMapping("/update")
-    public void updateEnfermedad(@RequestBody Enfermedad enf){
-        enfermedadService.updateEnfermedad(enf);
+    public ResponseEntity<Enfermedad> updateEnfermedad(@RequestBody Enfermedad enf) {
+        Enfermedad actualizada = enfermedadService.updateEnfermedad(enf);
+        if (actualizada == null) {
+            return new ResponseEntity<>( HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<Enfermedad>(actualizada, HttpStatus.OK);
     }
 
-    @DeleteMapping("delete/{id}")
-    public void deleteEnf(@PathVariable Long id){
+    /* Método para eliminar una enfermedad por su ID */
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteEnfermedad(@PathVariable Long id) {
         enfermedadService.deleteEnfermedad(id);
+        return new ResponseEntity<>("Enfermedad eliminada exitosamente", HttpStatus.NO_CONTENT); 
     }
 
 

@@ -33,8 +33,8 @@ public class DuenoServiceImplementation implements DuenoService {
     }
 
     @Override
-    public void addDueno(Dueno dueno) {
-        duenoRepository.save(dueno);
+    public Dueno addDueno(Dueno dueno) {
+        return duenoRepository.save(dueno);
     }
 
     @Transactional
@@ -46,18 +46,13 @@ public class DuenoServiceImplementation implements DuenoService {
         if (dueno != null) {
             mascotaRepository.deleteAllByDueno(dueno);
             duenoRepository.deleteById(id);
-
         }
-        // else {
-        // throw new NotFoundException();
-        // }
-
     }
 
     @Transactional
     @Override
-    public void updateDueno(Dueno dueno) {
-        duenoRepository.save(dueno);
+    public Dueno updateDueno(Dueno dueno) {
+        return duenoRepository.save(dueno);
     }
 
     @Override

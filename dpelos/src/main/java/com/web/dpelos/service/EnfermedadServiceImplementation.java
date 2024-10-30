@@ -30,8 +30,8 @@ public class EnfermedadServiceImplementation implements EnfermedadService {
     }
 
     @Override
-    public void addEnfermedad(Enfermedad enfermedad) {
-        enfermedadRepository.save(enfermedad);
+    public Enfermedad addEnfermedad(Enfermedad enfermedad) {
+        return enfermedadRepository.save(enfermedad);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class EnfermedadServiceImplementation implements EnfermedadService {
 
     @Override
     @Transactional
-    public void updateEnfermedad(Enfermedad raza) {
-        enfermedadRepository.save(raza);
+    public Enfermedad updateEnfermedad(Enfermedad raza) {
+        return enfermedadRepository.save(raza);
     }
 }

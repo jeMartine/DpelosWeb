@@ -29,8 +29,8 @@ import jakarta.transaction.Transactional;
 
 @Component
 @Transactional
-@Profile("default")
-public class DatabaseInit implements ApplicationRunner {
+@Profile("test")
+public class DatabaseInitTest implements ApplicationRunner {
 
         @Autowired
         DuenoRepository duenoRepository;
