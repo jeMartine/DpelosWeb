@@ -1,4 +1,4 @@
-package com.web.security;
+package com.web.dpelos.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
