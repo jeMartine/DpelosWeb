@@ -2,11 +2,15 @@ package com.web.dpelos.service;
 
 import java.util.List;
 
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Service;
 
+import com.web.dpelos.dto.AdministradorDTO;
+import com.web.dpelos.dto.VeterinarioDTO;
 import com.web.dpelos.entity.Administrador;
+import com.web.dpelos.entity.Veterinario;
 import com.web.dpelos.exception.NotFoundException;
 import com.web.dpelos.repository.AdminRepository;
 
@@ -19,6 +23,15 @@ public class AdminServiceImplentation implements AdminService{
 
     @Autowired
     private AdminRepository adminRepository;
+
+    public AdministradorDTO toDTO(Administrador administrador) {
+        if (administrador == null)
+            return null;
+
+        return new AdministradorDTO(
+                administrador.getAdminId(),
+                administrador.getAdminCedula());
+    }
 
     @Override
     public Administrador buscarAdministradorPorId(Long id){

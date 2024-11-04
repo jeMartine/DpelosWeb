@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.web.dpelos.dto.AdministradorDTO;
 import com.web.dpelos.dto.LoginRequest;
 import com.web.dpelos.dto.LoginResponse;
+import com.web.dpelos.dto.VeterinarioDTO;
+import com.web.dpelos.entity.Administrador;
+import com.web.dpelos.entity.Veterinario;
 import com.web.dpelos.service.AdminService;
 import com.web.dpelos.service.DuenoService;
 import com.web.dpelos.service.VeterinarioService;
@@ -45,11 +49,13 @@ public class LoginController {
 
             //Si no es nulo, envía administrador o veterinario
             if(admin!=null){
+                AdministradorDTO adminDTO = adminService.toDTO((Administrador) admin);
                 rol = "ADMIN";
-                return ResponseEntity.ok(new LoginResponse(admin, rol));
+                return ResponseEntity.ok(new LoginResponse(adminDTO, rol));
             }else if(user!=null){
+                VeterinarioDTO vetDTO = veterinarioService.toDTO((Veterinario) user);
                 rol="VET";
-                return ResponseEntity.ok(new LoginResponse(user, rol));
+                return ResponseEntity.ok(new LoginResponse(vetDTO, rol));
             }
 
         //petición para cliente

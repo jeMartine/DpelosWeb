@@ -66,7 +66,6 @@ public class DatabaseInit implements ApplicationRunner {
                 Date sqlDate = Date.valueOf(date);
                 // crear un administrador
                 Administrador admin = new Administrador("998877", "pass123");
-
                 Dueno[] duenos = new Dueno[] {
                                 new Dueno("13231", "Ana", "Martínez", "ana.martinez@gmail.com", "3001234567",
                                                 "https://static01.nyt.com/images/2017/05/07/arts/07GAL-GADOTweb/07GAL-GADOTweb-articleLarge.jpg?quality=75&auto=webp&disable=upscale"),
@@ -580,95 +579,95 @@ public class DatabaseInit implements ApplicationRunner {
                                 new Especialidad("Radiología")
                 };
 
-                // Entidades de veterinario
+                // Entidades de veterinarios
                 Veterinario[] veterinarios = new Veterinario[] {
-                                new Veterinario("María", "González", "987654321", "password456",
-                                                "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                200, true),
-                                new Veterinario("Carlos", "Rodríguez", "456789123", "password789",
-                                                "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                120, true),
-                                new Veterinario("Ana", "López", "321654987", "password101",
-                                                "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                180, true),
-                                new Veterinario("Luis", "Martínez", "654321789", "password202",
-                                                "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                220, true),
-                                new Veterinario("Marta", "Sánchez", "789123456", "password303",
-                                                "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                130, true),
-                                new Veterinario("José", "Ramírez", "963852741", "password404",
-                                                "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                160, true),
-                                new Veterinario("Laura", "Torres", "741258963", "password505",
-                                                "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                210, true),
-                                new Veterinario("Javier", "Fernández", "258369147", "password606",
-                                                "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                140, true),
-                                new Veterinario("Paula", "Gómez", "147258369", "password707",
-                                                "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                190, true),
-                                new Veterinario("Raúl", "Jiménez", "369852147", "password808",
-                                                "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                170, true),
-                                new Veterinario("Andrea", "Hernández", "258147369", "password909",
-                                                "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                230, true),
-                                new Veterinario("Miguel", "Ruiz", "852963741", "password010",
-                                                "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                110, true),
-                                new Veterinario("Clara", "Ortiz", "741369258", "password111",
-                                                "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                250, true),
-                                new Veterinario("Roberto", "Moreno", "963741852", "password212",
-                                                "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                140, true),
-                                new Veterinario("Elena", "Vargas", "258741369", "password313",
-                                                "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                180, true),
-                                new Veterinario("Fernando", "Cruz", "852147963", "password414",
-                                                "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                130, true),
-                                new Veterinario("Patricia", "Castro", "741852963", "password515",
-                                                "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                210, true),
-                                new Veterinario("Santiago", "Molina", "369147852", "password616",
-                                                "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                160, true),
-                                new Veterinario("Isabel", "Romero", "147369258", "password717",
-                                                "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                200, true),
-                                new Veterinario("Pablo", "Díaz", "258963147", "password818",
-                                                "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                170, true),
-                                new Veterinario("Lucía", "Silva", "741963258", "password919",
-                                                "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                150, true),
-                                new Veterinario("Ricardo", "Méndez", "852741369", "password020",
-                                                "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                240, true),
-                                new Veterinario("Sofía", "Herrera", "369258741", "password121",
-                                                "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                180, true),
-                                new Veterinario("Gabriel", "Ríos", "147852369", "password222",
-                                                "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                200, true),
-                                new Veterinario("Daniela", "Flores", "258741963", "password323",
-                                                "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                130, true),
-                                new Veterinario("Tomás", "Navarro", "741258369", "password424",
-                                                "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                220, true),
-                                new Veterinario("Lorena", "Vega", "963258741", "password525",
-                                                "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                150, true),
-                                new Veterinario("Francisco", "Acosta", "852369147", "password626",
-                                                "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                190, true),
-                                new Veterinario("Adriana", "Rojas", "369741258", "password727",
-                                                "https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668",
-                                                140, false)
+                        Veterinario.builder().nombreVeterinario("María").apellidoVeterinario("González").cedulaVeterinario("987654321")
+                        .passwordVeterinario("password456").fotoUrl("https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668").numeroAtenciones(200)
+                        .estadoVeterinario(true).build(),
+                        Veterinario.builder().nombreVeterinario("Carlos").apellidoVeterinario("Rodríguez").cedulaVeterinario("456789123")
+                        .passwordVeterinario("password789").fotoUrl("https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668").numeroAtenciones(120)
+                        .estadoVeterinario(true).build(),
+                        Veterinario.builder().nombreVeterinario("Ana").apellidoVeterinario("López").cedulaVeterinario("321654987")
+                        .passwordVeterinario("password101").fotoUrl("https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668").numeroAtenciones(180)
+                        .estadoVeterinario(true).build(),
+                        Veterinario.builder().nombreVeterinario("Luis").apellidoVeterinario("Martínez").cedulaVeterinario("654321789")
+                        .passwordVeterinario("password202").fotoUrl("https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668").numeroAtenciones(220)
+                        .estadoVeterinario(true).build(),
+                        Veterinario.builder().nombreVeterinario("Marta").apellidoVeterinario("Sánchez").cedulaVeterinario("789123456")
+                        .passwordVeterinario("password303").fotoUrl("https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668").numeroAtenciones(130)
+                        .estadoVeterinario(true).build(),
+                        Veterinario.builder().nombreVeterinario("José").apellidoVeterinario("Ramírez").cedulaVeterinario("963852741")
+                        .passwordVeterinario("password404").fotoUrl("https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668").numeroAtenciones(160)
+                        .estadoVeterinario(true).build(),
+                        Veterinario.builder().nombreVeterinario("Laura").apellidoVeterinario("Torres").cedulaVeterinario("741258963")
+                        .passwordVeterinario("password505").fotoUrl("https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668").numeroAtenciones(210)
+                        .estadoVeterinario(true).build(),
+                        Veterinario.builder().nombreVeterinario("Javier").apellidoVeterinario("Fernández").cedulaVeterinario("258369147")
+                        .passwordVeterinario("password606").fotoUrl("https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668").numeroAtenciones(140)
+                        .estadoVeterinario(true).build(),
+                        Veterinario.builder().nombreVeterinario("Paula").apellidoVeterinario("Gómez").cedulaVeterinario("147258369")
+                        .passwordVeterinario("password707").fotoUrl("https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668").numeroAtenciones(190)
+                        .estadoVeterinario(true).build(),
+                        Veterinario.builder().nombreVeterinario("Raúl").apellidoVeterinario("Jiménez").cedulaVeterinario("369852147")
+                        .passwordVeterinario("password808").fotoUrl("https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668").numeroAtenciones(170)
+                        .estadoVeterinario(true).build(),
+                        Veterinario.builder().nombreVeterinario("Andrea").apellidoVeterinario("Hernández").cedulaVeterinario("258147369")
+                        .passwordVeterinario("password909").fotoUrl("https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668").numeroAtenciones(230)
+                        .estadoVeterinario(true).build(),
+                        Veterinario.builder().nombreVeterinario("Miguel").apellidoVeterinario("Ruiz").cedulaVeterinario("852963741")
+                        .passwordVeterinario("password010").fotoUrl("https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668").numeroAtenciones(110)
+                        .estadoVeterinario(true).build(),
+                        Veterinario.builder().nombreVeterinario("Clara").apellidoVeterinario("Ortiz").cedulaVeterinario("741369258")
+                        .passwordVeterinario("password111").fotoUrl("https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668").numeroAtenciones(250)
+                        .estadoVeterinario(true).build(),
+                        Veterinario.builder().nombreVeterinario("Roberto").apellidoVeterinario("Moreno").cedulaVeterinario("963741852")
+                        .passwordVeterinario("password212").fotoUrl("https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668").numeroAtenciones(140)
+                        .estadoVeterinario(true).build(),
+                        Veterinario.builder().nombreVeterinario("Elena").apellidoVeterinario("Vargas").cedulaVeterinario("258741369")
+                        .passwordVeterinario("password313").fotoUrl("https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668").numeroAtenciones(180)
+                        .estadoVeterinario(true).build(),
+                        Veterinario.builder().nombreVeterinario("Fernando").apellidoVeterinario("Cruz").cedulaVeterinario("852147963")
+                        .passwordVeterinario("password414").fotoUrl("https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668").numeroAtenciones(130)
+                        .estadoVeterinario(true).build(),
+                        Veterinario.builder().nombreVeterinario("Patricia").apellidoVeterinario("Castro").cedulaVeterinario("741852963")
+                        .passwordVeterinario("password515").fotoUrl("https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668").numeroAtenciones(210)
+                        .estadoVeterinario(true).build(),
+                        Veterinario.builder().nombreVeterinario("Santiago").apellidoVeterinario("Molina").cedulaVeterinario("369147852")
+                        .passwordVeterinario("password616").fotoUrl("https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668").numeroAtenciones(160)
+                        .estadoVeterinario(true).build(),
+                        Veterinario.builder().nombreVeterinario("Isabel").apellidoVeterinario("Romero").cedulaVeterinario("147369258")
+                        .passwordVeterinario("password717").fotoUrl("https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668").numeroAtenciones(200)
+                        .estadoVeterinario(true).build(),
+                        Veterinario.builder().nombreVeterinario("Pablo").apellidoVeterinario("Díaz").cedulaVeterinario("258963147")
+                        .passwordVeterinario("password818").fotoUrl("https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668").numeroAtenciones(170)
+                        .estadoVeterinario(true).build(),
+                        Veterinario.builder().nombreVeterinario("Lucía").apellidoVeterinario("Silva").cedulaVeterinario("741963258")
+                        .passwordVeterinario("password919").fotoUrl("https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668").numeroAtenciones(150)
+                        .estadoVeterinario(true).build(),
+                        Veterinario.builder().nombreVeterinario("Ricardo").apellidoVeterinario("Méndez").cedulaVeterinario("852741369")
+                        .passwordVeterinario("password020").fotoUrl("https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668").numeroAtenciones(240)
+                        .estadoVeterinario(true).build(),
+                        Veterinario.builder().nombreVeterinario("Sofía").apellidoVeterinario("Herrera").cedulaVeterinario("369258741")  
+                        .passwordVeterinario("password121").fotoUrl("https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668").numeroAtenciones(180)
+                        .estadoVeterinario(true).build(),
+                        Veterinario.builder().nombreVeterinario("Gabriel").apellidoVeterinario("Ríos").cedulaVeterinario("147852369")
+                        .passwordVeterinario("password222").fotoUrl("https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668").numeroAtenciones(200)
+                        .estadoVeterinario(true).build(),
+                        Veterinario.builder().nombreVeterinario("Daniela").apellidoVeterinario("Flores").cedulaVeterinario("258741963")
+                        .passwordVeterinario("password323").fotoUrl("https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668").numeroAtenciones(170)
+                        .estadoVeterinario(true).build(),
+                        Veterinario.builder().nombreVeterinario("Tomás").apellidoVeterinario("Navarro").cedulaVeterinario("741258369")
+                        .passwordVeterinario("password424").fotoUrl("https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668").numeroAtenciones(220)
+                        .estadoVeterinario(true).build(),
+                        Veterinario.builder().nombreVeterinario("Lorena").apellidoVeterinario("Vega").cedulaVeterinario("963258741")
+                        .passwordVeterinario("password525").fotoUrl("https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668").numeroAtenciones(150)
+                        .estadoVeterinario(true).build(),
+                        Veterinario.builder().nombreVeterinario("Francisco").apellidoVeterinario("Acosta").cedulaVeterinario("852369147")
+                        .passwordVeterinario("password626").fotoUrl("https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668").numeroAtenciones(190)
+                        .estadoVeterinario(true).build(),
+                        Veterinario.builder().nombreVeterinario("Adriana").apellidoVeterinario("Rojas").cedulaVeterinario("369741258")
+                        .passwordVeterinario("password727").fotoUrl("https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668").numeroAtenciones(140)
+                        .estadoVeterinario(true).build()
                 };
 
                 // entidades de Medicamentos

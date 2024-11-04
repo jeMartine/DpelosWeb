@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.web.dpelos.dto.VeterinarioDTO;
 import com.web.dpelos.entity.Veterinario;
 import com.web.dpelos.exception.NotFoundException;
 import com.web.dpelos.repository.VeterinarioRepository;
@@ -21,6 +22,21 @@ public class VeterinarioServiceImplentation implements VeterinarioService {
 
     @Autowired
     VeterinarioRepository veterinarioRepository;
+
+    public VeterinarioDTO toDTO(Veterinario veterinario) {
+        if (veterinario == null)
+            return null;
+
+        return new VeterinarioDTO(
+                veterinario.getIdVeterinario(),
+                veterinario.getNombreVeterinario(),
+                veterinario.getApellidoVeterinario(),
+                veterinario.getCedulaVeterinario(),
+                veterinario.isEstadoVeterinario(),
+                veterinario.getFotoUrl(),
+                veterinario.getNumeroAtenciones(),
+                veterinario.getEspecialidad() != null ? veterinario.getEspecialidad().getNombreEspecialidad() : null);
+    }
 
     public Veterinario buscarVetPorId(Long id) {
         return veterinarioRepository.findById(id).get();

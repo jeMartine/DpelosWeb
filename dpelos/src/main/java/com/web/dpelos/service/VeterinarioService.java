@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 
+import com.web.dpelos.dto.VeterinarioDTO;
 import com.web.dpelos.entity.Veterinario;
 
 public interface VeterinarioService {
+    public VeterinarioDTO toDTO(Veterinario veterinario);
     public Veterinario buscarVetPorId(Long id);
 
     public List<Veterinario> findAll();

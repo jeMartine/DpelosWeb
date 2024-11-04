@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.web.dpelos.dto.VeterinarioDTO;
+import com.web.dpelos.dto.VeterinarioMapper;
 import com.web.dpelos.entity.Veterinario;
 import com.web.dpelos.service.VeterinarioService;
 
@@ -52,12 +54,13 @@ public class VeterinarioController {
 
     // Crear un veterinario
     @PostMapping
-    public ResponseEntity<Veterinario> crearVet(@RequestBody Veterinario vet) {
+    public ResponseEntity<VeterinarioDTO> crearVet(@RequestBody Veterinario vet) {
         Veterinario nuevoVet = veterinarioService.addVet(vet);
+        VeterinarioDTO veterinarioDTO = VeterinarioMapper.INSTACE.convert(nuevoVet);
         if(nuevoVet == null){
-            return new ResponseEntity<Veterinario>(nuevoVet, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<VeterinarioDTO>(veterinarioDTO, HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<Veterinario>(nuevoVet, HttpStatus.CREATED);
+        return new ResponseEntity<VeterinarioDTO>(veterinarioDTO, HttpStatus.CREATED);
 
     }
 

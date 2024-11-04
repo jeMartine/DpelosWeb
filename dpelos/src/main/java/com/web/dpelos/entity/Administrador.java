@@ -18,7 +18,6 @@ public class Administrador {
     @GeneratedValue
     private Long adminId;
     private String adminCedula;
-    @JsonIgnore
     private String password;
 
     public Administrador(String adminCedula, String password) {
