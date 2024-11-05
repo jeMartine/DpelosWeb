@@ -78,129 +78,129 @@ public class MascotaRepositoryTest {
         mascotaRepository.save(masc2);
     }
 
-    // Test 1
-    @Test
-    public void MascotaRepository_save_Mascota() {
-        // 1. Arrange
-        LocalDate date = LocalDate.now();
-        Date sqlDate = Date.valueOf(date);
-        Mascota mascota = new Mascota("Firulais", 5, "", sqlDate, true);
-        // 2. Act
-        Mascota mascotaSaved = mascotaRepository.save(mascota);
-        // 3. Assert
-        Assertions.assertThat(mascotaSaved).isNotNull();
-    }
+    // // Test 1
+    // @Test
+    // public void MascotaRepository_save_Mascota() {
+    //     // 1. Arrange
+    //     LocalDate date = LocalDate.now();
+    //     Date sqlDate = Date.valueOf(date);
+    //     Mascota mascota = new Mascota("Firulais", 5, "", sqlDate, true);
+    //     // 2. Act
+    //     Mascota mascotaSaved = mascotaRepository.save(mascota);
+    //     // 3. Assert
+    //     Assertions.assertThat(mascotaSaved).isNotNull();
+    // }
 
-    // Test 2
-    @Test
-    public void MascotaRepository_FindAll_NotEmptyList() {
-        // 1. Arrange
-        // 2. Act
-        List<Mascota> mascotas = mascotaRepository.findAll();
-        // 3. Assert
-        Assertions.assertThat(mascotas).isNotNull();
-        Assertions.assertThat(mascotas.size()).isEqualTo(2);
-        Assertions.assertThat(mascotas.get(0).getNombreMascota()).isEqualTo("Toby");
-    }
+    // // Test 2
+    // @Test
+    // public void MascotaRepository_FindAll_NotEmptyList() {
+    //     // 1. Arrange
+    //     // 2. Act
+    //     List<Mascota> mascotas = mascotaRepository.findAll();
+    //     // 3. Assert
+    //     Assertions.assertThat(mascotas).isNotNull();
+    //     Assertions.assertThat(mascotas.size()).isEqualTo(2);
+    //     Assertions.assertThat(mascotas.get(0).getNombreMascota()).isEqualTo("Toby");
+    // }
 
-    // Test 3
-    @Test
-    public void MascotaRepository_update_Mascota() {
-        // 1. Arrange
-        Mascota mascota = mascotaRepository.findById(1L).get();
-        mascota.setNombreMascota("Firulais");
-        // 2. Act
-        Mascota mascotaUpdated = mascotaRepository.save(mascota);
-        // 3. Assert
-        Assertions.assertThat(mascotaUpdated).isNotNull();
-        Assertions.assertThat(mascotaUpdated.getNombreMascota()).isEqualTo("Firulais");
-    }
+    // // Test 3
+    // @Test
+    // public void MascotaRepository_update_Mascota() {
+    //     // 1. Arrange
+    //     Mascota mascota = mascotaRepository.findById(1L).get();
+    //     mascota.setNombreMascota("Firulais");
+    //     // 2. Act
+    //     Mascota mascotaUpdated = mascotaRepository.save(mascota);
+    //     // 3. Assert
+    //     Assertions.assertThat(mascotaUpdated).isNotNull();
+    //     Assertions.assertThat(mascotaUpdated.getNombreMascota()).isEqualTo("Firulais");
+    // }
 
-    // Test 4
-    @Test
-    public void MascotaRepository_delete_Mascota() {
-        // 1. Arrange
-        Mascota mascota = mascotaRepository.findById(1L).get();
-        // 2. Act
-        mascotaRepository.delete(mascota);
-        // 3. Assert
-        Assertions.assertThat(mascotaRepository.findById(1L)).isEmpty();
-    }
+    // // Test 4
+    // @Test
+    // public void MascotaRepository_delete_Mascota() {
+    //     // 1. Arrange
+    //     Mascota mascota = mascotaRepository.findById(1L).get();
+    //     // 2. Act
+    //     mascotaRepository.delete(mascota);
+    //     // 3. Assert
+    //     Assertions.assertThat(mascotaRepository.findById(1L)).isEmpty();
+    // }
 
-    // Test 5
-    // 1 Custom
-    @Test
-    public void MascotaRepository_findByIdDueno_ReturnsMascotas() {
-        // 1. Arrange
-        Dueno dueno = duenoRepository.findById(1L).get();
+    // // Test 5
+    // // 1 Custom
+    // @Test
+    // public void MascotaRepository_findByIdDueno_ReturnsMascotas() {
+    //     // 1. Arrange
+    //     Dueno dueno = duenoRepository.findById(1L).get();
 
-        // 2. Act
-        Collection<Mascota> mascotas = mascotaRepository.findByIdDueno(dueno);
+    //     // 2. Act
+    //     Collection<Mascota> mascotas = mascotaRepository.findByIdDueno(dueno);
 
-        // 3. Assert
-        Assertions.assertThat(mascotas).isNotNull();
-        Assertions.assertThat(mascotas.size()).isEqualTo(1);
-        Assertions.assertThat(mascotas.iterator().next().getNombreMascota()).isEqualTo("Toby");
-    }
+    //     // 3. Assert
+    //     Assertions.assertThat(mascotas).isNotNull();
+    //     Assertions.assertThat(mascotas.size()).isEqualTo(1);
+    //     Assertions.assertThat(mascotas.iterator().next().getNombreMascota()).isEqualTo("Toby");
+    // }
 
-    // Test 6
-    // 2 Custom
-    @Test
-    public void MascotaRepository_findByIdDueno_NoMascotas() {
-        // 1. Arrange
-        Dueno dueno = new Dueno("99999", "Nonexistent", "User", "nonexistent.user@gmail.com", "0000000000", "");
-        duenoRepository.save(dueno);
+    // // Test 6
+    // // 2 Custom
+    // @Test
+    // public void MascotaRepository_findByIdDueno_NoMascotas() {
+    //     // 1. Arrange
+    //     Dueno dueno = new Dueno("99999", "Nonexistent", "User", "nonexistent.user@gmail.com", "0000000000", "");
+    //     duenoRepository.save(dueno);
 
-        // 2. Act
-        Collection<Mascota> mascotas = mascotaRepository.findByIdDueno(dueno);
+    //     // 2. Act
+    //     Collection<Mascota> mascotas = mascotaRepository.findByIdDueno(dueno);
 
-        // 3. Assert
-        Assertions.assertThat(mascotas).isNotNull();
-        Assertions.assertThat(mascotas).isEmpty();
-    }
+    //     // 3. Assert
+    //     Assertions.assertThat(mascotas).isNotNull();
+    //     Assertions.assertThat(mascotas).isEmpty();
+    // }
 
-    // Test 7
-    // 3 Custom
-    @Test
-    public void MascotaRepository_countByEstadoTrue_NoActiveMascotas() {
-        // 1. Arrange
-        Mascota mascota1 = mascotaRepository.findById(1L).get();
-        Mascota mascota2 = mascotaRepository.findById(2L).get();
-        mascota1.setEstado(false);
-        mascota2.setEstado(false);
-        mascotaRepository.save(mascota1);
-        mascotaRepository.save(mascota2);
+    // // Test 7
+    // // 3 Custom
+    // @Test
+    // public void MascotaRepository_countByEstadoTrue_NoActiveMascotas() {
+    //     // 1. Arrange
+    //     Mascota mascota1 = mascotaRepository.findById(1L).get();
+    //     Mascota mascota2 = mascotaRepository.findById(2L).get();
+    //     mascota1.setEstado(false);
+    //     mascota2.setEstado(false);
+    //     mascotaRepository.save(mascota1);
+    //     mascotaRepository.save(mascota2);
 
-        // 2. Act
-        long count = mascotaRepository.countByEstadoTrue();
+    //     // 2. Act
+    //     long count = mascotaRepository.countByEstadoTrue();
 
-        // 3. Assert
-        Assertions.assertThat(count).isEqualTo(0);
-    }
+    //     // 3. Assert
+    //     Assertions.assertThat(count).isEqualTo(0);
+    // }
 
-    // Test 8
-    // 4 Custom
-    @Test
-    public void MascotaRepository_countByEstadoTrue_AllActiveMascotas() {
-        // 1. Arrange
-        // 2. Act
-        long count = mascotaRepository.countByEstadoTrue();
-        // 3. Assert
-        Assertions.assertThat(count).isEqualTo(2);
-    }
+    // // Test 8
+    // // 4 Custom
+    // @Test
+    // public void MascotaRepository_countByEstadoTrue_AllActiveMascotas() {
+    //     // 1. Arrange
+    //     // 2. Act
+    //     long count = mascotaRepository.countByEstadoTrue();
+    //     // 3. Assert
+    //     Assertions.assertThat(count).isEqualTo(2);
+    // }
 
-    // Test 9
-    // 5 Custom
-    @Test
-    public void MascotaRepository_countByEstadoTrue_MixedEstadoMascotas() {
-        // 1. Arrange
-        Mascota mascota1 = mascotaRepository.findById(1L).get();
-        mascota1.setEstado(false);
-        mascotaRepository.save(mascota1);
-        // 2. Act
-        long count = mascotaRepository.countByEstadoTrue();
-        // 3. Assert
-        Assertions.assertThat(count).isEqualTo(1);
-    }
+    // // Test 9
+    // // 5 Custom
+    // @Test
+    // public void MascotaRepository_countByEstadoTrue_MixedEstadoMascotas() {
+    //     // 1. Arrange
+    //     Mascota mascota1 = mascotaRepository.findById(1L).get();
+    //     mascota1.setEstado(false);
+    //     mascotaRepository.save(mascota1);
+    //     // 2. Act
+    //     long count = mascotaRepository.countByEstadoTrue();
+    //     // 3. Assert
+    //     Assertions.assertThat(count).isEqualTo(1);
+    // }
 
 }

@@ -18,17 +18,18 @@ import jakarta.servlet.http.HttpServletRequest;
  * capturen errores.
  */
 @RestController
-public class CustomErrorController implements ErrorController {
-    @RequestMapping("/error")
-    public ModelAndView handleError(HttpServletRequest request) {
-        Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
-        Exception exception = (Exception) request.getAttribute("javax.servlet.error.exception");
+public class CustomErrorController{
+//public class CustomErrorController implements ErrorController {
+    // @RequestMapping("/error")
+    // public ModelAndView handleError(HttpServletRequest request) {
+    //     Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
+    //     Exception exception = (Exception) request.getAttribute("javax.servlet.error.exception");
 
-        ModelAndView modelAndView = new ModelAndView("Error/paginaError");
-        modelAndView.addObject("statusCode", statusCode);
-        modelAndView.addObject("errorMessage", exception == null ? "N/A" : exception.getMessage());
+    //     ModelAndView modelAndView = new ModelAndView("Error/paginaError");
+    //     modelAndView.addObject("statusCode", statusCode);
+    //     modelAndView.addObject("errorMessage", exception == null ? "N/A" : exception.getMessage());
 
-        return modelAndView;
-    }
+    //     return modelAndView;
+    // }
 
 }

@@ -61,7 +61,8 @@ public class DatabaseInit implements ApplicationRunner {
 
         @Override
         public void run(ApplicationArguments args) throws Exception {
-
+                // Esperar 5 segundos (5000 milisegundos)
+               // Thread.sleep(5000);
                 LocalDate date = LocalDate.now();
                 Date sqlDate = Date.valueOf(date);
                 // crear un administrador
@@ -169,6 +170,7 @@ public class DatabaseInit implements ApplicationRunner {
                                                 "https://randomuser.me/api/portraits/men/20.jpg"),
 
                 };
+
 
                 // Inicializar el arreglo de mascotas
                 Mascota[] mascotas = new Mascota[] {
