@@ -5,14 +5,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.web.dpelos.entity.Dueno;
-import com.web.dpelos.entity.Mascota;
 import com.web.dpelos.entity.Veterinario;
 
 public interface VeterinarioRepository extends JpaRepository<Veterinario, Long> {
     Veterinario findByCedulaVeterinario(String cedulaVeterinario);
 
-    Veterinario findByCedulaVeterinarioAndPasswordVeterinario(String cedulaVet, String passwordVet);
+    //Veterinario findByCedulaVeterinarioAndPasswordVeterinario(String cedulaVet, String passwordVet);
 
     // Buscar un veterinario por nombre
     Page<Veterinario> findByNombreVeterinarioContainingIgnoreCase(String nombreVeterinario, Pageable pageable);

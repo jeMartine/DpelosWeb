@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.web.dpelos.entity.Dueno;
+import com.web.dpelos.entity.UserEntity;
+import com.web.dpelos.repository.UserRepository;
+import com.web.dpelos.security.CustomUserDetailService;
 import com.web.dpelos.service.DuenoService;
-import com.web.dpelos.service.VeterinarioService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -31,7 +33,10 @@ public class DuenoController {
     DuenoService duenoService;
 
     @Autowired
-    VeterinarioService veterinarioService;
+    UserRepository userRepository;
+
+    @Autowired
+    CustomUserDetailService customUserDetailService;
 
     /* Método que retorna la lista de dueños registrados */
     @GetMapping()
@@ -55,10 +60,21 @@ public class DuenoController {
 
     /* Método que agrega un dueño a la base de datos */
     @PostMapping()
-    public ResponseEntity<Dueno> addDueno(@RequestBody Dueno dueno) {
-        Dueno nuevoDueno = duenoService.addDueno(dueno);
+    public ResponseEntity addDueno(@RequestBody Dueno dueno) {
+        /*Dueno nuevoDueno = duenoService.addDueno(dueno);
         if (nuevoDueno == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<Dueno>(nuevoDueno, HttpStatus.CREATED);*/
+        if(userRepository.existsByUsername(dueno.getCedulaDueno())){
+            return new ResponseEntity<String>("Este dueño ya existe", HttpStatus.BAD_REQUEST);
+        }
+
+        UserEntity userEntity = customUserDetailService.duenoToUser(dueno);
+        dueno.setUser(userEntity);
+        Dueno nuevoDueno = duenoService.addDueno(dueno);
+        if (nuevoDueno == null) {
+            return new ResponseEntity<Dueno>(nuevoDueno,HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<Dueno>(nuevoDueno, HttpStatus.CREATED);
     }

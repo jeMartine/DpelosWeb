@@ -21,7 +21,7 @@ public interface VeterinarioService {
 
     public Veterinario buscarVetPorCedula(String cedulaVet);
 
-    public Veterinario buscarVetLogin(String cedulaVet, String passwordVet);
+    //public Veterinario buscarVetLogin(String cedulaVet, String passwordVet);
 
     public long obtenerTotalVeterinarios();
 

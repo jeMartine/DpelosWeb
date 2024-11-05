@@ -18,6 +18,8 @@ public interface AdminService{
 
     public void updateAdministrador(Administrador admin);
 
-    public Administrador buscarAdminLogin(String cedula, String password);
+    public Administrador buscarAdminPorCedula(String cedula);
+
+    //public Administrador buscarAdminLogin(String cedula, String password);
 
 }

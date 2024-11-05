@@ -5,12 +5,15 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,6 +25,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Veterinario {
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private UserEntity user;
+
     @Id
     @GeneratedValue
     private Long idVeterinario;
@@ -30,9 +37,10 @@ public class Veterinario {
     private String cedulaVeterinario;
     private boolean estadoVeterinario;
     // @JsonIgnore
-    private String passwordVeterinario;
     private String fotoUrl;
     private int numeroAtenciones;
+    @Transient
+    private String passwordVeterinario;
 
     @ManyToOne
     @JoinColumn(name = "especialidad_id")
@@ -54,11 +62,4 @@ public class Veterinario {
         this.estadoVeterinario = estadoVeterinario;
     }
 
-    public List<Tratamiento> getTratamientos() {
-        return tratamientos;
-    }
-
-    public void setTratamientos(List<Tratamiento> tratamientos) {
-        this.tratamientos = tratamientos;
-    }
 }
