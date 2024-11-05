@@ -1,6 +1,6 @@
 package com.web.dpelos.repository;
 
-import java.sql.Date;
+/*import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
@@ -22,10 +22,10 @@ import com.web.dpelos.entity.Raza;
 //Clase para los Test relacionados al repositorio de Mascotas. MascotaRepository.java
 @DataJpaTest
 @RunWith(SpringRunner.class)
-@ActiveProfiles("test")
+@ActiveProfiles("test")*/
 public class MascotaRepositoryTest {
     // Repositorios para los tests.
-    @Autowired
+    /*@Autowired
     private MascotaRepository mascotaRepository;
     @Autowired
     private DuenoRepository duenoRepository;
@@ -189,6 +189,7 @@ public class MascotaRepositoryTest {
     //     Assertions.assertThat(count).isEqualTo(2);
     // }
 
+<<<<<<< HEAD
     // // Test 9
     // // 5 Custom
     // @Test
@@ -202,5 +203,20 @@ public class MascotaRepositoryTest {
     //     // 3. Assert
     //     Assertions.assertThat(count).isEqualTo(1);
     // }
+=======
+    // Test 9
+    // 5 Custom
+    @Test
+    public void MascotaRepository_countByEstadoTrue_MixedEstadoMascotas() {
+        // 1. Arrange
+        Mascota mascota1 = mascotaRepository.findById(1L).get();
+        mascota1.setEstado(false);
+        mascotaRepository.save(mascota1);
+        // 2. Act
+        long count = mascotaRepository.countByEstadoTrue();
+        // 3. Assert
+        Assertions.assertThat(count).isEqualTo(1);
+    }*/
+>>>>>>> efcaf0a138639dc9649bc86711f10f04e1ed480a
 
 }

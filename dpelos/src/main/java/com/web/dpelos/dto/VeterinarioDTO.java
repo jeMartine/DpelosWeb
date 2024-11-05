@@ -16,4 +16,15 @@ public class VeterinarioDTO {
     private String fotoUrl;
     private int numeroAtenciones;
     private String especialidad;
+
+    public VeterinarioDTO() {
+        this.idVeterinario = null;
+        this.nombreVeterinario = "";
+        this.apellidoVeterinario = "";
+        this.cedulaVeterinario = "";
+        this.estadoVeterinario = false;
+        this.fotoUrl = "";
+        this.numeroAtenciones = 0;
+        this.especialidad = "";
+    }
 }
