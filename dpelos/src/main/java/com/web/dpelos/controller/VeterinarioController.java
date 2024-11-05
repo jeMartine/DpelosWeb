@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -152,4 +153,19 @@ public class VeterinarioController {
         }
         return new ResponseEntity<Long>(totalVeterinariosInactivos, HttpStatus.OK);
     }
+
+    @GetMapping("/details")
+    public ResponseEntity<VeterinarioDTO> buscarVeterinarioDetail() {
+        Veterinario veterinario = veterinarioService.buscarVetPorCedula(
+            SecurityContextHolder.getContext().getAuthentication().getName()
+        );
+
+        VeterinarioDTO veterinarioDTO = VeterinarioMapper.INSTACE.convert(veterinario);
+
+        if(veterinario == null) {
+            return new ResponseEntity<VeterinarioDTO>(veterinarioDTO, HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<VeterinarioDTO>(veterinarioDTO, HttpStatus.OK); 
+    }
+    
 }

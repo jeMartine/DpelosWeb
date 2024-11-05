@@ -8,7 +8,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,11 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.web.dpelos.dto.LoginRequest;
 import com.web.dpelos.dto.LoginResponse;
-import com.web.dpelos.entity.Administrador;
-import com.web.dpelos.entity.Dueno;
 import com.web.dpelos.entity.Role;
 import com.web.dpelos.entity.UserEntity;
-import com.web.dpelos.entity.Veterinario;
 import com.web.dpelos.repository.UserRepository;
 import com.web.dpelos.security.JWTGenerator;
 import com.web.dpelos.service.AdminService;
@@ -77,10 +73,12 @@ public class LoginController {
 
             if ("ADMINISTRADOR".equals(rol)) {
                 //Administrador admin = adminService.buscarAdminPorCedula(user.getUsername());
-                return new ResponseEntity<String>(token, HttpStatus.OK);
+                //return new ResponseEntity<String>(token, HttpStatus.OK);
+                return ResponseEntity.ok(new LoginResponse(token, "ADMMINISTRADOR"));
             } else if ("VETERINARIO".equals(rol)) {
                 //Veterinario vet = veterinarioService.buscarVetPorCedula(user.getUsername());
-                return new ResponseEntity<String>(token, HttpStatus.OK);
+                //return new ResponseEntity<String>(token, HttpStatus.OK);
+                return ResponseEntity.ok(new LoginResponse(token, "VETERINARIO"));
             }
 
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Rol no reconocido");

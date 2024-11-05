@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -105,6 +106,18 @@ public class DuenoController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<Dueno>(dueno, HttpStatus.OK);
+    }
+
+    @GetMapping("/details")
+    public ResponseEntity<Dueno> buscarDuenoDetail() {
+        Dueno dueno = duenoService.buscarDuenoPorCedula(
+            SecurityContextHolder.getContext().getAuthentication().getName()
+        );
+
+        if(dueno == null) {
+            return new ResponseEntity<Dueno>(dueno, HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<Dueno>(dueno, HttpStatus.OK); 
     }
 
 }

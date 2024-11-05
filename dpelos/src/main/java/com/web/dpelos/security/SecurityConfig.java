@@ -26,7 +26,12 @@ public class SecurityConfig {
             .headers(headers -> headers.frameOptions(frame -> frame.disable()))
             .authorizeHttpRequests(requests -> requests
                 .requestMatchers("/h2/**").permitAll()
-                .requestMatchers("/dueno/**").authenticated()
+                .requestMatchers("/login/**").permitAll()
+                .requestMatchers("/dueno/**").hasAnyAuthority("DUENO", "ADMINISTRADOR", "VETERINARIO")
+                .requestMatchers("/vet/**").hasAnyAuthority("VETERINARIO", "ADMINISTRADOR")
+                .requestMatchers("/admin/**").hasAnyAuthority("ADMINISTRADOR")
+                .requestMatchers("/dueno/details").hasAuthority("DUENO")
+                .requestMatchers("/vet/details").hasAuthority("VETERINARIO")
                 .anyRequest().permitAll()
             )
             .exceptionHandling(exception -> exception.authenticationEntryPoint(jwtAuthEntryPoint));
