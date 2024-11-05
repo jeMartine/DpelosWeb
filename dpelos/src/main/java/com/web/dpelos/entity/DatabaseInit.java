@@ -12,7 +12,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.context.annotation.Profile;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.web.dpelos.repository.AdminRepository;
@@ -22,8 +24,10 @@ import com.web.dpelos.repository.EnfermedadMascotaRepository;
 import com.web.dpelos.repository.EspecialidadRepository;
 import com.web.dpelos.repository.MascotaRepository;
 import com.web.dpelos.repository.RazaMascotaRepository;
+import com.web.dpelos.repository.RoleRepository;
 import com.web.dpelos.repository.VeterinarioRepository;
 import com.web.dpelos.repository.TratamientoRepository;
+import com.web.dpelos.repository.UserRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -59,13 +63,40 @@ public class DatabaseInit implements ApplicationRunner {
         @Autowired
         AdminRepository adminRepository;
 
+        @Autowired
+        PasswordEncoder passwordEncoder;
+
+        @Autowired
+        RoleRepository roleRepository;
+
+        @Autowired
+        UserRepository userRepository;
+
         @Override
         public void run(ApplicationArguments args) throws Exception {
 
                 LocalDate date = LocalDate.now();
                 Date sqlDate = Date.valueOf(date);
+
+                roleRepository.save(new Role("VETERINARIO"));
+                roleRepository.save(new Role("ADMINISTRADOR"));
+                roleRepository.save(new Role("DUENO"));
+
                 // crear un administrador
-                Administrador admin = new Administrador("998877", "pass123");
+                Administrador adminSave;
+                UserEntity userAdminEntity;
+                adminSave = new Administrador("998877", "pass123");
+                userAdminEntity = saveUserAdmin(adminSave);
+                adminSave.setUser(userAdminEntity);
+                adminRepository.save(adminSave);
+
+
+                /*Dueno duenoSave;
+                UserEntity userEntity;
+                duenoSave = new Dueno("13231", "Ana", "Martínez", "ana.martinez@gmail.com", "3001234567",
+                "https://static01.nyt.com/images/2017/05/07/arts/07GAL-GADOTweb/07GAL-GADOTweb-articleLarge.jpg?quality=75&auto=webp&disable=upscale");
+                userEntity = saveUserDueno(duenoSave);
+                duenoSave.setUser(userEntity);*/
                 Dueno[] duenos = new Dueno[] {
                                 new Dueno("13231", "Ana", "Martínez", "ana.martinez@gmail.com", "3001234567",
                                                 "https://static01.nyt.com/images/2017/05/07/arts/07GAL-GADOTweb/07GAL-GADOTweb-articleLarge.jpg?quality=75&auto=webp&disable=upscale"),
@@ -807,14 +838,14 @@ public class DatabaseInit implements ApplicationRunner {
                 };
                 // Initialize Tratamiento objects
 
-                // Guardar el administrador
-                adminRepository.save(admin);
                 // Ejemplo de uso: guardar las mascotas en un repositorio (si fuera el caso)
                 for (Mascota mascota : mascotas) {
                         mascotaRepository.save(mascota);
                 }
 
                 for (Dueno dueno : duenos) {
+                        UserEntity userEntity = saveUserDueno(dueno);
+                        dueno.setUser(userEntity);
                         duenoRepository.save(dueno);
                 }
 
@@ -834,9 +865,11 @@ public class DatabaseInit implements ApplicationRunner {
                 }
 
                 // Guardar veterinarios
-                for (Veterinario veterinario : veterinarios) {
+                /*for (Veterinario veterinario : veterinarios) {
+                        UserEntity userEntity = saveUserVet(veterinario); 
+                        veterinario.setUser(userEntity);
                         veterinarioRepository.save(veterinario);
-                }
+                }*/
 
                 // Guardar drogas
                 for (Droga droga : drogas) {
@@ -870,8 +903,26 @@ public class DatabaseInit implements ApplicationRunner {
                         }
                 }
 
+                // Guardar veterinarios y asignar especialidades
+                for (Veterinario veterinario : veterinarios) {
+                        UserEntity userEntity = saveUserVet(veterinario);
+                        veterinario.setUser(userEntity);
+                
+                        // Asignar especialidades
+                        for (int i = 0; i < CANT_ESPECIALIDADES; i++) {
+                        int randomEsp = ThreadLocalRandom.current().nextInt(1, CANT_ESPECIALIDADES + 1);
+                        Long lEsp = Long.valueOf(randomEsp);
+                        Especialidad especialidad = especialidadRepository.findById(lEsp).orElse(null);
+                
+                        if (especialidad != null) {
+                                veterinario.setEspecialidad(especialidad);
+                        }
+                        }
+                        veterinarioRepository.save(veterinario);
+                }
+                
                 // Asignar especialidades a veterinarios
-                for (Veterinario vet : veterinarioRepository.findAll()) {
+                /*for (Veterinario vet : veterinarioRepository.findAll()) {
                         for (int i = 0; i < CANT_ESPECIALIDADES; i++) {
                                 int randomEsp = ThreadLocalRandom.current().nextInt(1, CANT_ESPECIALIDADES + 1);
 
@@ -880,7 +931,7 @@ public class DatabaseInit implements ApplicationRunner {
                                 vet.setEspecialidad(especialidad);
                                 veterinarioRepository.save(vet);
                         }
-                }
+                }*/
 
                 ArrayList<Tratamiento> tratamientos = new ArrayList<>();
                 for (int i = 0; i < 10; i++) {
@@ -994,6 +1045,34 @@ public class DatabaseInit implements ApplicationRunner {
                         tratamientoRepository.save(tratamiento);
                 }
 
+        }
+
+        private UserEntity saveUserDueno(Dueno dueno) {
+                UserEntity userEntity = new UserEntity();
+                userEntity.setUsername(dueno.getCedulaDueno());
+                userEntity.setPassword(passwordEncoder.encode("123"));
+                Role roles = roleRepository.findByName("DUENO").get();
+                userEntity.setRoles(List.of(roles));
+                return userRepository.save(userEntity);
+        }
+
+        private UserEntity saveUserVet(Veterinario veterinario) {
+                UserEntity userEntity = new UserEntity();
+                userEntity.setUsername(veterinario.getCedulaVeterinario());
+                //userEntity.setPassword(veterinario.getPasswordVeterinario());
+                userEntity.setPassword(passwordEncoder.encode(veterinario.getPasswordVeterinario()));
+                Role roles = roleRepository.findByName("VETERINARIO").get();
+                userEntity.setRoles(List.of(roles));
+                return userRepository.save(userEntity);
+        }
+
+        private UserEntity saveUserAdmin(Administrador admin) {
+                UserEntity userEntity = new UserEntity();
+                userEntity.setUsername(admin.getAdminCedula());
+                userEntity.setPassword(passwordEncoder.encode(admin.getPassword()));
+                Role roles = roleRepository.findByName("ADMINISTRADOR").get();
+                userEntity.setRoles(List.of(roles));
+                return userRepository.save(userEntity);
         }
 
 }

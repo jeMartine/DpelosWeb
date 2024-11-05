@@ -2,17 +2,17 @@ package com.web.dpelos.service;
 
 import java.util.List;
 
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.web.dpelos.dto.AdministradorDTO;
-import com.web.dpelos.dto.VeterinarioDTO;
 import com.web.dpelos.entity.Administrador;
-import com.web.dpelos.entity.Veterinario;
 import com.web.dpelos.exception.NotFoundException;
 import com.web.dpelos.repository.AdminRepository;
+import com.web.dpelos.repository.RoleRepository;
+import com.web.dpelos.repository.UserRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -23,6 +23,15 @@ public class AdminServiceImplentation implements AdminService{
 
     @Autowired
     private AdminRepository adminRepository;
+
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    RoleRepository roleRepository;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     public AdministradorDTO toDTO(Administrador administrador) {
         if (administrador == null)
@@ -64,9 +73,28 @@ public class AdminServiceImplentation implements AdminService{
         adminRepository.save(admin);
     }
 
-    @Override
-    public Administrador buscarAdminLogin(String cedula, String password){
-        return adminRepository.findByAdminCedulaAndPassword(cedula, password);
+    public Administrador buscarAdminPorCedula(String cedula){
+        return adminRepository.findByAdminCedula(cedula).orElseThrow(() -> new RuntimeException("Administrador no encontrado con la cédula: " + cedula));
     }
+
+    /*@Override
+    public Administrador buscarAdminLogin(String cedula){
+        return adminRepository.findByAdminCedula(cedula);
+    Optional<UserEntity> userEntityOpt = userRepository.findByUsername(cedula);
+        
+        if (userEntityOpt.isPresent()) {
+            UserEntity userEntity = userEntityOpt.get();
+            System.out.println("Admin encontrado: " + userEntity.getUsername());
+            if (passwordEncoder.matches(password, userEntity.getPassword())) {
+                return adminRepository.findByAdminCedula(cedula);
+            } else {
+                System.out.println("Contraseña incorrecta para admin: " + cedula);
+            }
+        } else {
+            System.out.println("Admin no encontrado para la cédula: " + cedula);
+        }
+        return null;*/
+        //return adminRepository.findByAdminCedulaAndPassword(cedula, password);
+    
 
 }
