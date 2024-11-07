@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 public class VeterinarioDTO {
     private Long idVeterinario;
     private String nombreVeterinario;
