@@ -189,7 +189,7 @@ public class MascotaRepositoryTest {
     //     Assertions.assertThat(count).isEqualTo(2);
     // }
 
-<<<<<<< HEAD
+
     // // Test 9
     // // 5 Custom
     // @Test
@@ -217,6 +217,5 @@ public class MascotaRepositoryTest {
         // 3. Assert
         Assertions.assertThat(count).isEqualTo(1);
     }*/
->>>>>>> efcaf0a138639dc9649bc86711f10f04e1ed480a
 
 }

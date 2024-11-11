@@ -1,5 +1,7 @@
 package com.web.dpelos.controller;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,9 +45,13 @@ public class DrogaController {
         return drogaService.buscarDrogaPorId(id);
     }
 
-    @PostMapping()
-    public void addDroga(@RequestBody Droga droga) {
-        drogaService.addDroga(droga);
+    @PostMapping("/add")
+    public ResponseEntity<Droga> addDroga(@RequestBody Droga droga) {
+        Droga drog = drogaService.addDroga(droga);
+        if(drog==null){
+            return new ResponseEntity<>(HttpStatus.BAD_GATEWAY);
+        }
+        return new ResponseEntity<Droga>(drog, HttpStatus.OK);
     }
 
     @PostMapping("/excel")
@@ -66,9 +72,13 @@ public class DrogaController {
         drogaService.deleteDroga(id);
     }
 
-    @PutMapping()
-    public void updateDroga(@RequestBody Droga droga) {
-        drogaService.updateDroga(droga);
+    @PutMapping("/update")
+    public ResponseEntity<Droga> updateDroga(@RequestBody Droga med) {
+        Droga droga =  drogaService.updateDroga(med);
+        if(droga == null){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<Droga>(droga, HttpStatus.OK);
     }
 
     /* Metodo para buscar medicamentos por su nombre */
