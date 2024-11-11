@@ -631,7 +631,7 @@ public class DatabaseInit implements ApplicationRunner {
                         .estadoVeterinario(true).build(),
                         Veterinario.builder().nombreVeterinario("José").apellidoVeterinario("Ramírez").cedulaVeterinario("963852741")
                         .passwordVeterinario("password404").fotoUrl("https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668").numeroAtenciones(160)
-                        .estadoVeterinario(true).build(),
+                        .estadoVeterinario(false).build(),
                         Veterinario.builder().nombreVeterinario("Laura").apellidoVeterinario("Torres").cedulaVeterinario("741258963")
                         .passwordVeterinario("password505").fotoUrl("https://guau.com.co/cdn/shop/files/veterinarioadomicilio_436x436.jpg?v=1699595668").numeroAtenciones(210)
                         .estadoVeterinario(true).build(),

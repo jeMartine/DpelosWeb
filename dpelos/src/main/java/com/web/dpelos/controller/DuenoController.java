@@ -62,12 +62,14 @@ public class DuenoController {
     /* Método que agrega un dueño a la base de datos */
     @PostMapping()
     public ResponseEntity addDueno(@RequestBody Dueno dueno) {
-        /*Dueno nuevoDueno = duenoService.addDueno(dueno);
-        if (nuevoDueno == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-        return new ResponseEntity<Dueno>(nuevoDueno, HttpStatus.CREATED);*/
-        if(userRepository.existsByUsername(dueno.getCedulaDueno())){
+        /*
+         * Dueno nuevoDueno = duenoService.addDueno(dueno);
+         * if (nuevoDueno == null) {
+         * return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+         * }
+         * return new ResponseEntity<Dueno>(nuevoDueno, HttpStatus.CREATED);
+         */
+        if (userRepository.existsByUsername(dueno.getCedulaDueno())) {
             return new ResponseEntity<String>("Este dueño ya existe", HttpStatus.BAD_REQUEST);
         }
 
@@ -75,7 +77,7 @@ public class DuenoController {
         dueno.setUser(userEntity);
         Dueno nuevoDueno = duenoService.addDueno(dueno);
         if (nuevoDueno == null) {
-            return new ResponseEntity<Dueno>(nuevoDueno,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<Dueno>(nuevoDueno, HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<Dueno>(nuevoDueno, HttpStatus.CREATED);
     }
@@ -84,7 +86,6 @@ public class DuenoController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteDueno(@PathVariable Long id) {
         duenoService.deleteDueno(id);
-
         return new ResponseEntity<>("Dueño eliminado exitosamente", HttpStatus.NO_CONTENT);
     }
 
@@ -111,13 +112,12 @@ public class DuenoController {
     @GetMapping("/details")
     public ResponseEntity<Dueno> buscarDuenoDetail() {
         Dueno dueno = duenoService.buscarDuenoPorCedula(
-            SecurityContextHolder.getContext().getAuthentication().getName()
-        );
+                SecurityContextHolder.getContext().getAuthentication().getName());
 
-        if(dueno == null) {
+        if (dueno == null) {
             return new ResponseEntity<Dueno>(dueno, HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<Dueno>(dueno, HttpStatus.OK); 
+        return new ResponseEntity<Dueno>(dueno, HttpStatus.OK);
     }
 
 }
