@@ -90,7 +90,7 @@ public class VeterinarioController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteVet(@PathVariable Long id) {
         veterinarioService.deleteVet(id);
-        return new ResponseEntity<>("Veterinario Eliminado", HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("Veterinario Eliminado", HttpStatus.OK);
     }
 
     // Actualizar un veterinario
