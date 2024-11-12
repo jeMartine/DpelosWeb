@@ -15,21 +15,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import com.web.dpelos.entity.Raza;
 import com.web.dpelos.service.RazaService;
 
-
 @RestController // Esta anotacion indica que esta clase es un controlador REST
 @RequestMapping("/raza") // Esta anotacion indica la URL base para todos los metodos de esta clase
-@CrossOrigin(origins = "http://localhost:4200") // Esta anotacion indica que se permite el acceso a esta URL desde un
-                                                // origen diferente (Angular)
+@CrossOrigin(origins = "http://dpelos.site") // Esta anotacion indica que se permite el acceso a esta URL desde un
+                                             // origen diferente (Angular)
 
 public class RazaController {
 
     @Autowired
     private RazaService razaService;
-    
+
     /* Método para obtener todas las razas */
     @GetMapping()
     public ResponseEntity<List<Raza>> obtenerRazas() {
@@ -55,33 +53,32 @@ public class RazaController {
     public ResponseEntity<Raza> addRaza(@RequestBody Raza raza) {
 
         Raza nuevaRaza = razaService.addRaza(raza);
-        if(nuevaRaza==null){
+        if (nuevaRaza == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<Raza>(nuevaRaza, HttpStatus.CREATED);
     }
-    
+
     /* Método para eliminar una raza por ID */
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteRaza(@PathVariable Long id) {
-        //boolean isDeleted = razaService.deleteRaza(id);
+        // boolean isDeleted = razaService.deleteRaza(id);
         razaService.deleteRaza(id);
         return new ResponseEntity<>("Raza eliminada.", HttpStatus.OK);
 
         // if (!isDeleted) {
-        //     return new ResponseEntity<>("Raza no encontrada.", HttpStatus.NOT_FOUND);
+        // return new ResponseEntity<>("Raza no encontrada.", HttpStatus.NOT_FOUND);
         // }
     }
 
     /* Método para actualizar una raza */
     @PutMapping("/update")
     public ResponseEntity<Raza> updateRaza(@RequestBody Raza raza) {
-    Raza nuevRaza = razaService.updateRaza(raza);
-    if (nuevRaza==null) {
-        return new ResponseEntity<>( HttpStatus.NOT_FOUND);
+        Raza nuevRaza = razaService.updateRaza(raza);
+        if (nuevRaza == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<Raza>(HttpStatus.OK);
     }
-    return new ResponseEntity<Raza>(HttpStatus.OK);
-    }
-
 
 }

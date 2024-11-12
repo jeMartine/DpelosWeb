@@ -29,8 +29,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController // Esta anotacion indica que esta clase es un controlador REST
 @RequestMapping("/mascota") // Esta anotacion indica la URL base para todos los metodos de esta clase
-@CrossOrigin(origins = "http://localhost:4200") // Esta anotacion indica que se permite el acceso a esta URL desde un
-                                                // origen diferente (Angular)
+@CrossOrigin(origins = "http://dpelos.site") // Esta anotacion indica que se permite el acceso a esta URL desde un
+                                             // origen diferente (Angular)
 public class MascotasController {
     @Autowired
     MascotaService mascotaService;
@@ -59,7 +59,7 @@ public class MascotasController {
         }
         return new ResponseEntity<>(mascotas, HttpStatus.OK);
     }
-    
+
     /* Metodo que retorna la informacion de una mascota segun su respectivo ID */
     @GetMapping("/{id}")
     public ResponseEntity<Mascota> mostrarMascotaPorID(@PathVariable Long id) {
@@ -88,7 +88,7 @@ public class MascotasController {
         mascota.setFechaCreacion(sqlDate);
         Mascota masc = mascotaService.addMascota(mascota);
 
-        if(masc==null){
+        if (masc == null) {
             return new ResponseEntity<>(HttpStatus.BAD_GATEWAY);
         }
         return new ResponseEntity<Mascota>(masc, HttpStatus.OK);
@@ -104,8 +104,8 @@ public class MascotasController {
     /* Metodo para actualizar la informacion de una mascota */
     @PutMapping("/update")
     public ResponseEntity<Mascota> actualizarMascota(@RequestBody Mascota mascota) {
-        Mascota masc =  mascotaService.updateMascota(mascota);
-        if(masc == null){
+        Mascota masc = mascotaService.updateMascota(mascota);
+        if (masc == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<Mascota>(masc, HttpStatus.OK);
@@ -119,7 +119,7 @@ public class MascotasController {
             @RequestParam int size) {
 
         Page<Mascota> pgMasc = mascotaService.buscarMascotasPorNombre(nombre, page, size);
-        if(pgMasc.isEmpty()){
+        if (pgMasc.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<Page<Mascota>>(pgMasc, HttpStatus.OK);

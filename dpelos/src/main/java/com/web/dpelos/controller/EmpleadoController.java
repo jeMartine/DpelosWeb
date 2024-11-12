@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController // Esta anotacion indica que esta clase es un controlador REST
 @RequestMapping("/empleado") // Esta anotacion indica la URL base para todos los metodos de esta clase
-@CrossOrigin(origins = "http://localhost:4200") // Esta anotacion indica que se permite el acceso a esta URL desde un
-                                                // origen diferente (Angular)
+@CrossOrigin(origins = "http://dpelos.site") // Esta anotacion indica que se permite el acceso a esta URL desde un
+                                             // origen diferente (Angular)
 
 public class EmpleadoController {
     @Autowired

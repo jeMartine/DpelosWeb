@@ -30,7 +30,7 @@ import com.web.dpelos.service.VeterinarioService;
 
 @Controller
 @RequestMapping("/login")
-@CrossOrigin
+@CrossOrigin(origins = "http://dpelos.site")
 public class LoginController {
 
     @Autowired
@@ -66,7 +66,7 @@ public class LoginController {
 
                 String token = jwtGenerator.generateToken(authentication);
                 return ResponseEntity.ok(new LoginResponse(token, "DUENO"));
-                //return new ResponseEntity<String>(token, HttpStatus.OK);
+                // return new ResponseEntity<String>(token, HttpStatus.OK);
                 // Dueno dueno = duenoService.buscarDuenoPorCedula(user.getUsername());
                 // return ResponseEntity.ok(new LoginResponse(token, "DUENO"));
             }
@@ -77,12 +77,12 @@ public class LoginController {
             String token = jwtGenerator.generateToken(authentication); // Generar el token
 
             if ("ADMINISTRADOR".equals(rol)) {
-                //Administrador admin = adminService.buscarAdminPorCedula(user.getUsername());
-                //return new ResponseEntity<String>(token, HttpStatus.OK);
+                // Administrador admin = adminService.buscarAdminPorCedula(user.getUsername());
+                // return new ResponseEntity<String>(token, HttpStatus.OK);
                 return ResponseEntity.ok(new LoginResponse(token, "ADMINISTRADOR"));
             } else if ("VETERINARIO".equals(rol)) {
-                //Veterinario vet = veterinarioService.buscarVetPorCedula(user.getUsername());
-                //return new ResponseEntity<String>(token, HttpStatus.OK);
+                // Veterinario vet = veterinarioService.buscarVetPorCedula(user.getUsername());
+                // return new ResponseEntity<String>(token, HttpStatus.OK);
                 return ResponseEntity.ok(new LoginResponse(token, "VETERINARIO"));
             }
 
@@ -93,7 +93,7 @@ public class LoginController {
         }
     }
 
-    //función que ayuda a validar un token
+    // función que ayuda a validar un token
 
     @GetMapping("/validate-token")
     public ResponseEntity<?> validateToken(@RequestHeader("Authorization") String authorizationHeader) {
@@ -115,15 +115,14 @@ public class LoginController {
         }
     }
 
-
-private String getRoleFromUsername(String username) {
-     //return "DUENO";
-    UserEntity userEntity = userRepository.findByUsername(username)
-        .orElseThrow(() -> new RuntimeException("User not found")); 
-    return userEntity.getRoles().stream()
-        .map(role -> role.getName())
-        .findFirst()
-        .orElse("UNKNOWN");
-}
+    private String getRoleFromUsername(String username) {
+        // return "DUENO";
+        UserEntity userEntity = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        return userEntity.getRoles().stream()
+                .map(role -> role.getName())
+                .findFirst()
+                .orElse("UNKNOWN");
+    }
 
 }

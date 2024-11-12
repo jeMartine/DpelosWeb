@@ -15,8 +15,8 @@ import com.web.dpelos.service.EspecialidadService;
 
 @RestController // Esta anotacion indica que esta clase es un controlador REST
 @RequestMapping("/especialidad") // Esta anotacion indica la URL base para todos los metodos de esta clase
-@CrossOrigin(origins = "http://localhost:4200") // Esta anotacion indica que se permite el acceso a esta URL desde un
-                                                // origen diferente (Angular)
+@CrossOrigin(origins = "http://dpelos.site") // Esta anotacion indica que se permite el acceso a esta URL desde un
+                                             // origen diferente (Angular)
 public class EspecialidadController {
 
     @Autowired
@@ -24,12 +24,12 @@ public class EspecialidadController {
 
     /* Metodo que obtiene todas las especialidades */
     @GetMapping
-    public ResponseEntity< List<Especialidad>> findAll(){
+    public ResponseEntity<List<Especialidad>> findAll() {
         List<Especialidad> esp = especialidadService.obtenerEspecialidades();
-        if(esp.isEmpty()){
+        if (esp.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<List<Especialidad>>(esp, HttpStatus.OK);
     }
-    
+
 }

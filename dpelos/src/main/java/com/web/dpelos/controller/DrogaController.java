@@ -27,8 +27,8 @@ import com.web.dpelos.service.DrogaService;
 
 @RestController // Esta anotacion indica que esta clase es un controlador REST
 @RequestMapping("/droga")
-@CrossOrigin(origins = "http://localhost:4200") // Esta anotacion indica que se permite el acceso a esta URL desde un
-                                                // origen diferente (Angular)
+@CrossOrigin(origins = "http://dpelos.site") // Esta anotacion indica que se permite el acceso a esta URL desde un
+                                             // origen diferente (Angular)
 public class DrogaController {
     @Autowired
     private DrogaService drogaService;
@@ -48,7 +48,7 @@ public class DrogaController {
     @PostMapping("/add")
     public ResponseEntity<Droga> addDroga(@RequestBody Droga droga) {
         Droga drog = drogaService.addDroga(droga);
-        if(drog==null){
+        if (drog == null) {
             return new ResponseEntity<>(HttpStatus.BAD_GATEWAY);
         }
         return new ResponseEntity<Droga>(drog, HttpStatus.OK);
@@ -74,8 +74,8 @@ public class DrogaController {
 
     @PutMapping("/update")
     public ResponseEntity<Droga> updateDroga(@RequestBody Droga med) {
-        Droga droga =  drogaService.updateDroga(med);
-        if(droga == null){
+        Droga droga = drogaService.updateDroga(med);
+        if (droga == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<Droga>(droga, HttpStatus.OK);

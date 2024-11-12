@@ -27,8 +27,8 @@ import com.web.dpelos.service.TratamientoService;
 
 @RestController // Esta anotacion indica que esta clase es un controlador REST
 @RequestMapping("/tratamiento") // Esta anotacion indica la URL base para todos los metodos de esta clase
-@CrossOrigin(origins = "http://localhost:4200") // Esta anotacion indica que se permite el acceso a esta URL desde un
-                                                // origen diferente (Angular)
+@CrossOrigin(origins = "http://dpelos.site") // Esta anotacion indica que se permite el acceso a esta URL desde un
+                                             // origen diferente (Angular)
 public class TratamientosController {
 
     @Autowired
@@ -87,8 +87,8 @@ public class TratamientosController {
     public ResponseEntity<String> updateTratamiento(@RequestBody Tratamiento tratamiento) {
         try {
             tratamientoService.updateTratamiento(tratamiento);
-            if(tratamiento.isEstado()==false){
-                for (Droga droga: tratamiento.getDrogas()){
+            if (tratamiento.isEstado() == false) {
+                for (Droga droga : tratamiento.getDrogas()) {
                     drogaService.venderDroga(droga, 1);
                 }
             }
