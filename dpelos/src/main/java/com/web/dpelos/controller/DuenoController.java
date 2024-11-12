@@ -27,8 +27,8 @@ import jakarta.servlet.http.HttpSession;
 /*Controlador de las peticiones relacionadas con la entidad Dueno */
 @RestController // Esta anotacion indica que esta clase es un controlador REST
 @RequestMapping("/dueno")
-@CrossOrigin(origins = "http://localhost:4200") // Esta anotacion indica que se permite el acceso a esta URL desde un
-                                                // origen diferente (Angular)
+@CrossOrigin(origins = "http://dpelos.site") // Esta anotacion indica que se permite el acceso a esta URL desde un
+                                             // origen diferente (Angular)
 public class DuenoController {
     @Autowired
     DuenoService duenoService;
