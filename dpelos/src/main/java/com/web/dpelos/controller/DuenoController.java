@@ -21,6 +21,7 @@ import com.web.dpelos.entity.UserEntity;
 import com.web.dpelos.repository.UserRepository;
 import com.web.dpelos.security.CustomUserDetailService;
 import com.web.dpelos.service.DuenoService;
+import com.web.dpelos.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -35,6 +36,9 @@ public class DuenoController {
 
     @Autowired
     UserRepository userRepository;
+
+    // @Autowired
+    // UserService userService;
 
     @Autowired
     CustomUserDetailService customUserDetailService;
@@ -86,7 +90,9 @@ public class DuenoController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteDueno(@PathVariable Long id) {
         duenoService.deleteDueno(id);
-        return new ResponseEntity<>("Dueño eliminado exitosamente", HttpStatus.NO_CONTENT);
+        userRepository.deleteRolesByUserId(id);
+
+        return new ResponseEntity<>("Dueño eliminado exitosamente", HttpStatus.OK);
     }
 
     /* Método para actualizar la información del dueño */
