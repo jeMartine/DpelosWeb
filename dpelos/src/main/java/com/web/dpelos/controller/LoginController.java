@@ -22,11 +22,14 @@ import com.web.dpelos.dto.LoginRequest;
 import com.web.dpelos.dto.LoginResponse;
 import com.web.dpelos.entity.Role;
 import com.web.dpelos.entity.UserEntity;
+import com.web.dpelos.entity.Veterinario;
 import com.web.dpelos.repository.UserRepository;
 import com.web.dpelos.security.JWTGenerator;
 import com.web.dpelos.service.AdminService;
 import com.web.dpelos.service.DuenoService;
 import com.web.dpelos.service.VeterinarioService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/login")
@@ -52,7 +55,7 @@ public class LoginController {
     JWTGenerator jwtGenerator;
 
     @PostMapping()
-    public ResponseEntity<?> login(@RequestBody LoginRequest peticion) {
+    public ResponseEntity<?> login(@RequestBody LoginRequest peticion, HttpSession session) {
         try {
             UserEntity user = userRepository.findByUsername(peticion.getDocument()).orElseThrow(
                     () -> new UsernameNotFoundException("Usuario no encontrado"));
@@ -83,6 +86,9 @@ public class LoginController {
             } else if ("VETERINARIO".equals(rol)) {
                 // Veterinario vet = veterinarioService.buscarVetPorCedula(user.getUsername());
                 // return new ResponseEntity<String>(token, HttpStatus.OK);
+                // return ResponseEntity.ok(new LoginResponse(token, "VETERINARIO"));
+                Veterinario vet = veterinarioService.buscarVetPorCedula(user.getUsername());
+                session.setAttribute("idVeterinario", vet.getIdVeterinario());
                 return ResponseEntity.ok(new LoginResponse(token, "VETERINARIO"));
             }
 
